@@ -5,9 +5,9 @@ import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/data/core/app_failure.dart';
 import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/data/models/icar_stop.dart';
-import 'package:icar/data/models/schedule.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/data/models/schedule/schedule.dart';
 
 part 'schedule_repository.g.dart';
 
@@ -34,11 +34,9 @@ class ScheduleRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as List;
-
       List<Schedule> scheduleList = [];
-      for (final schedule in responseMap) {
-        scheduleList.add(Schedule.fromMap(schedule));
+      for (final schedule in jsonDecode(response.body) as List) {
+        scheduleList.add(Schedule.fromJson(schedule));
       }
 
       return Right(scheduleList);

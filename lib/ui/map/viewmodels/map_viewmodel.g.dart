@@ -347,23 +347,5 @@ final isShowingDetailProvider =
     );
 
 typedef _$IsShowingDetail = AutoDisposeNotifier<bool>;
-String _$icarSchedulePageControllerHash() =>
-    r'c0ded56b44d8288a576c3ea0fd5b7f6f7ca52df6';
-
-/// See also [IcarSchedulePageController].
-@ProviderFor(IcarSchedulePageController)
-final icarSchedulePageControllerProvider =
-    AutoDisposeNotifierProvider<IcarSchedulePageController, int>.internal(
-      IcarSchedulePageController.new,
-      name: r'icarSchedulePageControllerProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$icarSchedulePageControllerHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$IcarSchedulePageController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

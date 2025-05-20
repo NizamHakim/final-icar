@@ -1,9 +1,9 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:icar/data/models/icar.dart';
-import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/data/models/icar_stop.dart';
+import 'package:icar/data/models/icar/icar.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/repositories/icar_repository/icar_repository.dart';
 import 'package:icar/data/repositories/icar_route_repository/icar_route_repository.dart';
 import 'package:icar/data/repositories/icar_stop_repository/icar_stop_repository.dart';
@@ -137,20 +137,4 @@ Future<List<Icar>> icarList(Ref ref, IcarStop icarStop) async {
       return icarListData;
     },
   );
-}
-
-@riverpod
-class IcarSchedulePageController extends _$IcarSchedulePageController {
-  @override
-  int build() {
-    return 0;
-  }
-
-  void next() {
-    state = state + 1;
-  }
-
-  void previous() {
-    state = state - 1;
-  }
 }

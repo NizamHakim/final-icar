@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RouteStopWaypoint {
 
- int get id; IcarRoute? get icarRoute; IcarStop? get icarStop; int get order;
+ int get id; int get icarRouteId; int get icarStopId; int get order; IcarRoute? get icarRoute; IcarStop? get icarStop;
 /// Create a copy of RouteStopWaypoint
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $RouteStopWaypointCopyWith<RouteStopWaypoint> get copyWith => _$RouteStopWaypoin
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RouteStopWaypoint&&(identical(other.id, id) || other.id == id)&&(identical(other.icarRoute, icarRoute) || other.icarRoute == icarRoute)&&(identical(other.icarStop, icarStop) || other.icarStop == icarStop)&&(identical(other.order, order) || other.order == order));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RouteStopWaypoint&&(identical(other.id, id) || other.id == id)&&(identical(other.icarRouteId, icarRouteId) || other.icarRouteId == icarRouteId)&&(identical(other.icarStopId, icarStopId) || other.icarStopId == icarStopId)&&(identical(other.order, order) || other.order == order)&&(identical(other.icarRoute, icarRoute) || other.icarRoute == icarRoute)&&(identical(other.icarStop, icarStop) || other.icarStop == icarStop));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,icarRoute,icarStop,order);
+int get hashCode => Object.hash(runtimeType,id,icarRouteId,icarStopId,order,icarRoute,icarStop);
 
 @override
 String toString() {
-  return 'RouteStopWaypoint(id: $id, icarRoute: $icarRoute, icarStop: $icarStop, order: $order)';
+  return 'RouteStopWaypoint(id: $id, icarRouteId: $icarRouteId, icarStopId: $icarStopId, order: $order, icarRoute: $icarRoute, icarStop: $icarStop)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RouteStopWaypointCopyWith<$Res>  {
   factory $RouteStopWaypointCopyWith(RouteStopWaypoint value, $Res Function(RouteStopWaypoint) _then) = _$RouteStopWaypointCopyWithImpl;
 @useResult
 $Res call({
- int id, IcarRoute? icarRoute, IcarStop? icarStop, int order
+ int id, int icarRouteId, int icarStopId, int order, IcarRoute? icarRoute, IcarStop? icarStop
 });
 
 
@@ -66,13 +66,15 @@ class _$RouteStopWaypointCopyWithImpl<$Res>
 
 /// Create a copy of RouteStopWaypoint
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? icarRoute = freezed,Object? icarStop = freezed,Object? order = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? icarRouteId = null,Object? icarStopId = null,Object? order = null,Object? icarRoute = freezed,Object? icarStop = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,icarRouteId: null == icarRouteId ? _self.icarRouteId : icarRouteId // ignore: cast_nullable_to_non_nullable
+as int,icarStopId: null == icarStopId ? _self.icarStopId : icarStopId // ignore: cast_nullable_to_non_nullable
+as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,icarRoute: freezed == icarRoute ? _self.icarRoute : icarRoute // ignore: cast_nullable_to_non_nullable
 as IcarRoute?,icarStop: freezed == icarStop ? _self.icarStop : icarStop // ignore: cast_nullable_to_non_nullable
-as IcarStop?,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,
+as IcarStop?,
   ));
 }
 /// Create a copy of RouteStopWaypoint
@@ -107,13 +109,15 @@ $IcarStopCopyWith<$Res>? get icarStop {
 @JsonSerializable()
 
 class _RouteStopWaypoint implements RouteStopWaypoint {
-  const _RouteStopWaypoint({required this.id, required this.icarRoute, required this.icarStop, required this.order});
+  const _RouteStopWaypoint({required this.id, required this.icarRouteId, required this.icarStopId, required this.order, this.icarRoute, this.icarStop});
   factory _RouteStopWaypoint.fromJson(Map<String, dynamic> json) => _$RouteStopWaypointFromJson(json);
 
 @override final  int id;
+@override final  int icarRouteId;
+@override final  int icarStopId;
+@override final  int order;
 @override final  IcarRoute? icarRoute;
 @override final  IcarStop? icarStop;
-@override final  int order;
 
 /// Create a copy of RouteStopWaypoint
 /// with the given fields replaced by the non-null parameter values.
@@ -128,16 +132,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RouteStopWaypoint&&(identical(other.id, id) || other.id == id)&&(identical(other.icarRoute, icarRoute) || other.icarRoute == icarRoute)&&(identical(other.icarStop, icarStop) || other.icarStop == icarStop)&&(identical(other.order, order) || other.order == order));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RouteStopWaypoint&&(identical(other.id, id) || other.id == id)&&(identical(other.icarRouteId, icarRouteId) || other.icarRouteId == icarRouteId)&&(identical(other.icarStopId, icarStopId) || other.icarStopId == icarStopId)&&(identical(other.order, order) || other.order == order)&&(identical(other.icarRoute, icarRoute) || other.icarRoute == icarRoute)&&(identical(other.icarStop, icarStop) || other.icarStop == icarStop));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,icarRoute,icarStop,order);
+int get hashCode => Object.hash(runtimeType,id,icarRouteId,icarStopId,order,icarRoute,icarStop);
 
 @override
 String toString() {
-  return 'RouteStopWaypoint(id: $id, icarRoute: $icarRoute, icarStop: $icarStop, order: $order)';
+  return 'RouteStopWaypoint(id: $id, icarRouteId: $icarRouteId, icarStopId: $icarStopId, order: $order, icarRoute: $icarRoute, icarStop: $icarStop)';
 }
 
 
@@ -148,7 +152,7 @@ abstract mixin class _$RouteStopWaypointCopyWith<$Res> implements $RouteStopWayp
   factory _$RouteStopWaypointCopyWith(_RouteStopWaypoint value, $Res Function(_RouteStopWaypoint) _then) = __$RouteStopWaypointCopyWithImpl;
 @override @useResult
 $Res call({
- int id, IcarRoute? icarRoute, IcarStop? icarStop, int order
+ int id, int icarRouteId, int icarStopId, int order, IcarRoute? icarRoute, IcarStop? icarStop
 });
 
 
@@ -165,13 +169,15 @@ class __$RouteStopWaypointCopyWithImpl<$Res>
 
 /// Create a copy of RouteStopWaypoint
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? icarRoute = freezed,Object? icarStop = freezed,Object? order = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? icarRouteId = null,Object? icarStopId = null,Object? order = null,Object? icarRoute = freezed,Object? icarStop = freezed,}) {
   return _then(_RouteStopWaypoint(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,icarRouteId: null == icarRouteId ? _self.icarRouteId : icarRouteId // ignore: cast_nullable_to_non_nullable
+as int,icarStopId: null == icarStopId ? _self.icarStopId : icarStopId // ignore: cast_nullable_to_non_nullable
+as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,icarRoute: freezed == icarRoute ? _self.icarRoute : icarRoute // ignore: cast_nullable_to_non_nullable
 as IcarRoute?,icarStop: freezed == icarStop ? _self.icarStop : icarStop // ignore: cast_nullable_to_non_nullable
-as IcarStop?,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,
+as IcarStop?,
   ));
 }
 

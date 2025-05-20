@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/models/ticket.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/data/repositories/ticket_repository/ticket_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

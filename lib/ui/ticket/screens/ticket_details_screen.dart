@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/models/ticket.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
+import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/ticket/viewmodels/ticket_details_viewmodel.dart';
@@ -28,20 +29,10 @@ class TicketDetailsScreen extends ConsumerWidget {
             );
           },
           error: (error, stackTrace) {
-            return Center(
-              child: Text(
-                'Error: $error',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.white,
-                ),
-              ),
-            );
+            return DataNotFetched(text: error.toString());
           },
           loading: () {
-            return const Center(
-              child: CircularLoader(size: 16, color: AppColors.white),
-            );
+            return const CircularLoader(color: AppColors.white);
           },
         ),
       ),

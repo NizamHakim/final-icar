@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/data/models/icar_stop.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/home/screens/stop_selector_screen.dart';
+import 'package:icar/ui/home/widgets/check_queue/select_stop/stop_selector_screen.dart';
 import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
 import 'package:icar/ui/home/widgets/check_queue/cq_select.dart';
 import 'package:icar/ui/home/widgets/check_queue/cq_paint.dart';
-import 'package:icar/ui/home/widgets/check_queue/route_sheet.dart';
+import 'package:icar/ui/home/widgets/check_queue/select_route/route_sheet.dart';
 import 'package:icar/ui/queue/screens/schedule_list_screen.dart';
 
-class CheckQueue extends ConsumerStatefulWidget {
+class CheckQueue extends ConsumerWidget {
   const CheckQueue({super.key});
 
   @override
-  ConsumerState<CheckQueue> createState() {
-    return _CheckQueueState();
-  }
-}
-
-class _CheckQueueState extends ConsumerState<CheckQueue> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     IcarStop? selectedStop = ref.watch(selectedStopProvider);
     IcarRoute? selectedRoute = ref.watch(selectedRouteProvider);
 

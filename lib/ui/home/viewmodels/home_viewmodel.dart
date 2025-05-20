@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/data/models/icar_stop.dart';
-import 'package:icar/data/models/ticket.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/data/repositories/icar_route_repository/icar_route_repository.dart';
 import 'package:icar/data/repositories/icar_stop_repository/icar_stop_repository.dart';
 import 'package:icar/data/repositories/ticket_repository/ticket_repository.dart';
@@ -9,27 +9,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_viewmodel.g.dart';
 
-@riverpod
-class SelectedStop extends _$SelectedStop {
-  @override
-  IcarStop? build() {
-    return null;
-  }
+class StopState {
+  const StopState({required this.stop, required this.visible});
 
-  void setSelectedStop(IcarStop stop) {
-    state = stop;
-  }
-}
+  final IcarStop stop;
+  final bool visible;
 
-@riverpod
-class SelectedRoute extends _$SelectedRoute {
-  @override
-  IcarRoute? build() {
-    return null;
-  }
-
-  void setSelectedRoute(IcarRoute route) {
-    state = route;
+  StopState copyWith({IcarStop? stop, bool? visible}) {
+    return StopState(stop: stop ?? this.stop, visible: visible ?? this.visible);
   }
 }
 
@@ -45,45 +32,53 @@ class SearchStop extends _$SearchStop {
   }
 }
 
-class StopState {
-  const StopState({required this.stop, required this.visible});
-
-  final IcarStop stop;
-  final bool visible;
-}
-
 @riverpod
-Future<List<StopState>> stopList(Ref ref) async {
-  final stopRepository = ref.watch(icarStopRepositoryProvider);
-  final data = await stopRepository.getAllStops();
+class IcarStopStateList extends _$IcarStopStateList {
+  @override
+  Future<List<StopState>> build() async {
+    final stopRepository = ref.watch(icarStopRepositoryProvider);
+    final stopListEither = await stopRepository.getAllStops();
 
-  return data.fold(
-    (failure) {
-      throw Exception(failure.message);
-    },
-    (stopList) {
-      final stopStateList =
-          stopList.map((stop) {
-            return StopState(stop: stop, visible: true);
-          }).toList();
-      return stopStateList;
-    },
-  );
-}
-
-@riverpod
-Future<List<StopState>> filteredStopList(Ref ref) async {
-  final searchValue = ref.watch(searchStopProvider);
-  final stops = await ref.watch(stopListProvider.future);
-
-  return stops.map((stopState) {
-    return StopState(
-      stop: stopState.stop,
-      visible: stopState.stop.name.toLowerCase().contains(
-        searchValue.toLowerCase(),
-      ),
+    return stopListEither.fold(
+      (failure) {
+        throw Exception(failure.message);
+      },
+      (stopList) {
+        final stopStateList =
+            stopList.map((stop) {
+              return StopState(stop: stop, visible: true);
+            }).toList();
+        return stopStateList;
+      },
     );
-  }).toList();
+  }
+
+  void updateStopVisibility(String filter) async {
+    final currentState = state;
+
+    if (currentState is! AsyncData<List<StopState>>) return;
+
+    state = AsyncData(
+      currentState.value.map((stopState) {
+        if (stopState.stop.name.toLowerCase().contains(filter.toLowerCase())) {
+          return stopState.copyWith(visible: true);
+        }
+        return stopState.copyWith(visible: false);
+      }).toList(),
+    );
+  }
+}
+
+@riverpod
+class SelectedStop extends _$SelectedStop {
+  @override
+  IcarStop? build() {
+    return null;
+  }
+
+  void setSelectedStop(IcarStop stop) {
+    state = stop;
+  }
 }
 
 @riverpod
@@ -99,6 +94,18 @@ Future<List<IcarRoute>> routeList(Ref ref) async {
       return routeList;
     },
   );
+}
+
+@riverpod
+class SelectedRoute extends _$SelectedRoute {
+  @override
+  IcarRoute? build() {
+    return null;
+  }
+
+  void setSelectedRoute(IcarRoute route) {
+    state = route;
+  }
 }
 
 @riverpod

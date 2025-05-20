@@ -9,9 +9,11 @@ part 'route_stop_waypoint.g.dart';
 abstract class RouteStopWaypoint with _$RouteStopWaypoint {
   const factory RouteStopWaypoint({
     required int id,
-    required IcarRoute? icarRoute,
-    required IcarStop? icarStop,
+    required int icarRouteId,
+    required int icarStopId,
     required int order,
+    IcarRoute? icarRoute,
+    IcarStop? icarStop,
   }) = _RouteStopWaypoint;
 
   factory RouteStopWaypoint.fromJson(Map<String, Object?> json) =>

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/data/models/icar_stop.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/queue/viewmodels/schedule_list_viewmodel.dart';
-import 'package:icar/ui/queue/widgets/sl_tile.dart';
+import 'package:icar/ui/queue/widgets/schedule_list/sl_tile.dart';
 
 class ScheduleListScreen extends ConsumerWidget {
   const ScheduleListScreen({
@@ -53,31 +54,30 @@ class ScheduleListScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(12),
         decoration: const BoxDecoration(color: AppColors.white),
         child: scheduleList.when(
-          data: (schedules) {
-            if (schedules.isEmpty) {
-              return const Center(child: Text('Tidak ada jadwal antrean'));
+          data: (scheduleListData) {
+            if (scheduleListData.isEmpty) {
+              return const DataNotFetched(text: 'Tidak ada jadwal antrean');
             }
 
             return ListView.separated(
               separatorBuilder: (context, index) {
                 return const Divider(color: AppColors.gray100, thickness: 1);
               },
-              itemCount: schedules.length,
+              itemCount: scheduleListData.length,
               itemBuilder: (context, index) {
-                final schedule = schedules[index];
                 return SlTile(
-                  schedule: schedule,
+                  schedule: scheduleListData[index],
                   icarRoute: icarRoute,
                   icarStop: icarStop,
                 );
               },
             );
           },
-          error: (error, stackTrace) {
-            return Center(child: Text('$error'));
+          error: (error, _) {
+            return DataNotFetched(text: error.toString());
           },
           loading: () {
-            return const Center(child: CircularLoader());
+            return const CircularLoader();
           },
         ),
       ),

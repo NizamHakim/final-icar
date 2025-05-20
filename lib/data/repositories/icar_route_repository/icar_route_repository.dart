@@ -5,7 +5,7 @@ import 'package:icar/data/core/server_conn.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:icar/data/models/icar_route.dart';
+import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/core/app_failure.dart';
 
 part 'icar_route_repository.g.dart';
@@ -28,15 +28,12 @@ class IcarRouteRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as List;
-      // print(responseMap);
-
-      List<IcarRoute> routesList = [];
-      for (final route in responseMap) {
-        routesList.add(IcarRoute.fromMap(route));
+      List<IcarRoute> icarRouteList = [];
+      for (final icarRoute in jsonDecode(response.body) as List) {
+        icarRouteList.add(IcarRoute.fromJson(icarRoute));
       }
 
-      return Right(routesList);
+      return Right(icarRouteList);
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }

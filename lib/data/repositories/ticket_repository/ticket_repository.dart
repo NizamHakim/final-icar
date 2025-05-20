@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/schedule.dart';
-import 'package:icar/data/models/ticket.dart';
-import 'package:icar/data/models/user.dart';
+import 'package:icar/data/models/schedule/schedule.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
+import 'package:icar/data/models/user/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -33,8 +33,7 @@ class TicketRepository {
         return const Right(null);
       }
 
-      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-      return Right(Ticket.fromMap(responseMap));
+      return Right(Ticket.fromJson(jsonDecode(response.body)));
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }
@@ -44,10 +43,9 @@ class TicketRepository {
     TicketStatus status,
   ) async {
     try {
+      print("${ServerConn.url}/api/tickets/user/1/status/${status.name}");
       final response = await http.get(
-        Uri.parse(
-          "${ServerConn.url}/api/tickets/user/1/status/${status.value}",
-        ),
+        Uri.parse("${ServerConn.url}/api/tickets/user/1/status/${status.name}"),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -56,11 +54,10 @@ class TicketRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as List<dynamic>;
       List<Ticket> ticketList = [];
 
-      for (final ticket in responseMap) {
-        ticketList.add(Ticket.fromMap(ticket));
+      for (final ticket in jsonDecode(response.body) as List) {
+        ticketList.add(Ticket.fromJson(ticket));
       }
 
       return Right(ticketList);
@@ -81,8 +78,7 @@ class TicketRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-      return Right(Ticket.fromMap(responseMap));
+      return Right(Ticket.fromJson(jsonDecode(response.body)));
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }
@@ -99,13 +95,12 @@ class TicketRepository {
         body: jsonEncode({"userId": user.id, "scheduleId": schedule.id}),
       );
 
-      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-
       if (response.statusCode != 201) {
+        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
         return Left(AppFailure(responseMap["error"]));
       }
 
-      return Right(Ticket.fromMap(responseMap));
+      return Right(Ticket.fromJson(jsonDecode(response.body)));
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }

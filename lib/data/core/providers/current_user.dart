@@ -1,4 +1,4 @@
-import 'package:icar/data/models/user.dart';
+import 'package:icar/data/models/user/user.dart';
 import 'package:icar/data/repositories/user_repository/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

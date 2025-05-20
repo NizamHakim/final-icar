@@ -11,10 +11,15 @@ _Icar _$IcarFromJson(Map<String, dynamic> json) => _Icar(
   name: json['name'] as String,
   capacity: (json['capacity'] as num).toInt(),
   status: $enumDecode(_$IcarStatusEnumMap, json['status']),
-  route:
-      json['route'] == null
+  icarRouteId: (json['icarRouteId'] as num).toInt(),
+  icarRoute:
+      json['icarRoute'] == null
           ? null
-          : IcarRoute.fromJson(json['route'] as Map<String, dynamic>),
+          : IcarRoute.fromJson(json['icarRoute'] as Map<String, dynamic>),
+  schedules:
+      (json['schedules'] as List<dynamic>?)
+          ?.map((e) => Schedule.fromJson(e as Map<String, dynamic>))
+          .toList(),
 );
 
 Map<String, dynamic> _$IcarToJson(_Icar instance) => <String, dynamic>{
@@ -22,7 +27,9 @@ Map<String, dynamic> _$IcarToJson(_Icar instance) => <String, dynamic>{
   'name': instance.name,
   'capacity': instance.capacity,
   'status': _$IcarStatusEnumMap[instance.status]!,
-  'route': instance.route,
+  'icarRouteId': instance.icarRouteId,
+  'icarRoute': instance.icarRoute,
+  'schedules': instance.schedules,
 };
 
 const _$IcarStatusEnumMap = {

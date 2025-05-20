@@ -6,61 +6,149 @@ part of 'my_queue_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$inQueueTicketsHash() => r'e3195924a23a8147558990141dfbc93318c0987e';
+String _$ticketListByStatusHash() =>
+    r'148ebcb6b74add1478407f96c6d8780a4d4ac04b';
 
-/// See also [inQueueTickets].
-@ProviderFor(inQueueTickets)
-final inQueueTicketsProvider = AutoDisposeFutureProvider<List<Ticket>>.internal(
-  inQueueTickets,
-  name: r'inQueueTicketsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$inQueueTicketsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef InQueueTicketsRef = AutoDisposeFutureProviderRef<List<Ticket>>;
-String _$canceledTicketsHash() => r'731262c6586485117eca52a97c6f6ee6c1212ec7';
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
 
-/// See also [canceledTickets].
-@ProviderFor(canceledTickets)
-final canceledTicketsProvider =
-    AutoDisposeFutureProvider<List<Ticket>>.internal(
-      canceledTickets,
-      name: r'canceledTicketsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$canceledTicketsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [ticketListByStatus].
+@ProviderFor(ticketListByStatus)
+const ticketListByStatusProvider = TicketListByStatusFamily();
+
+/// See also [ticketListByStatus].
+class TicketListByStatusFamily extends Family<AsyncValue<List<Ticket>>> {
+  /// See also [ticketListByStatus].
+  const TicketListByStatusFamily();
+
+  /// See also [ticketListByStatus].
+  TicketListByStatusProvider call(TicketStatus status) {
+    return TicketListByStatusProvider(status);
+  }
+
+  @override
+  TicketListByStatusProvider getProviderOverride(
+    covariant TicketListByStatusProvider provider,
+  ) {
+    return call(provider.status);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'ticketListByStatusProvider';
+}
+
+/// See also [ticketListByStatus].
+class TicketListByStatusProvider
+    extends AutoDisposeFutureProvider<List<Ticket>> {
+  /// See also [ticketListByStatus].
+  TicketListByStatusProvider(TicketStatus status)
+    : this._internal(
+        (ref) => ticketListByStatus(ref as TicketListByStatusRef, status),
+        from: ticketListByStatusProvider,
+        name: r'ticketListByStatusProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$ticketListByStatusHash,
+        dependencies: TicketListByStatusFamily._dependencies,
+        allTransitiveDependencies:
+            TicketListByStatusFamily._allTransitiveDependencies,
+        status: status,
+      );
+
+  TicketListByStatusProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.status,
+  }) : super.internal();
+
+  final TicketStatus status;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<Ticket>> Function(TicketListByStatusRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TicketListByStatusProvider._internal(
+        (ref) => create(ref as TicketListByStatusRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        status: status,
+      ),
     );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<Ticket>> createElement() {
+    return _TicketListByStatusProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TicketListByStatusProvider && other.status == status;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, status.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CanceledTicketsRef = AutoDisposeFutureProviderRef<List<Ticket>>;
-String _$finishedTicketsHash() => r'c30204dc90386ea77c5609f0a1c00a381cae17b8';
+mixin TicketListByStatusRef on AutoDisposeFutureProviderRef<List<Ticket>> {
+  /// The parameter `status` of this provider.
+  TicketStatus get status;
+}
 
-/// See also [finishedTickets].
-@ProviderFor(finishedTickets)
-final finishedTicketsProvider =
-    AutoDisposeFutureProvider<List<Ticket>>.internal(
-      finishedTickets,
-      name: r'finishedTicketsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$finishedTicketsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+class _TicketListByStatusProviderElement
+    extends AutoDisposeFutureProviderElement<List<Ticket>>
+    with TicketListByStatusRef {
+  _TicketListByStatusProviderElement(super.provider);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FinishedTicketsRef = AutoDisposeFutureProviderRef<List<Ticket>>;
+  @override
+  TicketStatus get status => (origin as TicketListByStatusProvider).status;
+}
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

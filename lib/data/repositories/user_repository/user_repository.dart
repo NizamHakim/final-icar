@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/data/core/app_failure.dart';
 import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/user.dart';
+import 'package:icar/data/models/user/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_repository.g.dart';
@@ -23,13 +23,12 @@ class UserRepository {
         headers: {"Content-Type": "application/json"},
       );
 
-      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-
       if (response.statusCode != 200) {
+        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
         return Left(AppFailure(responseMap["error"]));
       }
 
-      return Right(User.fromMap(responseMap));
+      return Right(User.fromJson(jsonDecode(response.body)));
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }

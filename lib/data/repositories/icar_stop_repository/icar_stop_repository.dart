@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/icar_stop.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -29,11 +29,9 @@ class IcarStopRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as List;
-
       List<IcarStop> stopList = [];
-      for (final stop in responseMap) {
-        stopList.add(IcarStop.fromMap(stop));
+      for (final stop in jsonDecode(response.body) as List) {
+        stopList.add(IcarStop.fromJson(stop));
       }
 
       return Right(stopList);
@@ -59,9 +57,7 @@ class IcarStopRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-
-      return Right(IcarStop.fromMap(responseMap));
+      return Right(IcarStop.fromJson(jsonDecode(response.body)));
     } catch (e) {
       return Left(AppFailure(e.toString()));
     }

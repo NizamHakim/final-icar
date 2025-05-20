@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IcarRoute {
 
- int get id; String get name;@JsonKey(name: "hexColor", fromJson: _colorFromJson, toJson: _colorToJson) Color get color; List<LatLng>? get polylinePoints;
+ int get id; String get name;@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color get color; List<Icar>? get icars; List<RouteStopWaypoint>? get routeStopWaypoints;@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? get polylinePoints;
 /// Create a copy of IcarRoute
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $IcarRouteCopyWith<IcarRoute> get copyWith => _$IcarRouteCopyWithImpl<IcarRoute>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is IcarRoute&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.color, color) || other.color == color)&&const DeepCollectionEquality().equals(other.polylinePoints, polylinePoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IcarRoute&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.color, color) || other.color == color)&&const DeepCollectionEquality().equals(other.icars, icars)&&const DeepCollectionEquality().equals(other.routeStopWaypoints, routeStopWaypoints)&&const DeepCollectionEquality().equals(other.polylinePoints, polylinePoints));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,color,const DeepCollectionEquality().hash(polylinePoints));
+int get hashCode => Object.hash(runtimeType,id,name,color,const DeepCollectionEquality().hash(icars),const DeepCollectionEquality().hash(routeStopWaypoints),const DeepCollectionEquality().hash(polylinePoints));
 
 @override
 String toString() {
-  return 'IcarRoute(id: $id, name: $name, color: $color, polylinePoints: $polylinePoints)';
+  return 'IcarRoute(id: $id, name: $name, color: $color, icars: $icars, routeStopWaypoints: $routeStopWaypoints, polylinePoints: $polylinePoints)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $IcarRouteCopyWith<$Res>  {
   factory $IcarRouteCopyWith(IcarRoute value, $Res Function(IcarRoute) _then) = _$IcarRouteCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(name: "hexColor", fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<LatLng>? polylinePoints
+ int id, String name,@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
 });
 
 
@@ -66,12 +66,14 @@ class _$IcarRouteCopyWithImpl<$Res>
 
 /// Create a copy of IcarRoute
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? color = null,Object? polylinePoints = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? color = null,Object? icars = freezed,Object? routeStopWaypoints = freezed,Object? polylinePoints = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,color: null == color ? _self.color : color // ignore: cast_nullable_to_non_nullable
-as Color,polylinePoints: freezed == polylinePoints ? _self.polylinePoints : polylinePoints // ignore: cast_nullable_to_non_nullable
+as Color,icars: freezed == icars ? _self.icars : icars // ignore: cast_nullable_to_non_nullable
+as List<Icar>?,routeStopWaypoints: freezed == routeStopWaypoints ? _self.routeStopWaypoints : routeStopWaypoints // ignore: cast_nullable_to_non_nullable
+as List<RouteStopWaypoint>?,polylinePoints: freezed == polylinePoints ? _self.polylinePoints : polylinePoints // ignore: cast_nullable_to_non_nullable
 as List<LatLng>?,
   ));
 }
@@ -82,15 +84,33 @@ as List<LatLng>?,
 /// @nodoc
 @JsonSerializable()
 
-class _IcarRoute implements IcarRoute {
-  const _IcarRoute({required this.id, required this.name, @JsonKey(name: "hexColor", fromJson: _colorFromJson, toJson: _colorToJson) required this.color, final  List<LatLng>? polylinePoints}): _polylinePoints = polylinePoints;
+class _IcarRoute extends IcarRoute {
+  const _IcarRoute({required this.id, required this.name, @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) required this.color, final  List<Icar>? icars, final  List<RouteStopWaypoint>? routeStopWaypoints, @JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) final  List<LatLng>? polylinePoints}): _icars = icars,_routeStopWaypoints = routeStopWaypoints,_polylinePoints = polylinePoints,super._();
   factory _IcarRoute.fromJson(Map<String, dynamic> json) => _$IcarRouteFromJson(json);
 
 @override final  int id;
 @override final  String name;
-@override@JsonKey(name: "hexColor", fromJson: _colorFromJson, toJson: _colorToJson) final  Color color;
+@override@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) final  Color color;
+ final  List<Icar>? _icars;
+@override List<Icar>? get icars {
+  final value = _icars;
+  if (value == null) return null;
+  if (_icars is EqualUnmodifiableListView) return _icars;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+ final  List<RouteStopWaypoint>? _routeStopWaypoints;
+@override List<RouteStopWaypoint>? get routeStopWaypoints {
+  final value = _routeStopWaypoints;
+  if (value == null) return null;
+  if (_routeStopWaypoints is EqualUnmodifiableListView) return _routeStopWaypoints;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
  final  List<LatLng>? _polylinePoints;
-@override List<LatLng>? get polylinePoints {
+@override@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? get polylinePoints {
   final value = _polylinePoints;
   if (value == null) return null;
   if (_polylinePoints is EqualUnmodifiableListView) return _polylinePoints;
@@ -112,16 +132,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IcarRoute&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.color, color) || other.color == color)&&const DeepCollectionEquality().equals(other._polylinePoints, _polylinePoints));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IcarRoute&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.color, color) || other.color == color)&&const DeepCollectionEquality().equals(other._icars, _icars)&&const DeepCollectionEquality().equals(other._routeStopWaypoints, _routeStopWaypoints)&&const DeepCollectionEquality().equals(other._polylinePoints, _polylinePoints));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,color,const DeepCollectionEquality().hash(_polylinePoints));
+int get hashCode => Object.hash(runtimeType,id,name,color,const DeepCollectionEquality().hash(_icars),const DeepCollectionEquality().hash(_routeStopWaypoints),const DeepCollectionEquality().hash(_polylinePoints));
 
 @override
 String toString() {
-  return 'IcarRoute(id: $id, name: $name, color: $color, polylinePoints: $polylinePoints)';
+  return 'IcarRoute(id: $id, name: $name, color: $color, icars: $icars, routeStopWaypoints: $routeStopWaypoints, polylinePoints: $polylinePoints)';
 }
 
 
@@ -132,7 +152,7 @@ abstract mixin class _$IcarRouteCopyWith<$Res> implements $IcarRouteCopyWith<$Re
   factory _$IcarRouteCopyWith(_IcarRoute value, $Res Function(_IcarRoute) _then) = __$IcarRouteCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(name: "hexColor", fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<LatLng>? polylinePoints
+ int id, String name,@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
 });
 
 
@@ -149,12 +169,14 @@ class __$IcarRouteCopyWithImpl<$Res>
 
 /// Create a copy of IcarRoute
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? color = null,Object? polylinePoints = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? color = null,Object? icars = freezed,Object? routeStopWaypoints = freezed,Object? polylinePoints = freezed,}) {
   return _then(_IcarRoute(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,color: null == color ? _self.color : color // ignore: cast_nullable_to_non_nullable
-as Color,polylinePoints: freezed == polylinePoints ? _self._polylinePoints : polylinePoints // ignore: cast_nullable_to_non_nullable
+as Color,icars: freezed == icars ? _self._icars : icars // ignore: cast_nullable_to_non_nullable
+as List<Icar>?,routeStopWaypoints: freezed == routeStopWaypoints ? _self._routeStopWaypoints : routeStopWaypoints // ignore: cast_nullable_to_non_nullable
+as List<RouteStopWaypoint>?,polylinePoints: freezed == polylinePoints ? _self._polylinePoints : polylinePoints // ignore: cast_nullable_to_non_nullable
 as List<LatLng>?,
   ));
 }

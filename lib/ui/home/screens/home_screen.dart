@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/home/widgets/check_queue/check_queue.dart';
 import 'package:icar/ui/home/widgets/my_queue.dart';
-import 'package:icar/ui/home/widgets/track_icar.dart';
+import 'package:icar/ui/home/widgets/track_icar/track_icar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

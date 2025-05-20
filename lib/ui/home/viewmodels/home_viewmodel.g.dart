@@ -6,41 +6,6 @@ part of 'home_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$stopListHash() => r'82bc736a99d35bc02f8a5e1ce55a08ae1b50c0c3';
-
-/// See also [stopList].
-@ProviderFor(stopList)
-final stopListProvider = AutoDisposeFutureProvider<List<StopState>>.internal(
-  stopList,
-  name: r'stopListProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$stopListHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef StopListRef = AutoDisposeFutureProviderRef<List<StopState>>;
-String _$filteredStopListHash() => r'f450c5734b0878e544367620d3c13420e4c09287';
-
-/// See also [filteredStopList].
-@ProviderFor(filteredStopList)
-final filteredStopListProvider =
-    AutoDisposeFutureProvider<List<StopState>>.internal(
-      filteredStopList,
-      name: r'filteredStopListProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$filteredStopListHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FilteredStopListRef = AutoDisposeFutureProviderRef<List<StopState>>;
 String _$routeListHash() => r'3010b98b18419472d4edc5c7e7dd2d0bffb115dc';
 
 /// See also [routeList].
@@ -75,6 +40,42 @@ final closestTicketProvider = AutoDisposeFutureProvider<Ticket?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ClosestTicketRef = AutoDisposeFutureProviderRef<Ticket?>;
+String _$searchStopHash() => r'2c1e94c7b41e1c8795451e2a1bfe008bd1103f2e';
+
+/// See also [SearchStop].
+@ProviderFor(SearchStop)
+final searchStopProvider =
+    AutoDisposeNotifierProvider<SearchStop, String>.internal(
+      SearchStop.new,
+      name: r'searchStopProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$searchStopHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$SearchStop = AutoDisposeNotifier<String>;
+String _$icarStopStateListHash() => r'fd60e1eaa84db58324384e26e22b92d69c8eeb34';
+
+/// See also [IcarStopStateList].
+@ProviderFor(IcarStopStateList)
+final icarStopStateListProvider = AutoDisposeAsyncNotifierProvider<
+  IcarStopStateList,
+  List<StopState>
+>.internal(
+  IcarStopStateList.new,
+  name: r'icarStopStateListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$icarStopStateListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$IcarStopStateList = AutoDisposeAsyncNotifier<List<StopState>>;
 String _$selectedStopHash() => r'b853006e90150ec3258ecc5e5438e2fe613484fa';
 
 /// See also [SelectedStop].
@@ -109,22 +110,5 @@ final selectedRouteProvider =
     );
 
 typedef _$SelectedRoute = AutoDisposeNotifier<IcarRoute?>;
-String _$searchStopHash() => r'2c1e94c7b41e1c8795451e2a1bfe008bd1103f2e';
-
-/// See also [SearchStop].
-@ProviderFor(SearchStop)
-final searchStopProvider =
-    AutoDisposeNotifierProvider<SearchStop, String>.internal(
-      SearchStop.new,
-      name: r'searchStopProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$searchStopHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$SearchStop = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

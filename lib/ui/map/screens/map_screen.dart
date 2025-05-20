@@ -8,11 +8,11 @@ import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
 import 'package:icar/ui/map/viewmodels/map_viewmodel.dart';
-import 'package:icar/ui/map/widgets/floating_toggle.dart';
-import 'package:icar/ui/map/widgets/icar_marker/icar_marker.dart';
-import 'package:icar/ui/map/widgets/route_polyline/route_polyline.dart';
-import 'package:icar/ui/map/widgets/route_stops_markers/route_stops_markers.dart';
-import 'package:icar/ui/map/widgets/user_marker/user_marker.dart';
+import 'package:icar/ui/map/widgets/map_properties/floating_toggle.dart';
+import 'package:icar/ui/map/widgets/map_properties/icar_marker/icar_marker.dart';
+import 'package:icar/ui/map/widgets/map_properties/route_polyline/route_polyline.dart';
+import 'package:icar/ui/map/widgets/map_properties/route_stops_markers/route_stops_markers.dart';
+import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
 import 'package:icar/ui/core/errors/location_permission_denied.dart';
 import 'package:icar/ui/core/errors/location_service_disabled.dart';
 import 'package:latlong2/latlong.dart';
@@ -49,15 +49,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
         content = DataNotFetched(text: error.toString());
       }
     } else if (routeList.hasError) {
-      content = Center(
-        child: Text(
-          'Error loading route list',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w500,
-            color: AppColors.gray300,
-          ),
-        ),
-      );
+      content = const DataNotFetched(text: 'Error loading route list');
     } else {
       final routeStates = routeList.asData!.value;
       final userLocationPosition = userLocation.asData!.value;

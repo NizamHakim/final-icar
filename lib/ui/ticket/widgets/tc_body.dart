@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
+import 'package:icar/ui/core/widgets/app_icon.dart';
+import 'package:icar/ui/core/widgets/text_badge.dart';
+import 'package:icar/ui/ticket/widgets/ticket_info.dart';
+
+class TcBody extends StatelessWidget {
+  const TcBody({super.key, required this.ticket});
+
+  final Ticket ticket;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Halte ${ticket.schedule!.icarStop!.name}",
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.gray900,
+                ),
+              ),
+              TextBadge(
+                text: Text(
+                  ticket.schedule!.icar!.name,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
+                foregroundColor: AppColors.warning500,
+                backgroundColor: AppColors.warning50,
+              ),
+            ],
+          ),
+          const Divider(color: AppColors.gray50, thickness: 1, height: 40),
+          Row(
+            children: [
+              const AppIcon(
+                iconSvg: AppIconsSvg.route,
+                color: AppColors.primary600,
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                ticket.schedule!.icar!.icarRoute!.name,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(color: AppColors.gray600),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const AppIcon(
+                iconSvg: AppIconsSvg.calendar,
+                color: AppColors.primary600,
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                ticket.schedule!.formattedArrivalDate,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(color: AppColors.gray600),
+              ),
+            ],
+          ),
+          const Divider(color: AppColors.gray50, thickness: 1, height: 40),
+          const TicketInfo(infoType: TicketInfoType.close),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const AppIcon(
+                iconSvg: AppIconsSvg.clock,
+                size: 16,
+                color: AppColors.gray400,
+              ),
+              Text(
+                " Berlaku sampai ",
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.copyWith(color: AppColors.gray600),
+              ),
+              Text(
+                "${ticket.formattedExpiredDate2}, ${ticket.formattedExpiredTime} WIB",
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: AppColors.gray600,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

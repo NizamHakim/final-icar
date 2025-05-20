@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:icar/data/core/app_failure.dart';
 import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/icar.dart';
+import 'package:icar/data/models/icar/icar.dart';
 import 'package:http/http.dart' as http;
-import 'package:icar/data/models/icar_stop.dart';
+import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'icar_repository.g.dart';
@@ -31,11 +31,9 @@ class IcarRepository {
         return Left(AppFailure(responseMap["error"]));
       }
 
-      final responseList = jsonDecode(response.body) as List;
-
       List<Icar> icarList = [];
-      for (final icar in responseList) {
-        icarList.add(Icar.fromMap(icar));
+      for (final icar in jsonDecode(response.body) as List) {
+        icarList.add(Icar.fromJson(icar));
       }
 
       return Right(icarList);

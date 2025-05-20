@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
-import 'package:icar/ui/queue/widgets/canceled_tickets.dart';
-import 'package:icar/ui/queue/widgets/finished_tickets.dart';
-import 'package:icar/ui/queue/widgets/in_queue_tickets.dart';
+import 'package:icar/ui/queue/widgets/my_queue/queue_ticket_list.dart';
 
 class MyQueueScreen extends StatelessWidget {
   const MyQueueScreen({super.key});
@@ -41,9 +40,9 @@ class MyQueueScreen extends StatelessWidget {
               const Expanded(
                 child: TabBarView(
                   children: [
-                    InQueueTickets(),
-                    CanceledTickets(),
-                    FinishedTickets(),
+                    QueueTicketList(ticketStatus: TicketStatus.IN_QUEUE),
+                    QueueTicketList(ticketStatus: TicketStatus.CANCELED),
+                    QueueTicketList(ticketStatus: TicketStatus.FINISHED),
                   ],
                 ),
               ),

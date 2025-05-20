@@ -1,10 +1,8 @@
 import 'package:icar/data/core/providers/current_user.dart';
 import 'package:icar/ui/root/authorized.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/core/providers/mapbox_token.dart';
 import 'package:icar/ui/core/themes/app_theme.dart';
 
 void main() async {
@@ -39,9 +37,6 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(mapboxTokenProvider).whenData((value) {
-      MapboxOptions.setAccessToken(value);
-    });
     ref.watch(currentUserProvider.notifier).getUser();
     return child;
   }
