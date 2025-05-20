@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:icar/data/models/schedule.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'package:icar/data/models/icar_route.dart';
 
@@ -26,20 +27,36 @@ class Icar {
     required this.position,
     required this.status,
     this.icarRoute,
+    this.schedules,
   });
 
   final int id;
   final String name;
   final int capacity;
-  final Point position;
+  final LatLng position;
   final IcarStatus status;
   final IcarRoute? icarRoute;
+  final List<Schedule>? schedules;
+
+  Map<String, List<Schedule>> get schedulesBySession {
+    final Map<String, List<Schedule>> schedulesBySession = {};
+    if (schedules != null) {
+      for (var schedule in schedules!) {
+        final session = schedule.session;
+        if (!schedulesBySession.containsKey(session)) {
+          schedulesBySession[session] = [];
+        }
+        schedulesBySession[session]!.add(schedule);
+      }
+    }
+    return schedulesBySession;
+  }
 
   Icar copyWith({
     int? id,
     String? name,
     int? capacity,
-    Point? position,
+    LatLng? position,
     IcarStatus? status,
     IcarRoute? icarRoute,
   }) {
@@ -58,10 +75,7 @@ class Icar {
       'id': id,
       'name': name,
       'capacity': capacity,
-      'position': {
-        'lat': position.coordinates.lat,
-        'lng': position.coordinates.lng,
-      },
+      'position': {'lat': position.latitude, 'lng': position.longitude},
       'status': status.value,
       'icarRoute': icarRoute?.toMap(),
     };
@@ -73,11 +87,17 @@ class Icar {
       id: map['id'] as int,
       name: map['name'] as String,
       capacity: map['capacity'] as int,
-      position: Point(coordinates: Position(position['lng'], position['lat'])),
+      position: LatLng(position['lat'] as double, position['lng'] as double),
       status: IcarStatus.fromValue(map['status'] as String),
       icarRoute:
           map['icarRoute'] != null
               ? IcarRoute.fromMap(map['icarRoute'] as Map<String, dynamic>)
+              : null,
+      schedules:
+          map['Schedule'] != null
+              ? (map['Schedule'] as List)
+                  .map((e) => Schedule.fromMap(e as Map<String, dynamic>))
+                  .toList()
               : null,
     );
     return temp;

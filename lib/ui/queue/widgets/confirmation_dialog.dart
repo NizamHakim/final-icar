@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar_route.dart';
 import 'package:icar/data/models/icar_stop.dart';
 import 'package:icar/data/models/schedule.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/queue/viewmodels/schedule_list_viewmodel.dart';
 

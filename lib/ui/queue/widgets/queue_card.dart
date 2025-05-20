@@ -1,11 +1,11 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:icar/data/models/ticket.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/text_badge.dart';
-import 'package:icar/ui/queue/screens/ticket_details_screen.dart';
+import 'package:icar/ui/ticket/screens/ticket_details_screen.dart';
 
 class QueueCard extends StatelessWidget {
   const QueueCard({super.key, required this.ticket});
@@ -17,7 +17,9 @@ class QueueCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const TicketDetailsScreen()),
+          MaterialPageRoute(
+            builder: (context) => TicketDetailsScreen(ticket: ticket),
+          ),
         );
       },
       child: Card(

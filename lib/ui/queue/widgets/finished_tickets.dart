@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/queue/viewmodels/my_queue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/queue_card.dart';
 
-class ExpiredTickets extends ConsumerWidget {
-  const ExpiredTickets({super.key});
+class FinishedTickets extends ConsumerWidget {
+  const FinishedTickets({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tickets = ref.watch(getExpiredTicketsProvider);
+    final tickets = ref.watch(finishedTicketsProvider);
 
     return tickets.when(
       data: (data) {
         if (data.isEmpty) {
-          return const Center(child: Text('Tidak ada tiket selesai'));
+          return Center(
+            child: Text(
+              'Tidak ada tiket selesai',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.gray300,
+              ),
+            ),
+          );
         }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -34,7 +43,10 @@ class ExpiredTickets extends ConsumerWidget {
         return Center(
           child: Text(
             'Error: $error',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.gray300,
+            ),
           ),
         );
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/map/widgets/map_preview.dart';
 
 class TrackIcar extends StatelessWidget {
@@ -13,12 +14,12 @@ class TrackIcar extends StatelessWidget {
           child: Text(
             'Lacak iCar',
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
+              color: AppColors.gray900,
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
         const MapPreview(),
       ],
     );

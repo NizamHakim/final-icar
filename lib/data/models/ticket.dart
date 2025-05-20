@@ -35,7 +35,11 @@ class Ticket {
   final String? review;
 
   String get formattedDate {
-    return DateFormat('EEEE, dd-MMMM-yyyy').format(expiredAt);
+    return DateFormat('EEEE, dd-MM-yyyy').format(expiredAt);
+  }
+
+  String get formattedDatedMy {
+    return DateFormat('dd-MM-yyyy').format(expiredAt);
   }
 
   String get formattedTime {

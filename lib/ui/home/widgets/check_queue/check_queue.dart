@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar_route.dart';
 import 'package:icar/data/models/icar_stop.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/home/screens/stop_selector_screen.dart';
 import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
 import 'package:icar/ui/home/widgets/check_queue/cq_select.dart';
@@ -28,8 +28,14 @@ class _CheckQueueState extends ConsumerState<CheckQueue> {
 
     return CustomPaint(
       painter: CqPaint(),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+      child: Container(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 16,
+          bottom: 20,
+        ),
+        decoration: const BoxDecoration(color: AppColors.transparent),
         child: Card(
           elevation: 0.1,
           child: Padding(

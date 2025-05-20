@@ -69,6 +69,25 @@ class TicketRepository {
     }
   }
 
+  Future<Either<AppFailure, Ticket>> getTicketDetails(Ticket ticket) async {
+    try {
+      final response = await http.get(
+        Uri.parse("${ServerConn.url}/api/tickets/${ticket.id}"),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      if (response.statusCode != 200) {
+        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
+        return Left(AppFailure(responseMap["error"]));
+      }
+
+      final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
+      return Right(Ticket.fromMap(responseMap));
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
+
   Future<Either<AppFailure, Ticket>> createNewTicket(
     User user,
     Schedule schedule,

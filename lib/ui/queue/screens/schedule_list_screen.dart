@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar_route.dart';
 import 'package:icar/data/models/icar_stop.dart';
-import 'package:icar/ui/core/app_colors.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/queue/viewmodels/schedule_list_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/sl_tile.dart';

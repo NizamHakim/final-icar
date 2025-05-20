@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 
 class ProfileMenuTile extends StatelessWidget {
   const ProfileMenuTile({

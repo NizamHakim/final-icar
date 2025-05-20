@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/providers/bottom_nav_index.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';

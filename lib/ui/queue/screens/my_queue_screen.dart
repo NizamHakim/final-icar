@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
 import 'package:icar/ui/queue/widgets/canceled_tickets.dart';
-import 'package:icar/ui/queue/widgets/expired_tickets.dart';
+import 'package:icar/ui/queue/widgets/finished_tickets.dart';
 import 'package:icar/ui/queue/widgets/in_queue_tickets.dart';
 
 class MyQueueScreen extends StatelessWidget {
@@ -26,15 +27,15 @@ class MyQueueScreen extends StatelessWidget {
                 unselectedLabelStyle: Theme.of(
                   context,
                 ).textTheme.labelLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.gray400,
                 ),
                 labelStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary500,
                 ),
-                dividerColor: Theme.of(context).colorScheme.outline,
-                indicatorColor: Theme.of(context).colorScheme.primary,
+                dividerColor: AppColors.gray100,
+                indicatorColor: AppColors.primary500,
               ),
               const SizedBox(height: 14),
               const Expanded(
@@ -42,7 +43,7 @@ class MyQueueScreen extends StatelessWidget {
                   children: [
                     InQueueTickets(),
                     CanceledTickets(),
-                    ExpiredTickets(),
+                    FinishedTickets(),
                   ],
                 ),
               ),

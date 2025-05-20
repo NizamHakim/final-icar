@@ -1,24 +1,28 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 class IcarStop {
-  const IcarStop({
+  IcarStop({
     required this.id,
     required this.name,
     required this.coordinate,
+    this.duration,
+    this.distance,
   });
 
   final int id;
   final String name;
-  final Point coordinate;
+  final LatLng coordinate;
+  final Duration? duration;
+  final int? distance;
 
-  IcarStop copyWith({int? id, String? name, Point? coordinate}) {
+  IcarStop copyWith({int? id, String? name, LatLng? coordinate}) {
     return IcarStop(
       id: id ?? this.id,
       name: name ?? this.name,
       coordinate: coordinate ?? this.coordinate,
+      duration: duration,
+      distance: distance,
     );
   }
 
@@ -26,10 +30,9 @@ class IcarStop {
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'coordinate': {
-        'lat': coordinate.coordinates.lat,
-        'lng': coordinate.coordinates.lng,
-      },
+      'coordinate': {'lat': coordinate.latitude, 'lng': coordinate.longitude},
+      'duration': duration?.inSeconds,
+      'distance': distance,
     };
   }
 
@@ -38,9 +41,15 @@ class IcarStop {
     return IcarStop(
       id: map['id'] as int,
       name: map['name'] as String,
-      coordinate: Point(
-        coordinates: Position(coordinate['lng'], coordinate['lat']),
+      coordinate: LatLng(
+        coordinate['lat'] as double,
+        coordinate['lng'] as double,
       ),
+      duration:
+          map['duration'] != null
+              ? Duration(seconds: map['duration'] as int)
+              : null,
+      distance: map['distance'] as int?,
     );
   }
 

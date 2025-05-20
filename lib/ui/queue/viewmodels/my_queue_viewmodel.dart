@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'my_queue_viewmodel.g.dart';
 
 @riverpod
-Future<List<Ticket>> getInQueueTickets(Ref ref) async {
+Future<List<Ticket>> inQueueTickets(Ref ref) async {
   final ticketRepository = ref.watch(ticketRepositoryProvider);
   final ticketsEither = await ticketRepository.getTicketsByStatus(
     TicketStatus.inQueue,
@@ -23,7 +23,7 @@ Future<List<Ticket>> getInQueueTickets(Ref ref) async {
 }
 
 @riverpod
-Future<List<Ticket>> getCanceledTickets(Ref ref) async {
+Future<List<Ticket>> canceledTickets(Ref ref) async {
   final ticketRepository = ref.watch(ticketRepositoryProvider);
   final ticketsEither = await ticketRepository.getTicketsByStatus(
     TicketStatus.canceled,
@@ -40,7 +40,7 @@ Future<List<Ticket>> getCanceledTickets(Ref ref) async {
 }
 
 @riverpod
-Future<List<Ticket>> getExpiredTickets(Ref ref) async {
+Future<List<Ticket>> finishedTickets(Ref ref) async {
   final ticketRepository = ref.watch(ticketRepositoryProvider);
   final ticketsEither = await ticketRepository.getTicketsByStatus(
     TicketStatus.finished,

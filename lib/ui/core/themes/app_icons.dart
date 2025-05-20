@@ -19,7 +19,7 @@ class AppIcons {
 }
 
 enum AppIconsSvg {
-  busStop("assets/icons/bus-stop.svg"),
+  busStop("assets/icons/bus_stop.svg"),
   route("assets/icons/route.svg"),
   home("assets/icons/home.svg"),
   homeOutline("assets/icons/home_outline.svg"),
@@ -34,7 +34,13 @@ enum AppIconsSvg {
   carLeft("assets/icons/car_left.svg"),
   carRight("assets/icons/car_right.svg"),
   checkCircle("assets/icons/check_circle.svg"),
-  chevronRight("assets/icons/chevron_right.svg");
+  chevronRight("assets/icons/chevron_right.svg"),
+  chevronLeft("assets/icons/chevron_left.svg"),
+  people("assets/icons/people.svg"),
+  arrowRight("assets/icons/arrow_right.svg"),
+  infoCircle("assets/icons/info_circle.svg"),
+  personHand("assets/icons/person_hand.svg"),
+  xClose("assets/icons/x_close.svg");
 
   const AppIconsSvg(this.path);
 

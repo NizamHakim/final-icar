@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/root/authorized.dart';
 

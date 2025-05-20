@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar_route.dart';
-import 'package:icar/ui/core/app_colors.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
 import 'package:icar/ui/home/widgets/check_queue/route_radio_tile.dart';
@@ -27,6 +27,8 @@ class _RouteSheetState extends ConsumerState<RouteSheet> {
     final routeList = ref.watch(routeListProvider);
 
     return Container(
+      width: double.infinity,
+      height: 344,
       decoration: const BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.only(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/queue/viewmodels/my_queue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/queue_card.dart';
@@ -9,12 +10,20 @@ class CanceledTickets extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tickets = ref.watch(getCanceledTicketsProvider);
+    final tickets = ref.watch(canceledTicketsProvider);
 
     return tickets.when(
       data: (data) {
         if (data.isEmpty) {
-          return const Center(child: Text('Tidak ada tiket dibatalkan'));
+          return Center(
+            child: Text(
+              'Tidak ada tiket dibatalkan',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.gray300,
+              ),
+            ),
+          );
         }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -34,7 +43,10 @@ class CanceledTickets extends ConsumerWidget {
         return Center(
           child: Text(
             'Error: $error',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.gray300,
+            ),
           ),
         );
       },

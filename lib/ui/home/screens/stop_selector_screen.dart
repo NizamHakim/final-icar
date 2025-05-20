@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/ui/core/app_colors.dart';
-import 'package:icar/ui/core/app_icons.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
@@ -18,6 +18,7 @@ class StopSelectorScreen extends ConsumerWidget {
     final stopStateList = ref.watch(filteredStopListProvider);
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         foregroundColor: AppColors.gray400,
         backgroundColor: AppColors.white,

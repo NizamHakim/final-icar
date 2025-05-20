@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/ui/core/app_colors.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
 import 'package:icar/ui/home/widgets/check_queue/stop_tile.dart';
 
