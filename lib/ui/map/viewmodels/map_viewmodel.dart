@@ -2,29 +2,18 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:icar/data/models/icar/icar.dart';
-import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/data/repositories/icar_repository/icar_position_repository.dart';
 import 'package:icar/data/repositories/icar_repository/icar_repository.dart';
 import 'package:icar/data/repositories/icar_route_repository/icar_route_repository.dart';
 import 'package:icar/data/repositories/icar_stop_repository/icar_stop_repository.dart';
+import 'package:icar/ui/map/viewmodels/states.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'map_viewmodel.g.dart';
 
-class RouteState {
-  IcarRoute route;
-  bool visible;
-
-  RouteState({required this.route, required this.visible});
-
-  RouteState copyWith({IcarRoute? route, bool? visible}) {
-    return RouteState(
-      route: route ?? this.route,
-      visible: visible ?? this.visible,
-    );
-  }
-}
-
+// map_screen
 @riverpod
 class RouteStateList extends _$RouteStateList {
   @override
@@ -61,21 +50,6 @@ class RouteStateList extends _$RouteStateList {
 }
 
 @riverpod
-Future<List<IcarStop>> stopList(Ref ref) async {
-  final stopRepository = ref.watch(icarStopRepositoryProvider);
-  final stopEither = await stopRepository.getAllStops();
-
-  return stopEither.fold(
-    (failure) {
-      throw Exception(failure.message);
-    },
-    (stopList) {
-      return stopList;
-    },
-  );
-}
-
-@riverpod
 class FlutterMapController extends _$FlutterMapController {
   @override
   MapController? build() {
@@ -104,6 +78,25 @@ class IsShowingDetail extends _$IsShowingDetail {
 }
 
 @riverpod
+Stream<Map<int, LatLng>> icarsPositionMapStream(Ref ref) async* {
+  final icarPositionStream = ref.watch(icarPositionStreamProvider);
+  final Map<int, LatLng> icarPositionMap = {};
+
+  await for (final icarPosition in icarPositionStream.stream) {
+    final icarId = icarPosition['icarId'] as int;
+    final position = icarPosition['position'] as Map<String, dynamic>;
+
+    icarPositionMap[icarId] = LatLng(
+      position['latitude'] as double,
+      position['longitude'] as double,
+    );
+
+    yield icarPositionMap;
+  }
+}
+
+// schedule dialog
+@riverpod
 Future<IcarStop> icarStopDetail(
   Ref ref,
   IcarStop icarStop,
@@ -123,7 +116,7 @@ Future<IcarStop> icarStopDetail(
 }
 
 @riverpod
-Future<List<Icar>> icarList(Ref ref, IcarStop icarStop) async {
+Future<List<Icar>> icarWithSchedulesList(Ref ref, IcarStop icarStop) async {
   final icarRepository = ref.watch(icarRepositoryProvider);
   final icarListEither = await icarRepository.getIcarsWithScheduleByStopId(
     icarStop,

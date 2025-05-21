@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
+import 'package:latlong2/latlong.dart';
 
 class IcarMarker extends StatelessWidget {
   const IcarMarker({super.key, required this.route, required this.position});
 
   final IcarRoute route;
-  final Position position;
+  final LatLng position;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class IcarMarker extends StatelessWidget {
       position: LocationMarkerPosition(
         latitude: position.latitude,
         longitude: position.longitude,
-        accuracy: position.accuracy,
+        accuracy: 0,
       ),
       style: LocationMarkerStyle(
         marker: _IcarMarker(color: route.color),

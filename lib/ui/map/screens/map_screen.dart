@@ -32,6 +32,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     final routeList = ref.watch(routeStateListProvider);
     final userLocation = ref.watch(userLocationProvider);
     final isShowingDetail = ref.watch(isShowingDetailProvider);
+    final icarsPositionMapStream = ref.watch(icarsPositionMapStreamProvider);
     ref.watch(flutterMapControllerProvider); // prevent rebuild
 
     Widget content;
@@ -75,15 +76,29 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.app',
               ),
-              for (var routeState in routeStates)
+              for (final routeState in routeStates)
                 if (routeState.visible) ...[
                   RoutePolyline(route: routeState.route),
                   RouteStopsMarkers(route: routeState.route),
-                  IcarMarker(
-                    route: routeState.route,
-                    position: userLocationPosition,
-                  ),
                 ],
+              for (final routeState in routeStates)
+                if (routeState.visible)
+                  ...icarsPositionMapStream.when(
+                    data: (icarsPositionMap) {
+                      return routeState.route.icars!.map((icar) {
+                        final position =
+                            icarsPositionMap[icar.id] ??
+                            const LatLng(-7.280328, 112.79137);
+
+                        return IcarMarker(
+                          route: routeState.route,
+                          position: position,
+                        );
+                      }).toList();
+                    },
+                    loading: () => [],
+                    error: (error, _) => [],
+                  ),
               UserMarker(position: userLocationPosition),
             ],
           ),

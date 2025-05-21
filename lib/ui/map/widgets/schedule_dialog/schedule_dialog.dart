@@ -57,7 +57,9 @@ class ScheduleDialog extends ConsumerWidget {
                     final icarStopDetail = ref.watch(
                       icarStopDetailProvider(icarStop, userLocationData),
                     );
-                    final icarList = ref.watch(icarListProvider(icarStop));
+                    final icarList = ref.watch(
+                      icarWithSchedulesListProvider(icarStop),
+                    );
 
                     if (icarStopDetail.isLoading || icarList.isLoading) {
                       return const CircularLoader();
