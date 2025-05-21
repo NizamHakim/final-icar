@@ -7,7 +7,9 @@ import 'package:icar/data/core/providers/user_location.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
+// ignore: unused_import
 import 'package:icar/ui/map/screens/map_screen.dart';
+import 'package:icar/ui/map/screens/map_temp.dart';
 import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
 import 'package:icar/ui/core/errors/location_permission_denied.dart';
 import 'package:icar/ui/core/errors/location_service_disabled.dart';
@@ -32,7 +34,7 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
           onTap: () {
             Navigator.of(
               context,
-            ).push(MaterialPageRoute(builder: (context) => const MapScreen()));
+            ).push(MaterialPageRoute(builder: (context) => const MapTemp()));
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
