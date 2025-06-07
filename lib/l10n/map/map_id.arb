@@ -1,0 +1,7 @@
+{
+	"@@locale": "id",
+	"mapScreenTitle": "Lacak iCar",
+	"@mapScreenTitle": {
+		"description": "Title for map screen"
+	}
+}

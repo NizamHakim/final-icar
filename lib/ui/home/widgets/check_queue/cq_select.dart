@@ -11,18 +11,17 @@ class CqSelect extends ConsumerWidget {
     required this.hintText,
     required this.iconSvg,
     required this.label,
-    required this.valueProvider,
+    required this.value,
   });
 
   final void Function() onTap;
   final String hintText;
   final AppIconsSvg iconSvg;
   final String label;
-  final AutoDisposeNotifierProvider valueProvider;
+  final String? value;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedValue = ref.watch(valueProvider);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -37,7 +36,7 @@ class CqSelect extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: AppIcon(iconSvg: iconSvg, color: AppColors.primary600),
             ),
-            selectedValue == null
+            value == null
                 ? Text(
                   hintText,
                   style: Theme.of(
@@ -54,7 +53,7 @@ class CqSelect extends ConsumerWidget {
                       ).textTheme.bodySmall!.copyWith(color: AppColors.gray300),
                     ),
                     Text(
-                      "Halte ${selectedValue.name}",
+                      value!,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.gray900,

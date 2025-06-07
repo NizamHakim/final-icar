@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
@@ -17,7 +19,11 @@ class TicketDetailsScreen extends ConsumerWidget {
     final ticketDetails = ref.watch(ticketDetailsProvider(ticket: ticket));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Tiket Antrian'), centerTitle: true),
+      backgroundColor: AppColors.primary600,
+      appBar: AppBar(
+        title: Text(TicketLocalizations.of(context)!.ticketDetailScreenTitle),
+        centerTitle: true,
+      ),
       body: SizedBox.expand(
         child: ticketDetails.when(
           data: (ticket) {
@@ -28,8 +34,10 @@ class TicketDetailsScreen extends ConsumerWidget {
               ),
             );
           },
-          error: (error, stackTrace) {
-            return DataNotFetched(text: error.toString());
+          error: (error, _) {
+            return DataNotFetched(
+              text: CoreLocalizations.of(context)!.internalServerError,
+            );
           },
           loading: () {
             return const CircularLoader(color: AppColors.white);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 
 class TcFooter extends StatelessWidget {
@@ -19,7 +20,7 @@ class TcFooter extends StatelessWidget {
             ),
           ),
           child: Text(
-            "Batalkan antrean",
+            TicketLocalizations.of(context)!.cancelTicketButtonLabel,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               fontWeight: FontWeight.w600,
               color: AppColors.error500,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
@@ -32,7 +34,7 @@ class ScheduleListScreen extends ConsumerWidget {
         title: Column(
           children: [
             Text(
-              "Halte ${icarStop.name}",
+              CoreLocalizations.of(context)!.stopWithName(icarStop.name),
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: AppColors.gray900,
                 fontWeight: FontWeight.w600,
@@ -56,12 +58,14 @@ class ScheduleListScreen extends ConsumerWidget {
         child: scheduleList.when(
           data: (scheduleListData) {
             if (scheduleListData.isEmpty) {
-              return const DataNotFetched(text: 'Tidak ada jadwal antrean');
+              return DataNotFetched(
+                text: QueueLocalizations.of(context)!.noScheduleAvailable,
+              );
             }
 
             return ListView.separated(
               separatorBuilder: (context, index) {
-                return const Divider(color: AppColors.gray100, thickness: 1);
+                return const Divider(color: AppColors.gray50, thickness: 1);
               },
               itemCount: scheduleListData.length,
               itemBuilder: (context, index) {
@@ -74,7 +78,9 @@ class ScheduleListScreen extends ConsumerWidget {
             );
           },
           error: (error, _) {
-            return DataNotFetched(text: error.toString());
+            return DataNotFetched(
+              text: CoreLocalizations.of(context)!.internalServerError,
+            );
           },
           loading: () {
             return const CircularLoader();

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
@@ -14,6 +16,7 @@ class SuccessDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+
     return AlertDialog(
       backgroundColor: AppColors.white,
       icon: Container(
@@ -37,7 +40,7 @@ class SuccessDialog extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                "Berhasil Masuk Antrean!",
+                QueueLocalizations.of(context)!.successQueueNotification,
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.w500,
                   color: AppColors.black,
@@ -47,7 +50,7 @@ class SuccessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              "Buka tiket antrean untuk melihat antreanmu",
+              QueueLocalizations.of(context)!.successQueueDescription,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w500,
                 color: AppColors.gray500,
@@ -65,7 +68,7 @@ class SuccessDialog extends StatelessWidget {
             );
           },
           child: Text(
-            "Beranda",
+            CoreLocalizations.of(context)!.bottomNavHome,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: AppColors.primary500,
               fontWeight: FontWeight.w600,
@@ -81,7 +84,7 @@ class SuccessDialog extends StatelessWidget {
             );
           },
           child: Text(
-            "Tiket antrean",
+            QueueLocalizations.of(context)!.successQueueTicket,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: AppColors.primary500,
               fontWeight: FontWeight.w600,

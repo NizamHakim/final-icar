@@ -42,7 +42,7 @@ class CreateNewTicket extends _$CreateNewTicket {
   Future<void> createTicket(Schedule schedule) async {
     state = const AsyncValue.loading();
 
-    final currentUser = ref.read(currentUserProvider);
+    final currentUser = ref.read(currentUserProvider).asData?.value;
     final ticketRepository = ref.read(ticketRepositoryProvider);
 
     final ticketEither = await ticketRepository.createNewTicket(

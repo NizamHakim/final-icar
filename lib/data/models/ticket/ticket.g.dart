@@ -33,7 +33,7 @@ Map<String, dynamic> _$TicketToJson(_Ticket instance) => <String, dynamic>{
 };
 
 const _$TicketStatusEnumMap = {
-  TicketStatus.FINISHED: 'FINISHED',
-  TicketStatus.CANCELED: 'CANCELED',
   TicketStatus.IN_QUEUE: 'IN_QUEUE',
+  TicketStatus.CANCELED: 'CANCELED',
+  TicketStatus.FINISHED: 'FINISHED',
 };

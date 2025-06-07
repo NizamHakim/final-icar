@@ -1,0 +1,47 @@
+{
+	"@@locale": "en",
+	"noUpcomingQueue": "No upcoming ticket in queue",
+	"@noUpcomingQueue": {
+		"description": "Not fetched - no upcoming queue"
+	},
+	"cqSelectStopHint": "Select a stop",
+	"@cqSelectStopHint": {
+		"description": "Check queue stop hint"
+	},
+	"cqSelectStopLabel": "Stop",
+	"@cqSelectStopLabel": {
+		"description": "Check queue stop label"
+	},
+	"cqFindStopHint": "Find a stop...",
+	"@cqFindStopHint": {
+		"description": "Placeholder for stop search input"
+	},
+	"cqSelectRouteHint": "Select a route",
+	"@cqSelectRouteHint": {
+		"description": "Check queue route hint"
+	},
+	"cqSelectRouteLabel": "Route",
+	"@cqSelectRouteLabel": {
+		"description": "Check queue route label"
+	},
+	"cqSubmitButton": "Check iCar queue",
+	"@cqSubmitButton": {
+		"description": "Check queue submit button"
+	},
+	"cqNoStopMatched": "No suitable stops matched",
+	"@cqNoStopMatched": {
+		"description": "No suitable stops for such query or nothing fetched"
+	},
+	"stopLatestSearchLabel": "Latest search",
+	"@stopLatestSearchLabel": {
+		"description": "Stop latest search label"
+	},
+	"stopAllOptionsLabel": "Stops",
+	"@stopAllOptionsLabel": {
+		"description": "All stops options label"
+	},
+	"viewAll": "View all",
+	"@viewAll": {
+		"description": "Label for viewing all queues"
+	}
+}

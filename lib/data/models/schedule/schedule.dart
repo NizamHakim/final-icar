@@ -30,11 +30,11 @@ abstract class Schedule with _$Schedule {
       _$ScheduleFromJson(json);
 
   String get formattedArrivalDate {
-    return DateFormat('EEEE, dd-MM-yyyy').format(arrivalTime);
+    return DateFormat('EEEE, dd-MM-yyyy').format(arrivalTime.toLocal());
   }
 
   String get formattedArrivalTime {
-    return DateFormat('HH:mm').format(arrivalTime);
+    return DateFormat('HH:mm').format(arrivalTime.toLocal());
   }
 
   bool get isEnabled {

@@ -42,7 +42,7 @@ class AppTheme {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: AppColors.white,
     ),
-    scaffoldBackgroundColor: AppColors.primary600,
+    scaffoldBackgroundColor: AppColors.white,
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: AppColors.gray50),
@@ -69,7 +69,6 @@ class AppTheme {
         ),
         borderRadius: BorderRadius.circular(10),
       ),
-      hintStyle: const TextStyle(color: AppColors.gray300),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(

@@ -1,5 +1,7 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
@@ -77,7 +79,11 @@ class QueueCard extends StatelessWidget {
                         ),
                       ),
                       TextBadge(
-                        text: Text(ticket.status.name),
+                        text: Text(
+                          QueueLocalizations.of(
+                            context,
+                          )!.ticketStatus(ticket.status.name),
+                        ),
                         foregroundColor: AppColors.success500,
                         backgroundColor: AppColors.success50,
                       ),
@@ -101,7 +107,9 @@ class QueueCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        "Halte ${ticket.schedule!.icarStop!.name}",
+                        CoreLocalizations.of(
+                          context,
+                        )!.stopWithName(ticket.schedule!.icarStop!.name),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: AppColors.gray600,
                           fontWeight: FontWeight.w600,

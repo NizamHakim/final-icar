@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
@@ -12,16 +13,22 @@ class MyQueueScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Antrian Saya')),
+        backgroundColor: AppColors.primary600,
+        appBar: AppBar(
+          title: Text(QueueLocalizations.of(context)!.myQueueScreenTitle),
+        ),
         body: RootContainer.roundedTop(
           child: Column(
             children: [
               TabBar(
                 automaticIndicatorColorAdjustment: false,
-                tabs: const [
-                  Tab(text: 'Dalam antrean'),
-                  Tab(text: 'Dibatalkan'),
-                  Tab(text: 'Selesai'),
+                tabs: [
+                  for (final status in TicketStatus.values)
+                    Tab(
+                      text: QueueLocalizations.of(
+                        context,
+                      )!.ticketStatus(status.name),
+                    ),
                 ],
                 unselectedLabelStyle: Theme.of(
                   context,
@@ -37,12 +44,11 @@ class MyQueueScreen extends StatelessWidget {
                 indicatorColor: AppColors.primary500,
               ),
               const SizedBox(height: 14),
-              const Expanded(
+              Expanded(
                 child: TabBarView(
                   children: [
-                    QueueTicketList(ticketStatus: TicketStatus.IN_QUEUE),
-                    QueueTicketList(ticketStatus: TicketStatus.CANCELED),
-                    QueueTicketList(ticketStatus: TicketStatus.FINISHED),
+                    for (final status in TicketStatus.values)
+                      QueueTicketList(ticketStatus: status),
                   ],
                 ),
               ),

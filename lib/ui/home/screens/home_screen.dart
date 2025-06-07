@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/home/widgets/check_queue/check_queue.dart';
 import 'package:icar/ui/home/widgets/my_queue.dart';
 import 'package:icar/ui/home/widgets/track_icar/track_icar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<StatefulWidget> createState() {
-    return _HomeScreenState();
-  }
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary600,
-      appBar: AppBar(title: const Text('Antre iCar ITS')),
+      appBar: AppBar(title: Text(CoreLocalizations.of(context)!.appName)),
       body: SizedBox.expand(
         child: SingleChildScrollView(
           child: Column(

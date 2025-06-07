@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/home_localizations.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/home/widgets/check_queue/select_stop/stop_selector_screen.dart';
-import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
+import 'package:icar/ui/home/viewmodels/icar_route_options_viewmodel.dart';
+import 'package:icar/ui/home/viewmodels/icar_stop_options_viewmodel.dart';
+import 'package:icar/ui/home/widgets/check_queue/select_icar_stop/select_icar_stop_screen.dart';
 import 'package:icar/ui/home/widgets/check_queue/cq_select.dart';
 import 'package:icar/ui/home/widgets/check_queue/cq_paint.dart';
-import 'package:icar/ui/home/widgets/check_queue/select_route/route_sheet.dart';
+import 'package:icar/ui/home/widgets/check_queue/select_route/select_icar_route_sheet.dart';
 import 'package:icar/ui/queue/screens/schedule_list_screen.dart';
 
 class CheckQueue extends ConsumerWidget {
@@ -39,27 +42,32 @@ class CheckQueue extends ConsumerWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const StopSelectorScreen(),
+                        builder: (context) => const SelectIcarStopScreen(),
                       ),
                     );
                   },
-                  valueProvider: selectedStopProvider,
-                  hintText: 'Pilih halte',
+                  value:
+                      selectedStop != null
+                          ? CoreLocalizations.of(
+                            context,
+                          )!.stopWithName(selectedStop.name)
+                          : null,
+                  hintText: HomeLocalizations.of(context)!.cqSelectStopHint,
                   iconSvg: AppIconsSvg.busStop,
-                  label: "Halte",
+                  label: HomeLocalizations.of(context)!.cqSelectStopLabel,
                 ),
                 const SizedBox(height: 10),
                 CqSelect(
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => const RouteSheet(),
+                      builder: (context) => const SelectIcarRouteSheet(),
                     );
                   },
-                  valueProvider: selectedRouteProvider,
-                  hintText: 'Pilih rute',
+                  value: selectedRoute?.name,
+                  hintText: HomeLocalizations.of(context)!.cqSelectRouteHint,
                   iconSvg: AppIconsSvg.route,
-                  label: "Rute",
+                  label: HomeLocalizations.of(context)!.cqSelectRouteLabel,
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
@@ -88,7 +96,7 @@ class CheckQueue extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      'Cek antrean iCar',
+                      HomeLocalizations.of(context)!.cqSubmitButton,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.white,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/data/core/providers/user_location.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
@@ -62,17 +63,7 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
           ),
         );
       },
-      error: (error, stackTrace) {
-        Widget content;
-
-        if (error is LocationServiceDisabledException) {
-          content = const LocationServiceDisabled();
-        } else if (error is PermissionDeniedException) {
-          content = const LocationPermissionDenied();
-        } else {
-          content = DataNotFetched(text: error.toString());
-        }
-
+      error: (error, _) {
         return DottedBorder(
           dashPattern: const [10, 6],
           borderType: BorderType.RRect,
@@ -83,7 +74,7 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
             height: 240,
             width: double.infinity,
             color: AppColors.white,
-            child: content,
+            child: _showErrorWidget(error),
           ),
         );
       },
@@ -95,5 +86,17 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
         );
       },
     );
+  }
+
+  Widget _showErrorWidget(Object error) {
+    if (error is LocationServiceDisabledException) {
+      return const LocationServiceDisabled();
+    } else if (error is PermissionDeniedException) {
+      return const LocationPermissionDenied();
+    } else {
+      return DataNotFetched(
+        text: CoreLocalizations.of(context)!.internalServerError,
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
@@ -28,19 +29,6 @@ class SlTile extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          schedule.isEnabled
-              ? TextBadge(
-                text: Text(schedule.icar!.name),
-                foregroundColor: icarRoute.color,
-                backgroundColor: icarRoute.secondaryColor,
-                icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
-              )
-              : TextBadge(
-                text: Text(schedule.icar!.name),
-                foregroundColor: AppColors.gray300,
-                backgroundColor: AppColors.gray50,
-                icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
-              ),
           const SizedBox(height: 4),
           Text(
             schedule.formattedArrivalTime,
@@ -50,68 +38,78 @@ class SlTile extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          schedule.isEnabled
-              ? Text(
-                '${schedule.tickets!.length} orang dalam antrean',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium!.copyWith(color: AppColors.success500),
-              )
-              : Text(
-                'Antre dibuka 30 menit sebelum iCar tiba',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium!.copyWith(color: AppColors.gray500),
-              ),
+          _scheduleStatusBadge(schedule),
         ],
       ),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            "${schedule.icar!.capacity.toString()} kursi",
+            QueueLocalizations.of(context)!.icarSeats(schedule.icar!.capacity),
             style: Theme.of(
               context,
             ).textTheme.bodyMedium!.copyWith(color: AppColors.gray500),
           ),
         ],
       ),
-      onTap:
-          schedule.isEnabled
-              ? () async {
-                final newTicket = await showDialog<Ticket?>(
-                  context: context,
-                  builder:
-                      (context) => ConfirmationDialog(
-                        schedule: schedule,
-                        icarRoute: icarRoute,
-                        icarStop: icarStop,
-                      ),
-                );
-
-                if (newTicket != null) {
-                  if (!context.mounted) return;
-                  showDialog(
-                    context: context,
-                    builder: (context) => SuccessDialog(ticket: newTicket),
-                  );
-                }
-              }
-              : () {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      "Belum bisa antre. Silahkan memilih waktu lain yang tersedia.",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium!.copyWith(color: AppColors.white),
-                    ),
-                    backgroundColor: AppColors.error500,
-                    showCloseIcon: true,
-                  ),
-                );
-              },
+      onTap: _onTap(schedule, context),
     );
+  }
+
+  Widget _scheduleStatusBadge(Schedule schedule) {
+    if (schedule.isEnabled) {
+      return TextBadge(
+        text: Text(schedule.icar!.name),
+        foregroundColor: icarRoute.color,
+        backgroundColor: icarRoute.secondaryColor,
+        icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
+      );
+    }
+
+    return TextBadge(
+      text: Text(schedule.icar!.name),
+      foregroundColor: AppColors.gray300,
+      backgroundColor: AppColors.gray50,
+      icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
+    );
+  }
+
+  VoidCallback _onTap(Schedule schedule, BuildContext context) {
+    if (schedule.isEnabled) {
+      return () async {
+        final newTicket = await showDialog<Ticket?>(
+          context: context,
+          builder:
+              (context) => ConfirmationDialog(
+                schedule: schedule,
+                icarRoute: icarRoute,
+                icarStop: icarStop,
+              ),
+        );
+        if (newTicket != null) {
+          if (!context.mounted) return;
+          showDialog(
+            context: context,
+            builder: (context) => SuccessDialog(ticket: newTicket),
+          );
+        }
+      };
+    }
+
+    return () {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            QueueLocalizations.of(context)!.pleaseSelectOtherSchedule,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error500,
+          showCloseIcon: true,
+        ),
+      );
+    };
   }
 }

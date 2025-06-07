@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/map_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/home/widgets/track_icar/map_preview.dart';
 
@@ -12,7 +13,7 @@ class TrackIcar extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Text(
-            'Lacak iCar',
+            MapLocalizations.of(context)!.mapScreenTitle,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
               fontWeight: FontWeight.w600,
               color: AppColors.gray900,

@@ -7,7 +7,7 @@ import 'package:icar/data/models/user/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:icar/data/core/app_failure.dart';
+import 'package:icar/data/core/exceptions/app_failure.dart';
 
 part 'ticket_repository.g.dart';
 
@@ -43,7 +43,6 @@ class TicketRepository {
     TicketStatus status,
   ) async {
     try {
-      print("${ServerConn.url}/api/tickets/user/1/status/${status.name}");
       final response = await http.get(
         Uri.parse("${ServerConn.url}/api/tickets/user/1/status/${status.name}"),
         headers: {"Content-Type": "application/json"},

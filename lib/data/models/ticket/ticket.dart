@@ -7,7 +7,7 @@ part 'ticket.freezed.dart';
 part 'ticket.g.dart';
 
 // ignore: constant_identifier_names
-enum TicketStatus { FINISHED, CANCELED, IN_QUEUE }
+enum TicketStatus { IN_QUEUE, CANCELED, FINISHED }
 
 @freezed
 abstract class Ticket with _$Ticket {
@@ -26,14 +26,14 @@ abstract class Ticket with _$Ticket {
   factory Ticket.fromJson(Map<String, Object?> json) => _$TicketFromJson(json);
 
   String get formattedExpiredDate {
-    return DateFormat('EEEE, dd-MM-yyyy').format(expiredAt);
+    return DateFormat('EEEE, dd-MM-yyyy').format(expiredAt.toLocal());
   }
 
   String get formattedExpiredDate2 {
-    return DateFormat('dd-MM-yyyy').format(expiredAt);
+    return DateFormat('dd-MM-yyyy').format(expiredAt.toLocal());
   }
 
   String get formattedExpiredTime {
-    return DateFormat('HH:mm').format(expiredAt);
+    return DateFormat('HH:mm').format(expiredAt.toLocal());
   }
 }

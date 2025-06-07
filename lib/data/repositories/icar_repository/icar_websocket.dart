@@ -27,7 +27,7 @@ IcarWebsocket icarWebsocket(Ref ref) {
 }
 
 class IcarWebsocket {
-  final url = "ws://192.168.100.31:5002";
+  final url = "ws://192.168.1.31:5002";
 
   IcarWebsocket() {
     debugPrint("IcarWebsocket initialized");

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
+import 'package:icar/ui/core/widgets/app_icon.dart';
 
 class ProfileMenuTile extends StatelessWidget {
   const ProfileMenuTile({
@@ -9,26 +11,31 @@ class ProfileMenuTile extends StatelessWidget {
     required this.onTap,
   });
 
-  final IconData leadingIcon;
+  final AppIconsSvg leadingIcon;
   final String text;
   final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      leading: Icon(leadingIcon),
-      title: Text(
-        text,
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-          color: Theme.of(context).colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
+    return Column(
+      children: [
+        ListTile(
+          onTap: onTap,
+          leading: AppIcon(iconSvg: leadingIcon, color: AppColors.gray900),
+          title: Text(
+            text,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          trailing: const AppIcon(
+            iconSvg: AppIconsSvg.chevronRight,
+            color: AppColors.gray500,
+          ),
         ),
-      ),
-      trailing: Icon(
-        AppIcons.arrowRight,
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
+        const Divider(color: AppColors.gray50, thickness: 1, height: 0),
+      ],
     );
   }
 }

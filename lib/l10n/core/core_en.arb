@@ -1,0 +1,57 @@
+{
+	"@@locale": "en",
+	"appName": "Join Queue iCar ITS",
+	"@appName": {
+		"description": "Application name"
+	},
+	"stop": "Stop",
+	"@stop": {
+		"description": "Core - stop"
+	},
+	"cancel": "Cancel",
+	"@cancel": {
+		"description": "Core - Cancel"
+	},
+	"save": "Save",
+	"@save": {
+		"description": "Core - Save"
+	},
+	"confirm": "Confirm",
+	"@confirm": {
+		"description": "Core - Confirm"
+	},
+	"stopWithName": "{stopName} Stop",
+	"@stopWithName": {
+		"placeholders": {
+			"stopName": {
+				"type": "String"
+			}
+		},
+		"description": "Core - Stop with name"
+	},
+	"minutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+	"@minutes": {
+		"placeholders": {
+			"count": {
+				"type": "int"
+			}
+		},
+		"description": "Core - Displaying time in minutes"
+	},
+	"bottomNavHome": "Home",
+	"@bottomNavHome": {
+		"description": "Bottom navigation home label"
+	},
+	"bottomNavMyQueue": "My Queue",
+	"@bottomNavMyQueue": {
+		"description": "Bottom navigation my queue label"
+	},
+	"bottomNavProfile": "Profile",
+	"@bottomNavProfile": {
+		"description": "Bottom navigation profile label"
+	},
+	"internalServerError": "Internal server error.\nPlease try again later.",
+	"@internalServerError": {
+		"description": "Exception - Internal server error message"
+	}
+}

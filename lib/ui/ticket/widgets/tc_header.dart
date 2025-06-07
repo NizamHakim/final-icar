@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
@@ -32,7 +33,9 @@ class TcHeader extends StatelessWidget {
               color: AppColors.primary500,
             ),
             text: Text(
-              "${ticket.schedule!.tickets!.length} orang dalam antrean",
+              QueueLocalizations.of(
+                context,
+              )!.peopleInQueue(ticket.schedule!.tickets!.length),
               style: Theme.of(context).textTheme.labelMedium,
             ),
             foregroundColor: AppColors.primary500,

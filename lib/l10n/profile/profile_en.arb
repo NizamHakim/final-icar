@@ -1,0 +1,32 @@
+{
+	"@@locale": "en",
+	"profileScreenTitle": "Profile",
+	"@profileScreenTitle": {
+		"description": "Title for profile screen"
+	},
+	"language": "Language",
+	"@language": {
+		"description": "Button to switch the app language"
+	},
+	"help": "Help",
+	"@help": {
+		"description": "Button to call help"
+	},
+	"logout": "Logout",
+	"@logout": {
+		"description": "Button to logout"
+	},
+	"switchLangDialogTitle": "Switch language to {lang}",
+	"@switchLangDialogTitle": {
+		"placeholders": {
+			"lang": {
+				"type": "String"
+			}
+		},
+		"description": "Title for dialog to switch language"
+	},
+	"switchLangDialogDescription": "The app will restart to apply the new language.",
+	"@switchLangDialogDescription": {
+		"description": "Description for dialog to switch language"
+	}
+}

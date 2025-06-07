@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/data/models/icar_route/icar_route.dart';
-import 'package:icar/data/core/app_failure.dart';
+import 'package:icar/data/core/exceptions/app_failure.dart';
 
 part 'icar_route_repository.g.dart';
 

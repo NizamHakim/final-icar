@@ -8,7 +8,7 @@ import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
-import 'package:icar/ui/map/viewmodels/map_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/schedule_dialog_viewmodel.dart';
 import 'package:icar/ui/core/errors/location_permission_denied.dart';
 import 'package:icar/ui/core/errors/location_service_disabled.dart';
 import 'package:icar/ui/map/widgets/schedule_dialog/sd_content.dart';

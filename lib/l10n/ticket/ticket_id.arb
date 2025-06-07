@@ -1,0 +1,33 @@
+{
+	"@@locale": "id",
+	"ticketDetailScreenTitle": "Tiket Antrean",
+	"@ticketDetailScreenTitle": {
+		"description": "Title for my ticket details screen"
+	},
+	"expiredAt": " Berlaku sampai ",
+	"@expiredAt": {
+		"description": "Label for the ticket expiration time"
+	},
+	"cancelTicketButtonLabel": "Batalkan antrean",
+	"@cancelTicketButtonLabel": {
+		"description": "Label for the button to cancel a queue ticket"
+	},
+	"ticketInfoTitle": "{infoType, select, CLOSE{iCar sudah dekat!} ARRIVED{iCar tiba di halte!} other{Unknown}}",
+	"@ticketInfoTitle": {
+		"placeholders": {
+			"infoType": {
+				"type": "String"
+			}
+		},
+		"description": "Title for the ticket info screen base on the type of information"
+	},
+	"ticketInfoDescription": "{infoType, select, CLOSE{iCar sampai dalam beberapa menit. Ayo pergi ke halte!} ARRIVED{Ayo naik iCar atau antre di waktu lain kalau iCar penuh.} other{Unknown}}",
+	"@ticketInfoDescription": {
+		"placeholders": {
+			"infoType": {
+				"type": "String"
+			}
+		},
+		"description": "Description for the ticket info screen base on the type of information"
+	}
+}

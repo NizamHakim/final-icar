@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/home_localizations.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
@@ -7,7 +10,7 @@ import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/providers/bottom_nav_index.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
-import 'package:icar/ui/home/viewmodels/home_viewmodel.dart';
+import 'package:icar/ui/home/viewmodels/closest_ticket_inqueue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/my_queue/queue_card.dart';
 
 class MyQueue extends ConsumerWidget {
@@ -15,7 +18,7 @@ class MyQueue extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final closestTicket = ref.watch(closestTicketProvider);
+    final closestTicketInQueue = ref.watch(closestTicketInQueueProvider);
 
     return Column(
       children: [
@@ -23,7 +26,7 @@ class MyQueue extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Antrean Saya',
+              QueueLocalizations.of(context)!.myQueueScreenTitle,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.gray900,
@@ -37,7 +40,7 @@ class MyQueue extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Lihat semua',
+                    HomeLocalizations.of(context)!.viewAll,
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColors.gray600,
@@ -55,9 +58,9 @@ class MyQueue extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: 12),
-        closestTicket.when(
-          data: (ticket) {
-            if (ticket == null) {
+        closestTicketInQueue.when(
+          data: (closestTicketInQueueData) {
+            if (closestTicketInQueueData == null) {
               return DottedBorder(
                 dashPattern: const [10, 6],
                 borderType: BorderType.RRect,
@@ -67,11 +70,13 @@ class MyQueue extends ConsumerWidget {
                   height: 200,
                   width: double.infinity,
                   color: AppColors.white,
-                  child: const DataNotFetched(text: 'Tidak ada antrean'),
+                  child: DataNotFetched(
+                    text: HomeLocalizations.of(context)!.noUpcomingQueue,
+                  ),
                 ),
               );
             }
-            return QueueCard(ticket: ticket);
+            return QueueCard(ticket: closestTicketInQueueData);
           },
           error: (error, _) {
             return DottedBorder(
@@ -83,7 +88,9 @@ class MyQueue extends ConsumerWidget {
                 height: 200,
                 width: double.infinity,
                 color: AppColors.white,
-                child: DataNotFetched(text: error.toString()),
+                child: DataNotFetched(
+                  text: CoreLocalizations.of(context)!.internalServerError,
+                ),
               ),
             );
           },

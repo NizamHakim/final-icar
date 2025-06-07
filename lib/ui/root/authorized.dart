@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/providers/bottom_nav_index.dart';
@@ -31,7 +32,7 @@ class Authorized extends ConsumerWidget {
               iconSvg: AppIconsSvg.homeOutline,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            label: 'Beranda',
+            label: CoreLocalizations.of(context)!.bottomNavHome,
           ),
           NavigationDestination(
             selectedIcon: const AppIcon(
@@ -42,7 +43,7 @@ class Authorized extends ConsumerWidget {
               iconSvg: AppIconsSvg.list,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            label: 'Antrean Saya',
+            label: CoreLocalizations.of(context)!.bottomNavMyQueue,
           ),
           NavigationDestination(
             selectedIcon: const AppIcon(
@@ -53,7 +54,7 @@ class Authorized extends ConsumerWidget {
               iconSvg: AppIconsSvg.personOutline,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            label: 'Profile',
+            label: CoreLocalizations.of(context)!.bottomNavProfile,
           ),
         ],
       ),

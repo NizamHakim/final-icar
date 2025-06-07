@@ -1,0 +1,7 @@
+{
+	"@@locale": "en",
+	"mapScreenTitle": "Track iCar",
+	"@mapScreenTitle": {
+		"description": "Title for map screen"
+	}
+}

@@ -1,0 +1,47 @@
+{
+	"@@locale": "id",
+	"noUpcomingQueue": "Tidak ada tiket antrian yang akan datang",
+	"@noUpcomingQueue": {
+		"description": "Not fetched - no upcoming queue"
+	},
+	"cqSelectStopHint": "Pilih halte",
+	"@cqSelectStopHint": {
+		"description": "Check queue stop hint"
+	},
+	"cqSelectStopLabel": "Halte",
+	"@cqSelectStopLabel": {
+		"description": "Check queue stop label"
+	},
+	"cqFindStopHint": "Cari halte...",
+	"@cqFindStopHint": {
+		"description": "Placeholder for stop search input"
+	},
+	"cqSelectRouteHint": "Pilih rute",
+	"@cqSelectRouteHint": {
+		"description": "Check queue route hint"
+	},
+	"cqSelectRouteLabel": "Rute",
+	"@cqSelectRouteLabel": {
+		"description": "Check queue route label"
+	},
+	"cqSubmitButton": "Cek antrean iCar",
+	"@cqSubmitButton": {
+		"description": "Check queue submit button"
+	},
+	"cqNoStopMatched": "Tidak ada halte yang cocok",
+	"@cqNoStopMatched": {
+		"description": "No suitable stops for such query or nothing fetched"
+	},
+	"stopLatestSearchLabel": "Pencarian terbaru",
+	"@stopLatestSearchLabel": {
+		"description": "Stop latest search label"
+	},
+	"stopAllOptionsLabel": "Halte",
+	"@stopAllOptionsLabel": {
+		"description": "All stops options label"
+	},
+	"viewAll": "Lihat semua",
+	"@viewAll": {
+		"description": "Label for viewing all queues"
+	}
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
@@ -22,7 +24,9 @@ class TcBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Halte ${ticket.schedule!.icarStop!.name}",
+                CoreLocalizations.of(
+                  context,
+                )!.stopWithName(ticket.schedule!.icarStop!.name),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.gray900,
@@ -74,7 +78,7 @@ class TcBody extends StatelessWidget {
             ],
           ),
           const Divider(color: AppColors.gray50, thickness: 1, height: 40),
-          const TicketInfo(infoType: TicketInfoType.close),
+          const TicketInfo(infoType: TicketInfoType.CLOSE),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +89,7 @@ class TcBody extends StatelessWidget {
                 color: AppColors.gray400,
               ),
               Text(
-                " Berlaku sampai ",
+                TicketLocalizations.of(context)!.expiredAt,
                 style: Theme.of(
                   context,
                 ).textTheme.titleSmall!.copyWith(color: AppColors.gray600),

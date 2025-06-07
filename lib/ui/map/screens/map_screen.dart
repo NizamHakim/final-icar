@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/map_localizations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:icar/data/core/providers/user_location.dart';
 import 'package:icar/ui/core/errors/data_not_fetched.dart';
@@ -38,19 +40,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     Widget content;
 
     if (routeList.isLoading || userLocation.isLoading) {
-      content = const Center(child: CircularLoader(size: 16));
+      content = const CircularLoader();
     } else if (userLocation.hasError) {
-      final error = userLocation.error;
-
-      if (error is LocationServiceDisabledException) {
-        content = const LocationServiceDisabled();
-      } else if (error is PermissionDeniedException) {
-        content = const LocationPermissionDenied();
-      } else {
-        content = DataNotFetched(text: error.toString());
-      }
+      content = _showErrorWidget(userLocation.error!, context);
     } else if (routeList.hasError) {
-      content = const DataNotFetched(text: 'Error loading route list');
+      content = _showErrorWidget(routeList.error!, context);
     } else {
       final routeStates = routeList.asData!.value;
       final userLocationPosition = userLocation.asData!.value;
@@ -60,9 +54,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           FlutterMap(
             mapController: mapController,
             options: MapOptions(
-              initialCenter: LatLng(
-                userLocationPosition.latitude,
-                userLocationPosition.longitude,
+              initialCenter: const LatLng(
+                // userLocationPosition.latitude,
+                // userLocationPosition.longitude,
+                -7.286326,
+                112.794968,
               ),
               initialZoom: 16,
               onMapReady: () {
@@ -116,7 +112,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: const Text('Lacak iCar'),
+        title: Text(MapLocalizations.of(context)!.mapScreenTitle),
         centerTitle: true,
         backgroundColor: AppColors.white,
         foregroundColor: AppColors.gray400,
@@ -127,5 +123,17 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       ),
       body: RootContainer(padding: EdgeInsets.zero, child: content),
     );
+  }
+
+  Widget _showErrorWidget(Object error, BuildContext context) {
+    if (error is LocationServiceDisabledException) {
+      return const LocationServiceDisabled();
+    } else if (error is PermissionDeniedException) {
+      return const LocationPermissionDenied();
+    } else {
+      return DataNotFetched(
+        text: CoreLocalizations.of(context)!.internalServerError,
+      );
+    }
   }
 }

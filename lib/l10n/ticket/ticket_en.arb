@@ -1,0 +1,33 @@
+{
+	"@@locale": "en",
+	"ticketDetailScreenTitle": "Queue Ticket",
+	"@ticketDetailScreenTitle": {
+		"description": "Title for my ticket details screen"
+	},
+	"expiredAt": " Expired at ",
+	"@expiredAt": {
+		"description": "Label for the ticket expiration time"
+	},
+	"cancelTicketButtonLabel": "Cancel queue",
+	"@cancelTicketButtonLabel": {
+		"description": "Label for the button to cancel a queue ticket"
+	},
+	"ticketInfoTitle": "{infoType, select, CLOSE{iCar is nearby!} ARRIVED{iCar has arrived at the stop!} other{Unknown}}",
+	"@ticketInfoTitle": {
+		"placeholders": {
+			"infoType": {
+				"type": "String"
+			}
+		},
+		"description": "Title for the ticket info screen base on the type of information"
+	},
+	"ticketInfoDescription": "{infoType, select, CLOSE{iCar will be arrived in couple of minutes. Lets go to the stop!} ARRIVED{Let's get to the iCar or queue for another time if it's fully occupied.} other{Unknown}}",
+	"@ticketInfoDescription": {
+		"placeholders": {
+			"infoType": {
+				"type": "String"
+			}
+		},
+		"description": "Description for the ticket info screen base on the type of information"
+	}
+}

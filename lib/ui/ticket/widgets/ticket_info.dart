@@ -1,38 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
-
-enum TicketInfoType {
-  close(
-    foregroundColor: AppColors.primary500,
-    backgroundColor: AppColors.primary50,
-    borderColor: AppColors.primary100,
-    title: "iCar sudah dekat!",
-    text: "iCar sampai dalam beberapa menit. Ayo pergi ke halte!",
-  ),
-  arrived(
-    foregroundColor: AppColors.success500,
-    backgroundColor: AppColors.success50,
-    borderColor: AppColors.success100,
-    title: "iCar tiba di halte!",
-    text: "Ayo naik iCar atau antre di waktu lain kalau iCar penuh.",
-  );
-
-  const TicketInfoType({
-    required this.foregroundColor,
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.title,
-    required this.text,
-  });
-
-  final Color foregroundColor;
-  final Color backgroundColor;
-  final Color borderColor;
-  final String title;
-  final String text;
-}
 
 class TicketInfo extends StatelessWidget {
   const TicketInfo({super.key, required this.infoType});
@@ -41,19 +11,21 @@ class TicketInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final infoData = TicketInfoData.fromType(infoType, context);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: infoType.borderColor),
+        border: Border.all(color: infoData.borderColor),
         borderRadius: BorderRadius.circular(8),
-        color: infoType.backgroundColor,
+        color: infoData.backgroundColor,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppIcon(
             iconSvg: AppIconsSvg.infoCircle,
-            color: infoType.foregroundColor,
+            color: infoData.foregroundColor,
             size: 24,
           ),
           const SizedBox(width: 16),
@@ -62,17 +34,17 @@ class TicketInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  infoType.title,
+                  infoData.title,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: infoType.foregroundColor,
+                    color: infoData.foregroundColor,
                   ),
                 ),
                 // this part overflows
                 Text(
-                  infoType.text,
+                  infoData.description,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: infoType.foregroundColor,
+                    color: infoData.foregroundColor,
                   ),
                 ),
               ],
@@ -81,5 +53,53 @@ class TicketInfo extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+// ignore: constant_identifier_names
+enum TicketInfoType { CLOSE, ARRIVED }
+
+class TicketInfoData {
+  const TicketInfoData._({
+    required this.infoType,
+    required this.foregroundColor,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.title,
+    required this.description,
+  });
+
+  final TicketInfoType infoType;
+  final Color foregroundColor;
+  final Color backgroundColor;
+  final Color borderColor;
+  final String title;
+  final String description;
+
+  factory TicketInfoData.fromType(TicketInfoType type, BuildContext context) {
+    switch (type) {
+      case TicketInfoType.CLOSE:
+        return TicketInfoData._(
+          infoType: type,
+          foregroundColor: AppColors.primary500,
+          backgroundColor: AppColors.primary50,
+          borderColor: AppColors.primary100,
+          title: TicketLocalizations.of(context)!.ticketInfoTitle(type.name),
+          description: TicketLocalizations.of(
+            context,
+          )!.ticketInfoDescription(type.name),
+        );
+      case TicketInfoType.ARRIVED:
+        return TicketInfoData._(
+          infoType: type,
+          foregroundColor: AppColors.success500,
+          backgroundColor: AppColors.success50,
+          borderColor: AppColors.success100,
+          title: TicketLocalizations.of(context)!.ticketInfoTitle(type.name),
+          description: TicketLocalizations.of(
+            context,
+          )!.ticketInfoDescription(type.name),
+        );
+    }
   }
 }

@@ -7,7 +7,7 @@ import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:icar/data/core/app_failure.dart';
+import 'package:icar/data/core/exceptions/app_failure.dart';
 
 part 'icar_stop_repository.g.dart';
 
@@ -17,10 +17,14 @@ IcarStopRepository icarStopRepository(Ref ref) {
 }
 
 class IcarStopRepository {
-  Future<Either<AppFailure, List<IcarStop>>> getAllStops() async {
+  Future<Either<AppFailure, List<IcarStop>>> getAllStops(
+    Position userPosition,
+  ) async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.url}/api/icar-stops"),
+        Uri.parse(
+          "${ServerConn.url}/api/icar-stops/${userPosition.latitude},${userPosition.longitude}",
+        ),
         headers: {"Content-Type": "application/json"},
       );
 

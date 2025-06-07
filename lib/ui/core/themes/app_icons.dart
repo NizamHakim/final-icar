@@ -1,23 +1,3 @@
-import 'package:flutter/material.dart';
-
-class AppIcons {
-  static const IconData home = Icons.home;
-  static const IconData homeOutlined = Icons.home_outlined;
-  static const IconData list = Icons.list;
-  static const IconData listOutlined = Icons.list_outlined;
-  static const IconData profile = Icons.person;
-  static const IconData profileOutlined = Icons.person_outline;
-  static const IconData busStops = Icons.directions_bus;
-  static const IconData route = Icons.route_outlined;
-  static const IconData arrowRight = Icons.keyboard_arrow_right_sharp;
-  static const IconData icar = Icons.directions_car_outlined;
-  static const IconData world = Icons.language;
-  static const IconData chat = Icons.chat_bubble_outline;
-  static const IconData logout = Icons.logout;
-  static const IconData eye = Icons.visibility_outlined;
-  static const IconData eyeSlashed = Icons.visibility_off_outlined;
-}
-
 enum AppIconsSvg {
   busStop("assets/icons/bus_stop.svg"),
   route("assets/icons/route.svg"),
@@ -40,7 +20,13 @@ enum AppIconsSvg {
   arrowRight("assets/icons/arrow_right.svg"),
   infoCircle("assets/icons/info_circle.svg"),
   personHand("assets/icons/person_hand.svg"),
-  xClose("assets/icons/x_close.svg");
+  xClose("assets/icons/x_close.svg"),
+  eye("assets/icons/eye.svg"),
+  eyeOff("assets/icons/eye_off.svg"),
+  check("assets/icons/check.svg"),
+  globe("assets/icons/globe.svg"),
+  logout("assets/icons/logout.svg"),
+  messageChat("assets/icons/message_chat.svg");
 
   const AppIconsSvg(this.path);
 
