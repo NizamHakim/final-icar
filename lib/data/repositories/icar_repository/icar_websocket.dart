@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/data/core/server_conn.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -27,15 +28,13 @@ IcarWebsocket icarWebsocket(Ref ref) {
 }
 
 class IcarWebsocket {
-  final url = "ws://192.168.1.31:5002";
-
   IcarWebsocket() {
     debugPrint("IcarWebsocket initialized");
   }
   IOWebSocketChannel connect() {
-    debugPrint("Connecting to WebSocket: $url");
+    debugPrint("Connecting to WebSocket: ${ServerConn.wsUrl}");
     return IOWebSocketChannel.connect(
-      Uri.parse(url),
+      Uri.parse(ServerConn.wsUrl),
       headers: {"client-type": "user"},
       pingInterval: const Duration(seconds: 30),
     );

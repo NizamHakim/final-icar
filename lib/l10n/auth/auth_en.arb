@@ -1,0 +1,95 @@
+{
+	"@@locale": "en",
+	"signupScreenTitle": "Create new account",
+	"@signupScreenTitle": {
+		"description": "Title for my signup screen"
+	},
+	"loginScreenTitle": "Login to your account",
+	"@loginScreenTitle": {
+		"description": "Title for my login screen"
+	},
+	"signup": "Signup",
+	"@signup": {
+		"description": "Signup"
+	},
+	"login": "Login",
+	"@login": {
+		"description": "Login"
+	},
+	"haveAnAccount": "Have an account?",
+	"@haveAnAccount": {
+		"description": "Text button to navigate to login screen"
+	},
+	"doesntHaveAnAccount": "Doesn't have an account?",
+	"@doesntHaveAnAccount": {
+		"description": "Text button to navigate to signup screen"
+	},
+	"inputNameLabel": "Name",
+	"@inputNameLabel": {
+		"description": "Label for name input field"
+	},
+	"inputNameHint": "Enter your name",
+	"@inputNameHint": {
+		"description": "Hint for name input field"
+	},
+	"inputNameError": "{error, select, NAME_REQUIRED{Name is required} other{An unexpected error occurred}}",
+	"@inputNameError": {
+		"placeholders": {
+			"error": {
+				"type": "String"
+			}
+		},
+		"description": "Error for name input field"
+	},
+	"inputEmailLabel": "Email",
+	"@inputEmailLabel": {
+		"description": "Label for email input field"
+	},
+	"inputEmailHint": "Enter your email",
+	"@inputEmailHint": {
+		"description": "Hint for email input field"
+	},
+	"inputEmailError": "{error, select, EMAIL_REQUIRED{Email is required} EMAIL_INVALID_FORMAT{Email is invalid} EMAIL_ALREADY_REGISTERED{Email is already registered} EMAIL_PASSWORD_COMBINATION_INVALID{Email and password combination is incorrect} other{An unexpected error occurred}}",
+	"@inputEmailError": {
+		"placeholders": {
+			"error": {
+				"type": "String"
+			}
+		},
+		"description": "Error for email input field"
+	},
+	"inputPasswordLabel": "Password",
+	"@inputPasswordLabel": {
+		"description": "Label for password input field"
+	},
+	"inputPasswordHint": "Enter your password",
+	"@inputPasswordHint": {
+		"description": "Hint for password input field"
+	},
+	"inputPasswordError": "{error, select, PASSWORD_REQUIRED{Password is required} PASSWORD_MIN_LENGTH{Password must be at least 8 characters long} EMAIL_PASSWORD_COMBINATION_INVALID{Email and password combination is incorrect} other{An unexpected error occurred}}",
+	"@inputPasswordError": {
+		"placeholders": {
+			"error": {
+				"type": "String"
+			}
+		},
+		"description": "Error for password input field"
+	},
+	"inputConfirmPasswordLabel": "Confirm Password",
+	"@inputConfirmPasswordLabel": {
+		"description": "Label for confirm password input field"
+	},
+	"inputConfirmPasswordHint": "Enter your password",
+	"@inputConfirmPasswordHint": {
+		"description": "Hint for confirm password input field"
+	},
+	"inputConfirmPasswordError": "{error, select, CONFIRM_PASSWORD_REQUIRED{Confirm password is required} CONFIRM_PASSWORD_MISMATCH{Confirm password and password does not match} other{An unexpected error occurred}}",
+	"@inputConfirmPasswordError": {
+		"placeholders": {
+			"error": {
+				"type": "String"
+			}
+		},
+		"description": "Error for confirm password input field"
+	}
+}

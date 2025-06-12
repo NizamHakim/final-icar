@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/map_localizations.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:icar/data/core/providers/user_location.dart';
-import 'package:icar/ui/core/errors/data_not_fetched.dart';
+import 'package:icar/data/core/providers/user_location/user_location.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
-import 'package:icar/ui/map/viewmodels/map_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/map_properties/map_properties_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/schedule_dialog/schedule_dialog_viewmodel.dart';
 import 'package:icar/ui/map/widgets/map_properties/floating_toggle.dart';
 import 'package:icar/ui/map/widgets/map_properties/icar_marker/icar_marker.dart';
 import 'package:icar/ui/map/widgets/map_properties/route_polyline/route_polyline.dart';
-import 'package:icar/ui/map/widgets/map_properties/route_stops_markers/route_stops_markers.dart';
+import 'package:icar/ui/map/widgets/map_properties/route_stops_markers/icar_stops_markers.dart';
 import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
-import 'package:icar/ui/core/errors/location_permission_denied.dart';
-import 'package:icar/ui/core/errors/location_service_disabled.dart';
+import 'package:icar/util/handle_error.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
@@ -31,23 +28,30 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final routeList = ref.watch(routeStateListProvider);
     final userLocation = ref.watch(userLocationProvider);
+    final routeList = ref.watch(routeStateListProvider);
+    final icarStopList = ref.watch(icarStopListProvider);
+
     final isShowingDetail = ref.watch(isShowingDetailProvider);
     final icarsPositionMapStream = ref.watch(icarsPositionMapStreamProvider);
-    ref.watch(flutterMapControllerProvider); // prevent rebuild
+    ref.watch(flutterMapControllerProvider); // initialize
 
     Widget content;
 
-    if (routeList.isLoading || userLocation.isLoading) {
+    if (userLocation.isLoading ||
+        routeList.isLoading ||
+        icarStopList.isLoading) {
       content = const CircularLoader();
     } else if (userLocation.hasError) {
-      content = _showErrorWidget(userLocation.error!, context);
+      content = handleError(context, userLocation.error!);
     } else if (routeList.hasError) {
-      content = _showErrorWidget(routeList.error!, context);
+      content = handleError(context, routeList.error!);
+    } else if (icarStopList.hasError) {
+      content = handleError(context, icarStopList.error!);
     } else {
       final routeStates = routeList.asData!.value;
       final userLocationPosition = userLocation.asData!.value;
+      final icarStops = icarStopList.asData!.value;
 
       content = Stack(
         children: [
@@ -73,10 +77,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 userAgentPackageName: 'com.example.app',
               ),
               for (final routeState in routeStates)
-                if (routeState.visible) ...[
-                  RoutePolyline(route: routeState.route),
-                  RouteStopsMarkers(route: routeState.route),
-                ],
+                if (routeState.visible) RoutePolyline(route: routeState.route),
+              IcarStopsMarkers(icarStops: icarStops),
               for (final routeState in routeStates)
                 if (routeState.visible)
                   ...icarsPositionMapStream.when(
@@ -93,7 +95,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                       }).toList();
                     },
                     loading: () => [],
-                    error: (error, _) => [],
+                    error: (_, _) => [],
                   ),
               UserMarker(position: userLocationPosition),
             ],
@@ -123,17 +125,5 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       ),
       body: RootContainer(padding: EdgeInsets.zero, child: content),
     );
-  }
-
-  Widget _showErrorWidget(Object error, BuildContext context) {
-    if (error is LocationServiceDisabledException) {
-      return const LocationServiceDisabled();
-    } else if (error is PermissionDeniedException) {
-      return const LocationPermissionDenied();
-    } else {
-      return DataNotFetched(
-        text: CoreLocalizations.of(context)!.internalServerError,
-      );
-    }
   }
 }

@@ -1,4 +1,5 @@
 flutter gen-l10n --arb-dir ./lib/l10n/core --template-arb-file core_en.arb --output-localization-file core_localizations.dart --output-class CoreLocalizations &&
+flutter gen-l10n --arb-dir ./lib/l10n/auth --template-arb-file auth_en.arb --output-localization-file auth_localizations.dart --output-class AuthLocalizations &&
 flutter gen-l10n --arb-dir ./lib/l10n/home --template-arb-file home_en.arb --output-localization-file home_localizations.dart --output-class HomeLocalizations &&
 flutter gen-l10n --arb-dir ./lib/l10n/map --template-arb-file map_en.arb --output-localization-file map_localizations.dart --output-class MapLocalizations &&
 flutter gen-l10n --arb-dir ./lib/l10n/onboarding --template-arb-file onboarding_en.arb --output-localization-file onboarding_localizations.dart --output-class OnboardingLocalizations &&

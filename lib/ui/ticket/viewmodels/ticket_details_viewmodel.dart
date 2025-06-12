@@ -19,3 +19,26 @@ Future<Ticket> ticketDetails(Ref ref, {required Ticket ticket}) async {
     },
   );
 }
+
+@riverpod
+class CancelTicket extends _$CancelTicket {
+  @override
+  FutureOr<Ticket?> build() {
+    return null;
+  }
+
+  Future<void> cancelTicket(Ticket ticket) async {
+    state = const AsyncValue.loading();
+    final ticketRepository = ref.read(ticketRepositoryProvider);
+    final cancelResult = await ticketRepository.cancelTicket(ticket);
+
+    cancelResult.fold(
+      (error) {
+        state = AsyncValue.error(error, StackTrace.current);
+      },
+      (success) {
+        state = AsyncValue.data(success);
+      },
+    );
+  }
+}

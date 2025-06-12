@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Ticket {
 
- int get id; DateTime get expiredAt; TicketStatus get status; int get userId; int get scheduleId; User? get user; Schedule? get schedule;
+ int get id; DateTime get expiredAt; TicketStatus get status; int get userId; int get scheduleId; User? get user; Schedule? get schedule; Review? get review;
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $TicketCopyWith<Ticket> get copyWith => _$TicketCopyWithImpl<Ticket>(this as Tic
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Ticket&&(identical(other.id, id) || other.id == id)&&(identical(other.expiredAt, expiredAt) || other.expiredAt == expiredAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.scheduleId, scheduleId) || other.scheduleId == scheduleId)&&(identical(other.user, user) || other.user == user)&&(identical(other.schedule, schedule) || other.schedule == schedule));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Ticket&&(identical(other.id, id) || other.id == id)&&(identical(other.expiredAt, expiredAt) || other.expiredAt == expiredAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.scheduleId, scheduleId) || other.scheduleId == scheduleId)&&(identical(other.user, user) || other.user == user)&&(identical(other.schedule, schedule) || other.schedule == schedule)&&(identical(other.review, review) || other.review == review));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,expiredAt,status,userId,scheduleId,user,schedule);
+int get hashCode => Object.hash(runtimeType,id,expiredAt,status,userId,scheduleId,user,schedule,review);
 
 @override
 String toString() {
-  return 'Ticket(id: $id, expiredAt: $expiredAt, status: $status, userId: $userId, scheduleId: $scheduleId, user: $user, schedule: $schedule)';
+  return 'Ticket(id: $id, expiredAt: $expiredAt, status: $status, userId: $userId, scheduleId: $scheduleId, user: $user, schedule: $schedule, review: $review)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $TicketCopyWith<$Res>  {
   factory $TicketCopyWith(Ticket value, $Res Function(Ticket) _then) = _$TicketCopyWithImpl;
 @useResult
 $Res call({
- int id, DateTime expiredAt, TicketStatus status, int userId, int scheduleId, User? user, Schedule? schedule
+ int id, DateTime expiredAt, TicketStatus status, int userId, int scheduleId, User? user, Schedule? schedule, Review? review
 });
 
 
-$UserCopyWith<$Res>? get user;$ScheduleCopyWith<$Res>? get schedule;
+$UserCopyWith<$Res>? get user;$ScheduleCopyWith<$Res>? get schedule;$ReviewCopyWith<$Res>? get review;
 
 }
 /// @nodoc
@@ -66,7 +66,7 @@ class _$TicketCopyWithImpl<$Res>
 
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? expiredAt = null,Object? status = null,Object? userId = null,Object? scheduleId = null,Object? user = freezed,Object? schedule = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? expiredAt = null,Object? status = null,Object? userId = null,Object? scheduleId = null,Object? user = freezed,Object? schedule = freezed,Object? review = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,expiredAt: null == expiredAt ? _self.expiredAt : expiredAt // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,8 @@ as TicketStatus,userId: null == userId ? _self.userId : userId // ignore: cast_n
 as int,scheduleId: null == scheduleId ? _self.scheduleId : scheduleId // ignore: cast_nullable_to_non_nullable
 as int,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as User?,schedule: freezed == schedule ? _self.schedule : schedule // ignore: cast_nullable_to_non_nullable
-as Schedule?,
+as Schedule?,review: freezed == review ? _self.review : review // ignore: cast_nullable_to_non_nullable
+as Review?,
   ));
 }
 /// Create a copy of Ticket
@@ -102,6 +103,18 @@ $ScheduleCopyWith<$Res>? get schedule {
   return $ScheduleCopyWith<$Res>(_self.schedule!, (value) {
     return _then(_self.copyWith(schedule: value));
   });
+}/// Create a copy of Ticket
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReviewCopyWith<$Res>? get review {
+    if (_self.review == null) {
+    return null;
+  }
+
+  return $ReviewCopyWith<$Res>(_self.review!, (value) {
+    return _then(_self.copyWith(review: value));
+  });
 }
 }
 
@@ -110,7 +123,7 @@ $ScheduleCopyWith<$Res>? get schedule {
 @JsonSerializable()
 
 class _Ticket extends Ticket {
-  const _Ticket({required this.id, required this.expiredAt, required this.status, required this.userId, required this.scheduleId, this.user, this.schedule}): super._();
+  const _Ticket({required this.id, required this.expiredAt, required this.status, required this.userId, required this.scheduleId, this.user, this.schedule, this.review}): super._();
   factory _Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
 
 @override final  int id;
@@ -120,6 +133,7 @@ class _Ticket extends Ticket {
 @override final  int scheduleId;
 @override final  User? user;
 @override final  Schedule? schedule;
+@override final  Review? review;
 
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
@@ -134,16 +148,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ticket&&(identical(other.id, id) || other.id == id)&&(identical(other.expiredAt, expiredAt) || other.expiredAt == expiredAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.scheduleId, scheduleId) || other.scheduleId == scheduleId)&&(identical(other.user, user) || other.user == user)&&(identical(other.schedule, schedule) || other.schedule == schedule));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ticket&&(identical(other.id, id) || other.id == id)&&(identical(other.expiredAt, expiredAt) || other.expiredAt == expiredAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.scheduleId, scheduleId) || other.scheduleId == scheduleId)&&(identical(other.user, user) || other.user == user)&&(identical(other.schedule, schedule) || other.schedule == schedule)&&(identical(other.review, review) || other.review == review));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,expiredAt,status,userId,scheduleId,user,schedule);
+int get hashCode => Object.hash(runtimeType,id,expiredAt,status,userId,scheduleId,user,schedule,review);
 
 @override
 String toString() {
-  return 'Ticket(id: $id, expiredAt: $expiredAt, status: $status, userId: $userId, scheduleId: $scheduleId, user: $user, schedule: $schedule)';
+  return 'Ticket(id: $id, expiredAt: $expiredAt, status: $status, userId: $userId, scheduleId: $scheduleId, user: $user, schedule: $schedule, review: $review)';
 }
 
 
@@ -154,11 +168,11 @@ abstract mixin class _$TicketCopyWith<$Res> implements $TicketCopyWith<$Res> {
   factory _$TicketCopyWith(_Ticket value, $Res Function(_Ticket) _then) = __$TicketCopyWithImpl;
 @override @useResult
 $Res call({
- int id, DateTime expiredAt, TicketStatus status, int userId, int scheduleId, User? user, Schedule? schedule
+ int id, DateTime expiredAt, TicketStatus status, int userId, int scheduleId, User? user, Schedule? schedule, Review? review
 });
 
 
-@override $UserCopyWith<$Res>? get user;@override $ScheduleCopyWith<$Res>? get schedule;
+@override $UserCopyWith<$Res>? get user;@override $ScheduleCopyWith<$Res>? get schedule;@override $ReviewCopyWith<$Res>? get review;
 
 }
 /// @nodoc
@@ -171,7 +185,7 @@ class __$TicketCopyWithImpl<$Res>
 
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? expiredAt = null,Object? status = null,Object? userId = null,Object? scheduleId = null,Object? user = freezed,Object? schedule = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? expiredAt = null,Object? status = null,Object? userId = null,Object? scheduleId = null,Object? user = freezed,Object? schedule = freezed,Object? review = freezed,}) {
   return _then(_Ticket(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,expiredAt: null == expiredAt ? _self.expiredAt : expiredAt // ignore: cast_nullable_to_non_nullable
@@ -180,7 +194,8 @@ as TicketStatus,userId: null == userId ? _self.userId : userId // ignore: cast_n
 as int,scheduleId: null == scheduleId ? _self.scheduleId : scheduleId // ignore: cast_nullable_to_non_nullable
 as int,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as User?,schedule: freezed == schedule ? _self.schedule : schedule // ignore: cast_nullable_to_non_nullable
-as Schedule?,
+as Schedule?,review: freezed == review ? _self.review : review // ignore: cast_nullable_to_non_nullable
+as Review?,
   ));
 }
 
@@ -207,6 +222,18 @@ $ScheduleCopyWith<$Res>? get schedule {
 
   return $ScheduleCopyWith<$Res>(_self.schedule!, (value) {
     return _then(_self.copyWith(schedule: value));
+  });
+}/// Create a copy of Ticket
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReviewCopyWith<$Res>? get review {
+    if (_self.review == null) {
+    return null;
+  }
+
+  return $ReviewCopyWith<$Res>(_self.review!, (value) {
+    return _then(_self.copyWith(review: value));
   });
 }
 }

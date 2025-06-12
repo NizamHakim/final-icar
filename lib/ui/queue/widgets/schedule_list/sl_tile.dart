@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
@@ -11,7 +13,7 @@ import 'package:icar/ui/core/widgets/text_badge.dart';
 import 'package:icar/ui/queue/widgets/schedule_list/confirmation_dialog.dart';
 import 'package:icar/ui/queue/widgets/schedule_list/success_dialog.dart';
 
-class SlTile extends StatelessWidget {
+class SlTile extends ConsumerWidget {
   const SlTile({
     super.key,
     required this.schedule,
@@ -24,21 +26,24 @@ class SlTile extends StatelessWidget {
   final IcarStop icarStop;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentLocale = ref.watch(currentLocaleProvider);
+
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _scheduleStatusBadge(context, schedule),
           const SizedBox(height: 4),
           Text(
-            schedule.formattedArrivalTime,
+            schedule.formattedArrivalTime(currentLocale),
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
               color: AppColors.gray900,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 4),
-          _scheduleStatusBadge(schedule),
+          _scheduleDescription(context, schedule),
         ],
       ),
       trailing: Column(
@@ -56,10 +61,13 @@ class SlTile extends StatelessWidget {
     );
   }
 
-  Widget _scheduleStatusBadge(Schedule schedule) {
+  Widget _scheduleStatusBadge(BuildContext context, Schedule schedule) {
     if (schedule.isEnabled) {
       return TextBadge(
-        text: Text(schedule.icar!.name),
+        text: Text(
+          schedule.icar!.name,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
         foregroundColor: icarRoute.color,
         backgroundColor: icarRoute.secondaryColor,
         icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
@@ -67,10 +75,31 @@ class SlTile extends StatelessWidget {
     }
 
     return TextBadge(
-      text: Text(schedule.icar!.name),
+      text: Text(
+        schedule.icar!.name,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
       foregroundColor: AppColors.gray300,
       backgroundColor: AppColors.gray50,
       icon: const AppIcon(iconSvg: AppIconsSvg.carRight, size: 14),
+    );
+  }
+
+  Widget _scheduleDescription(BuildContext context, Schedule schedule) {
+    if (schedule.isEnabled) {
+      return Text(
+        QueueLocalizations.of(context)!.peopleInQueue(schedule.tickets!.length),
+        style: Theme.of(
+          context,
+        ).textTheme.bodyMedium!.copyWith(color: AppColors.success500),
+      );
+    }
+
+    return Text(
+      QueueLocalizations.of(context)!.scheduleNotYetAvailable,
+      style: Theme.of(
+        context,
+      ).textTheme.bodyMedium!.copyWith(color: AppColors.gray500),
     );
   }
 

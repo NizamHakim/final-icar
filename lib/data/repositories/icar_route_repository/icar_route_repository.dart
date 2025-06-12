@@ -19,7 +19,7 @@ class IcarRouteRepository {
   Future<Either<AppFailure, List<IcarRoute>>> getAllRoutes() async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.url}/api/icar-routes"),
+        Uri.parse("${ServerConn.httpUrl}/api/icar-routes"),
         headers: {"Content-Type": "application/json"},
       );
 

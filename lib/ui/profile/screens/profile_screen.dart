@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/profile_localizations.dart';
-import 'package:icar/data/core/providers/current_user.dart';
+import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
+import 'package:icar/ui/profile/viewmodels/logout/logout.dart';
 import 'package:icar/ui/profile/widgets/language/switch_language_screen.dart';
 import 'package:icar/ui/profile/widgets/profile_menu_tile.dart';
 
@@ -16,7 +17,7 @@ class ProfileScreen extends ConsumerWidget {
     final currentUser = ref.watch(currentUserProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.primary600,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(ProfileLocalizations.of(context)!.profileScreenTitle),
       ),
@@ -36,7 +37,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             Text(
-              currentUser.asData!.value!.name,
+              currentUser!.name,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: AppColors.gray900,
                 fontWeight: FontWeight.w600,
@@ -44,7 +45,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             Text(
-              currentUser.asData!.value!.email,
+              currentUser.email,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: AppColors.gray500),
@@ -75,7 +76,9 @@ class ProfileScreen extends ConsumerWidget {
                     ProfileMenuTile(
                       leadingIcon: AppIconsSvg.logout,
                       text: ProfileLocalizations.of(context)!.logout,
-                      onTap: () {},
+                      onTap: () {
+                        ref.read(logoutProvider);
+                      },
                     ),
                   ],
                 ),

@@ -26,7 +26,9 @@ enum AppIconsSvg {
   check("assets/icons/check.svg"),
   globe("assets/icons/globe.svg"),
   logout("assets/icons/logout.svg"),
-  messageChat("assets/icons/message_chat.svg");
+  messageChat("assets/icons/message_chat.svg"),
+  starOutline("assets/icons/star_outline.svg"),
+  starFilled("assets/icons/star_filled.svg");
 
   const AppIconsSvg(this.path);
 

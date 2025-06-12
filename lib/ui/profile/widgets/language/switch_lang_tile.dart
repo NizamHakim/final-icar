@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/core/providers/locales.dart';
+import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
@@ -25,7 +25,7 @@ class SwitchLangTile extends ConsumerWidget {
           ),
           children: [
             TextSpan(
-              text: " (${appLocale.locale.languageCode})",
+              text: " (${appLocale.locale.languageCode.toUpperCase()})",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.gray500,
                 fontWeight: FontWeight.w400,

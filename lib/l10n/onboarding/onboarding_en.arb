@@ -1,3 +1,31 @@
 {
-	"@@locale": "en"
+	"@@locale": "en",
+	"onboardingTitle1": "Join queue with the app",
+	"@onboardingTitle1": {
+		"description": "Title for the first onboarding screen"
+	},
+	"onboardingTitle2": "iCar tracking",
+	"@onboardingTitle2": {
+		"description": "Title for the second onboarding screen"
+	},
+	"onboardingTitle3": "Go to the stop",
+	"@onboardingTitle3": {
+		"description": "Title for the third onboarding screen"
+	},
+	"onboardingDescription1": "Travel around ITS with iCar and monitor queues through the app",
+	"@onboardingDescription1": {
+		"description": "Description for the first onboarding screen"
+	},
+	"onboardingDescription2": "Track iCar position and get ready for your ride",
+	"@onboardingDescription2": {
+		"description": "Description for the second onboarding screen"
+	},
+	"onboardingDescription3": "Go to the stop when your ride is nearby",
+	"@onboardingDescription3": {
+		"description": "Description for the second onboarding screen"
+	},
+	"skip": "Skip",
+	"@skip": {
+		"description": "Skip button"
+	}
 }

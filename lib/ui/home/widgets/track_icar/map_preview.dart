@@ -4,14 +4,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
-import 'package:icar/data/core/providers/user_location.dart';
-import 'package:icar/ui/core/errors/data_not_fetched.dart';
+import 'package:icar/data/core/providers/user_location/user_location.dart';
+import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/map/screens/map_screen.dart';
 import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
-import 'package:icar/ui/core/errors/location_permission_denied.dart';
-import 'package:icar/ui/core/errors/location_service_disabled.dart';
+import 'package:icar/util/permissions/location/widgets/location_permission_denied.dart';
+import 'package:icar/util/permissions/location/widgets/location_service_disabled.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapPreview extends ConsumerStatefulWidget {

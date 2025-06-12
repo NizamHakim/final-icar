@@ -169,7 +169,7 @@ class _ScheduleListProviderElement
   IcarRoute get icarRoute => (origin as ScheduleListProvider).icarRoute;
 }
 
-String _$createNewTicketHash() => r'bcb4d613e83695e5eecc8fd302153b62962831e0';
+String _$createNewTicketHash() => r'2956f4e1dfc6d1389b89dee0210e6a3d8461a532';
 
 /// See also [CreateNewTicket].
 @ProviderFor(CreateNewTicket)

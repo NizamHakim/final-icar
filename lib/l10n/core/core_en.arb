@@ -20,6 +20,10 @@
 	"@confirm": {
 		"description": "Core - Confirm"
 	},
+	"submit": "Submit",
+	"@submit": {
+		"description": "Core - Submit"
+	},
 	"stopWithName": "{stopName} Stop",
 	"@stopWithName": {
 		"placeholders": {

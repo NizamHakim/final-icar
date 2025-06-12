@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/onboarding_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/onboarding/viewmodels/onboarding_viewmodel.dart';
-import 'package:icar/ui/root/authorized.dart';
-import 'package:icar/util/permissions/location_manager.dart';
+import 'package:icar/ui/root/unaothorized.dart';
+import 'package:icar/util/permissions/location/location_permission_manager.dart';
 
 class OnboardingAction extends ConsumerWidget {
   const OnboardingAction({super.key});
@@ -19,14 +20,14 @@ class OnboardingAction extends ConsumerWidget {
       children: [
         TextButton(
           onPressed: () async {
-            await LocationManager.requestPermission(context);
+            await LocationPermissionManager.requestForPermission(context);
             if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const Authorized()),
+              MaterialPageRoute(builder: (context) => const Unaothorized()),
             );
           },
           child: Text(
-            "Skip",
+            OnboardingLocalizations.of(context)!.skip,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.w600,
               color: AppColors.gray600,
@@ -40,11 +41,13 @@ class OnboardingAction extends ConsumerWidget {
                     ref.read(onboardingIndexProvider.notifier).set(index + 1);
                   }
                   : () async {
-                    await LocationManager.requestPermission(context);
+                    await LocationPermissionManager.requestForPermission(
+                      context,
+                    );
                     if (!context.mounted) return;
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const Authorized(),
+                        builder: (context) => const Unaothorized(),
                       ),
                     );
                   },

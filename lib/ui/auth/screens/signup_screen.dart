@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/auth_localizations.dart';
+import 'package:icar/ui/auth/screens/login_screen.dart';
+import 'package:icar/ui/auth/viewmodels/signup/signup_viewmodel.dart';
 import 'package:icar/ui/auth/widgets/auth_input.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
-import 'package:icar/util/validators/validations/validation_email.dart';
-import 'package:icar/util/validators/validations/validation_password.dart';
-import 'package:icar/util/validators/validations/validation_password_confirmation.dart';
-import 'package:icar/util/validators/validations/validation_required.dart';
-import 'package:icar/util/validators/validator.dart';
+import 'package:icar/ui/root/authorized.dart';
+import 'package:icar/util/show_snackbar.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -36,9 +38,40 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(createNewUserProvider).isLoading;
+    final signupFormError = ref.watch(signupFormErrorProvider);
+
+    ref.listen(createNewUserProvider, (_, next) {
+      next.when(
+        data: (_) {
+          if (next.value != null) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const Authorized()),
+            );
+          }
+        },
+        loading: () {},
+        error: (error, _) {
+          showSnackBar(
+            context,
+            SnackBar(
+              content: Text(
+                CoreLocalizations.of(context)!.internalServerError,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(color: AppColors.white),
+              ),
+              backgroundColor: AppColors.error500,
+            ),
+          );
+        },
+      );
+    });
+
     return Scaffold(
-      backgroundColor: AppColors.primary600,
-      appBar: AppBar(title: const Text('Create new account')),
+      appBar: AppBar(
+        title: Text(AuthLocalizations.of(context)!.signupScreenTitle),
+      ),
       body: RootContainer.roundedTop(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child: SingleChildScrollView(
@@ -50,83 +83,71 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AuthInput(
-                      label: 'Name',
-                      hint: 'Enter your name',
+                      label: AuthLocalizations.of(context)!.inputNameLabel,
+                      hint: AuthLocalizations.of(context)!.inputNameHint,
                       controller: _nameController,
-                      validator: Validator.apply(context, [
-                        const ValidationRequired(label: 'Name'),
-                      ]),
+                      errorText:
+                          signupFormError.name != null
+                              ? AuthLocalizations.of(
+                                context,
+                              )!.inputNameError(signupFormError.name!)
+                              : null,
                     ),
                     const SizedBox(height: 20),
                     AuthInput(
-                      label: 'Email',
-                      hint: 'Enter your email',
+                      label: AuthLocalizations.of(context)!.inputEmailLabel,
+                      hint: AuthLocalizations.of(context)!.inputEmailHint,
                       controller: _emailController,
-                      validator: Validator.apply(context, [
-                        const ValidationRequired(label: 'Email'),
-                        ValidationEmail(),
-                      ]),
+                      errorText:
+                          signupFormError.email != null
+                              ? AuthLocalizations.of(
+                                context,
+                              )!.inputEmailError(signupFormError.email!)
+                              : null,
                     ),
                     const SizedBox(height: 20),
                     AuthInput(
-                      label: 'Password',
-                      hint: 'Enter your password',
+                      label: AuthLocalizations.of(context)!.inputPasswordLabel,
+                      hint: AuthLocalizations.of(context)!.inputPasswordHint,
                       controller: _passwordController,
-                      validator: Validator.apply(context, [
-                        const ValidationRequired(label: 'Password'),
-                        ValidationPassword(),
-                      ]),
                       isObscure: true,
+                      errorText:
+                          signupFormError.password != null
+                              ? AuthLocalizations.of(
+                                context,
+                              )!.inputPasswordError(signupFormError.password!)
+                              : null,
                     ),
                     const SizedBox(height: 20),
                     AuthInput(
-                      label: 'Confirm Password',
-                      hint: 'Enter your password',
+                      label:
+                          AuthLocalizations.of(
+                            context,
+                          )!.inputConfirmPasswordLabel,
+                      hint:
+                          AuthLocalizations.of(
+                            context,
+                          )!.inputConfirmPasswordHint,
                       controller: _confirmPasswordController,
-                      validator: Validator.apply(context, [
-                        const ValidationRequired(label: 'Confirm Password'),
-                        ValidationPasswordConfirmation(
-                          password: _passwordController.text,
-                        ),
-                      ]),
                       isObscure: true,
+                      errorText:
+                          signupFormError.confirmPassword != null
+                              ? AuthLocalizations.of(
+                                context,
+                              )!.inputConfirmPasswordError(
+                                signupFormError.confirmPassword!,
+                              )
+                              : null,
                     ),
                     const SizedBox(height: 32),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          foregroundColor: AppColors.white,
-                          backgroundColor: AppColors.primary600,
-                          disabledBackgroundColor: AppColors.primary600
-                              .withValues(alpha: 0.5),
-                        ),
-                        child: Text(
-                          "Signup",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.labelLarge!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                    _submitButton(context, isLoading),
                   ],
                 ),
               ),
               const SizedBox(height: 32),
               RichText(
                 text: TextSpan(
-                  text: "Have an account? ",
+                  text: "${AuthLocalizations.of(context)!.haveAnAccount} ",
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium!.copyWith(color: AppColors.gray600),
@@ -134,9 +155,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
                         child: Text(
-                          "Login",
+                          AuthLocalizations.of(context)!.login,
                           style: Theme.of(
                             context,
                           ).textTheme.bodyMedium!.copyWith(
@@ -150,6 +177,69 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _submitButton(BuildContext context, bool isLoading) {
+    if (isLoading) {
+      return SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: null,
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            foregroundColor: AppColors.white,
+            backgroundColor: AppColors.primary600,
+            disabledBackgroundColor: AppColors.primary600.withValues(
+              alpha: 0.5,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircularLoader(size: 14, color: AppColors.white),
+              const SizedBox(width: 8),
+              Text(
+                AuthLocalizations.of(context)!.signup,
+                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () async {
+          await ref
+              .read(createNewUserProvider.notifier)
+              .createUser(
+                _nameController.text,
+                _emailController.text,
+                _passwordController.text,
+                _confirmPasswordController.text,
+              );
+        },
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          foregroundColor: AppColors.white,
+          backgroundColor: AppColors.primary600,
+          disabledBackgroundColor: AppColors.primary600.withValues(alpha: 0.5),
+        ),
+        child: Text(
+          AuthLocalizations.of(context)!.signup,
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+            fontWeight: FontWeight.w600,
+            color: AppColors.white,
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:icar/data/models/icar/icar.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
@@ -29,12 +30,18 @@ abstract class Schedule with _$Schedule {
   factory Schedule.fromJson(Map<String, Object?> json) =>
       _$ScheduleFromJson(json);
 
-  String get formattedArrivalDate {
-    return DateFormat('EEEE, dd-MM-yyyy').format(arrivalTime.toLocal());
+  String formattedArrivalDate(Locale locale) {
+    return DateFormat(
+      'EEEE, dd-MM-yyyy',
+      locale.languageCode,
+    ).format(arrivalTime.toLocal());
   }
 
-  String get formattedArrivalTime {
-    return DateFormat('HH:mm').format(arrivalTime.toLocal());
+  String formattedArrivalTime(Locale locale) {
+    return DateFormat(
+      'HH:mm',
+      locale.languageCode,
+    ).format(arrivalTime.toLocal());
   }
 
   bool get isEnabled {

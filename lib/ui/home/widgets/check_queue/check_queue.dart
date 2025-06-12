@@ -6,11 +6,11 @@ import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/home/viewmodels/icar_route_options_viewmodel.dart';
-import 'package:icar/ui/home/viewmodels/icar_stop_options_viewmodel.dart';
-import 'package:icar/ui/home/widgets/check_queue/select_icar_stop/select_icar_stop_screen.dart';
-import 'package:icar/ui/home/widgets/check_queue/cq_select.dart';
-import 'package:icar/ui/home/widgets/check_queue/cq_paint.dart';
+import 'package:icar/ui/home/viewmodels/icar_route/icar_route_viewmodel.dart';
+import 'package:icar/ui/home/viewmodels/icar_stop/icar_stop_viewmodel.dart';
+import 'package:icar/ui/home/screens/select_icar_stop_screen.dart';
+import 'package:icar/ui/home/widgets/check_queue/check_queue_select.dart';
+import 'package:icar/ui/home/widgets/check_queue/check_queue_paint.dart';
 import 'package:icar/ui/home/widgets/check_queue/select_route/select_icar_route_sheet.dart';
 import 'package:icar/ui/queue/screens/schedule_list_screen.dart';
 
@@ -23,7 +23,7 @@ class CheckQueue extends ConsumerWidget {
     IcarRoute? selectedRoute = ref.watch(selectedRouteProvider);
 
     return CustomPaint(
-      painter: CqPaint(),
+      painter: CheckQueuePaint(),
       child: Container(
         padding: const EdgeInsets.only(
           left: 16,
@@ -38,7 +38,7 @@ class CheckQueue extends ConsumerWidget {
             padding: const EdgeInsets.all(12),
             child: Column(
               children: [
-                CqSelect(
+                CheckQueueSelect(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -57,7 +57,7 @@ class CheckQueue extends ConsumerWidget {
                   label: HomeLocalizations.of(context)!.cqSelectStopLabel,
                 ),
                 const SizedBox(height: 10),
-                CqSelect(
+                CheckQueueSelect(
                   onTap: () {
                     showModalBottomSheet(
                       context: context,

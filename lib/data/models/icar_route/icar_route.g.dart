@@ -9,7 +9,7 @@ part of 'icar_route.dart';
 _IcarRoute _$IcarRouteFromJson(Map<String, dynamic> json) => _IcarRoute(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
-  color: _colorFromJson(json['color'] as String),
+  color: colorFromJson(json['color'] as String),
   icars:
       (json['icars'] as List<dynamic>?)
           ?.map((e) => Icar.fromJson(e as Map<String, dynamic>))
@@ -25,7 +25,7 @@ Map<String, dynamic> _$IcarRouteToJson(_IcarRoute instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'color': _colorToJson(instance.color),
+      'color': colorToJson(instance.color),
       'icars': instance.icars,
       'routeStopWaypoints': instance.routeStopWaypoints,
       'polylinePoints': _latLngToJson(instance.polylinePoints),

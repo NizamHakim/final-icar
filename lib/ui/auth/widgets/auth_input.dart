@@ -9,7 +9,6 @@ class AuthInput extends StatefulWidget {
     required this.label,
     required this.hint,
     required this.controller,
-    required this.validator,
     this.errorText,
     this.isObscure = false,
   });
@@ -17,7 +16,6 @@ class AuthInput extends StatefulWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
   final String? errorText;
   final bool isObscure;
 
@@ -49,6 +47,7 @@ class _AuthInputState extends State<AuthInput> {
         ),
         const SizedBox(height: 6),
         TextFormField(
+          controller: widget.controller,
           obscureText: currentlyObscure,
           decoration: InputDecoration(
             errorText: widget.errorText,
@@ -78,7 +77,6 @@ class _AuthInputState extends State<AuthInput> {
           style: Theme.of(
             context,
           ).textTheme.bodyMedium!.copyWith(color: AppColors.gray900),
-          validator: widget.validator,
         ),
       ],
     );

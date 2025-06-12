@@ -148,5 +148,22 @@ class _TicketDetailsProviderElement
   Ticket get ticket => (origin as TicketDetailsProvider).ticket;
 }
 
+String _$cancelTicketHash() => r'5f698f79396f35404d3729c00596574983d56b99';
+
+/// See also [CancelTicket].
+@ProviderFor(CancelTicket)
+final cancelTicketProvider =
+    AutoDisposeAsyncNotifierProvider<CancelTicket, Ticket?>.internal(
+      CancelTicket.new,
+      name: r'cancelTicketProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$cancelTicketHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$CancelTicket = AutoDisposeAsyncNotifier<Ticket?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

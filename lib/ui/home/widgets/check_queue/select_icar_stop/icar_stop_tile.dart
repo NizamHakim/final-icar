@@ -5,7 +5,7 @@ import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
-import 'package:icar/ui/home/viewmodels/icar_stop_options_viewmodel.dart';
+import 'package:icar/ui/home/viewmodels/icar_stop/icar_stop_viewmodel.dart';
 
 class IcarStopTile extends ConsumerWidget {
   const IcarStopTile({super.key, required this.icarStop});

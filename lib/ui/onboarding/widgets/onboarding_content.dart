@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/onboarding_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/onboarding/viewmodels/onboarding_viewmodel.dart';
 
@@ -10,18 +11,20 @@ class OnboardingContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final int index = ref.watch(onboardingIndexProvider);
     return <Widget>[
-      const _TextContent(
-        title: "Antre pakai Aplikasi",
+      _TextContent(
+        title: OnboardingLocalizations.of(context)!.onboardingTitle1,
         description:
-            "Keliling ITS dengan iCar dan lihat antrean pakai aplikasi",
+            OnboardingLocalizations.of(context)!.onboardingDescription1,
       ),
-      const _TextContent(
-        title: "Lacak iCar",
-        description: "Lacak posisi iCar dan bersiap untuk perjalanan",
+      _TextContent(
+        title: OnboardingLocalizations.of(context)!.onboardingTitle2,
+        description:
+            OnboardingLocalizations.of(context)!.onboardingDescription2,
       ),
-      const _TextContent(
-        title: "Pergi ke Halte",
-        description: "Pergi ke halte saat iCar sudah dekat",
+      _TextContent(
+        title: OnboardingLocalizations.of(context)!.onboardingTitle3,
+        description:
+            OnboardingLocalizations.of(context)!.onboardingDescription3,
       ),
     ][index];
   }

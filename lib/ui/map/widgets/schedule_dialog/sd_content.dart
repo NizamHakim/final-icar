@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar/icar.dart';
-import 'package:icar/ui/core/errors/data_not_fetched.dart';
+import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/text_badge.dart';
-import 'package:icar/ui/map/widgets/schedule_dialog/schedule_table.dart';
+import 'package:icar/ui/map/widgets/schedule_dialog/table/schedule_table.dart';
 
 class SdContent extends ConsumerStatefulWidget {
   const SdContent({super.key, required this.icarList});

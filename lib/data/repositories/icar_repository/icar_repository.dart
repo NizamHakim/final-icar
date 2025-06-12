@@ -22,7 +22,7 @@ class IcarRepository {
   ) async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.url}/api/icars/icar-stop/${icarStop.id}"),
+        Uri.parse("${ServerConn.httpUrl}/api/icars/icar-stop/${icarStop.id}"),
         headers: {"Content-Type": "application/json"},
       );
 

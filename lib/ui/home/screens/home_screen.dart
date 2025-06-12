@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/home/widgets/check_queue/check_queue.dart';
-import 'package:icar/ui/home/widgets/my_queue.dart';
+import 'package:icar/ui/home/widgets/closest_ticket/closest_ticket.dart';
 import 'package:icar/ui/home/widgets/track_icar/track_icar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,7 +22,11 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                 decoration: const BoxDecoration(color: AppColors.white),
                 child: const Column(
-                  children: [MyQueue(), SizedBox(height: 20), TrackIcar()],
+                  children: [
+                    ClosestTicket(),
+                    SizedBox(height: 20),
+                    TrackIcar(),
+                  ],
                 ),
               ),
             ],

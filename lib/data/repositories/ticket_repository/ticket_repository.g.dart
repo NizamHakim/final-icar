@@ -3,6 +3,52 @@
 part of 'ticket_repository.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_TicketDistanceResponse _$TicketDistanceResponseFromJson(
+  Map<String, dynamic> json,
+) => _TicketDistanceResponse(
+  ticketId: (json['ticketId'] as num).toInt(),
+  distanceStatus: $enumDecode(
+    _$TicketDistanceStatusEnumMap,
+    json['distanceStatus'],
+  ),
+);
+
+Map<String, dynamic> _$TicketDistanceResponseToJson(
+  _TicketDistanceResponse instance,
+) => <String, dynamic>{
+  'ticketId': instance.ticketId,
+  'distanceStatus': _$TicketDistanceStatusEnumMap[instance.distanceStatus]!,
+};
+
+const _$TicketDistanceStatusEnumMap = {
+  TicketDistanceStatus.NOTHING: 'NOTHING',
+  TicketDistanceStatus.CLOSE: 'CLOSE',
+  TicketDistanceStatus.ARRIVED: 'ARRIVED',
+};
+
+_ReviewOptionsResponse _$ReviewOptionsResponseFromJson(
+  Map<String, dynamic> json,
+) => _ReviewOptionsResponse(
+  reviewOptions: (json['reviewOptions'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(
+      int.parse(k),
+      (e as List<dynamic>).map((e) => e as String).toList(),
+    ),
+  ),
+);
+
+Map<String, dynamic> _$ReviewOptionsResponseToJson(
+  _ReviewOptionsResponse instance,
+) => <String, dynamic>{
+  'reviewOptions': instance.reviewOptions.map(
+    (k, e) => MapEntry(k.toString(), e),
+  ),
+};
+
+// **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 

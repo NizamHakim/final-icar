@@ -12,6 +12,10 @@
 	"@cancelTicketButtonLabel": {
 		"description": "Label for the button to cancel a queue ticket"
 	},
+	"ticketHistoryButtonLabel": "Riwayat antrean",
+	"@ticketHistoryButtonLabel": {
+		"description": "Label for the button to view a ticket history"
+	},
 	"ticketInfoTitle": "{infoType, select, CLOSE{iCar sudah dekat!} ARRIVED{iCar tiba di halte!} other{Unknown}}",
 	"@ticketInfoTitle": {
 		"placeholders": {
@@ -29,5 +33,54 @@
 			}
 		},
 		"description": "Description for the ticket info screen base on the type of information"
+	},
+	"queueTicketCanceled": "Tiket antrean dibatalkan",
+	"@queueTicketCanceled": {
+		"description": "Ticket header for canceled ticket"
+	},
+	"icarHasArrived": "iCar sudah tiba",
+	"@icarHasArrived": {
+		"description": "Ticket header for finished ticket"
+	},
+	"queueHistoryScreenTitle": "Riwayat Antrean",
+	"@queueHistoryScreenTitle": {
+		"description": "Title for the queue history screen"
+	},
+	"whatDoYouThink": "Bagaimana pendapatmu?",
+	"@whatDoYouThink": {
+		"description": "Label for rating"
+	},
+	"whatsGood": "Apa yang sudah bagus?",
+	"@whatsGood": {
+		"description": "Label for review"
+	},
+	"whatShouldBeImproved": "Apa yang perlu ditingkatkan?",
+	"@whatShouldBeImproved": {
+		"description": "Label for review"
+	},
+	"reviewOptions": "{review, select, PUNCTUALITY{Ketepatan jadwal} TRAVEL_SAFETY{Keamanan perjalanan} COMFORT{Kenyamanan} CLEANLINESS{Kebersihan} TRAVEL_SPEED{Kecepatan} APPLICATION_SERVICE{Layanan aplikasi} NUMBER_OF_SEATS{Jumlah kursi} TRAVEL_ROUTE{Rute perjalanan} NUMBER_OF_STOPS{Jumlah halte} other{Unknown}}",
+	"@reviewOptions": {
+		"placeholders": {
+			"review": {
+				"type": "String"
+			}
+		},
+		"description": "Review options"
+	},
+	"haveStopsOrRouteSuggestion": "Punya saran halte atau rute baru?",
+	"@haveStopsOrRouteSuggestion": {
+		"description": "Label for suggestion"
+	},
+	"pickBuildingName": "Pilih nama bangunan...",
+	"@pickBuildingName": {
+		"description": "Hint for suggestion"
+	},
+	"anyOtherSuggestion": "Ada saran lain?",
+	"@anyOtherSuggestion": {
+		"description": "Label for suggestion"
+	},
+	"enterSuggestion": "Masukkan saran...",
+	"@enterSuggestion": {
+		"description": "Hint for suggestion"
 	}
 }

@@ -24,7 +24,7 @@ class ScheduleRepository {
     try {
       final response = await http.get(
         Uri.parse(
-          "${ServerConn.url}/api/schedules/icar-stop/${icarStop.id}/icar-route/${icarRoute.id}",
+          "${ServerConn.httpUrl}/api/schedules/icar-stop/${icarStop.id}/icar-route/${icarRoute.id}",
         ),
         headers: {"Content-Type": "application/json"},
       );

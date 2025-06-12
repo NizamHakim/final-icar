@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
-import 'package:icar/ui/map/viewmodels/map_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/map_properties/map_properties_viewmodel.dart';
 import 'package:icar/ui/map/widgets/map_properties/route_checkbox.dart';
 
 class FloatingToggle extends ConsumerWidget {

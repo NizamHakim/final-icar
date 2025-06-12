@@ -7,7 +7,7 @@ part of 'my_queue_viewmodel.dart';
 // **************************************************************************
 
 String _$ticketListByStatusHash() =>
-    r'148ebcb6b74add1478407f96c6d8780a4d4ac04b';
+    r'e77c1b4e67a17935991103dc47903c651a834c8b';
 
 /// Copied from Dart SDK
 class _SystemHash {

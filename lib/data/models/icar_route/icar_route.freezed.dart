@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IcarRoute {
 
- int get id; String get name;@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color get color; List<Icar>? get icars; List<RouteStopWaypoint>? get routeStopWaypoints;@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? get polylinePoints;
+ int get id; String get name;@JsonKey(fromJson: colorFromJson, toJson: colorToJson) Color get color; List<Icar>? get icars; List<RouteStopWaypoint>? get routeStopWaypoints;@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? get polylinePoints;
 /// Create a copy of IcarRoute
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $IcarRouteCopyWith<$Res>  {
   factory $IcarRouteCopyWith(IcarRoute value, $Res Function(IcarRoute) _then) = _$IcarRouteCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
+ int id, String name,@JsonKey(fromJson: colorFromJson, toJson: colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
 });
 
 
@@ -85,12 +85,12 @@ as List<LatLng>?,
 @JsonSerializable()
 
 class _IcarRoute extends IcarRoute {
-  const _IcarRoute({required this.id, required this.name, @JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) required this.color, final  List<Icar>? icars, final  List<RouteStopWaypoint>? routeStopWaypoints, @JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) final  List<LatLng>? polylinePoints}): _icars = icars,_routeStopWaypoints = routeStopWaypoints,_polylinePoints = polylinePoints,super._();
+  const _IcarRoute({required this.id, required this.name, @JsonKey(fromJson: colorFromJson, toJson: colorToJson) required this.color, final  List<Icar>? icars, final  List<RouteStopWaypoint>? routeStopWaypoints, @JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) final  List<LatLng>? polylinePoints}): _icars = icars,_routeStopWaypoints = routeStopWaypoints,_polylinePoints = polylinePoints,super._();
   factory _IcarRoute.fromJson(Map<String, dynamic> json) => _$IcarRouteFromJson(json);
 
 @override final  int id;
 @override final  String name;
-@override@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) final  Color color;
+@override@JsonKey(fromJson: colorFromJson, toJson: colorToJson) final  Color color;
  final  List<Icar>? _icars;
 @override List<Icar>? get icars {
   final value = _icars;
@@ -152,7 +152,7 @@ abstract mixin class _$IcarRouteCopyWith<$Res> implements $IcarRouteCopyWith<$Re
   factory _$IcarRouteCopyWith(_IcarRoute value, $Res Function(_IcarRoute) _then) = __$IcarRouteCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(fromJson: _colorFromJson, toJson: _colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
+ int id, String name,@JsonKey(fromJson: colorFromJson, toJson: colorToJson) Color color, List<Icar>? icars, List<RouteStopWaypoint>? routeStopWaypoints,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) List<LatLng>? polylinePoints
 });
 
 

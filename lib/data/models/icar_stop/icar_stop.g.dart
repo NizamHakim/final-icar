@@ -9,7 +9,7 @@ part of 'icar_stop.dart';
 _IcarStop _$IcarStopFromJson(Map<String, dynamic> json) => _IcarStop(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
-  coordinate: _latLngFromJson(json['coordinate'] as Map<String, dynamic>),
+  coordinate: latLngFromJson(json['coordinate'] as Map<String, dynamic>),
   routeStopWaypoints:
       (json['routeStopWaypoints'] as List<dynamic>?)
           ?.map((e) => RouteStopWaypoint.fromJson(e as Map<String, dynamic>))
@@ -25,7 +25,7 @@ _IcarStop _$IcarStopFromJson(Map<String, dynamic> json) => _IcarStop(
 Map<String, dynamic> _$IcarStopToJson(_IcarStop instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
-  'coordinate': _latLngToJson(instance.coordinate),
+  'coordinate': latLngToJson(instance.coordinate),
   'routeStopWaypoints': instance.routeStopWaypoints,
   'schedules': instance.schedules,
   'distance': instance.distance,

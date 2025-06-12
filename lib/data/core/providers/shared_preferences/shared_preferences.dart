@@ -4,7 +4,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'shared_preferences.g.dart';
 
+@Riverpod(keepAlive: true)
+class SharedPreferencesInstance extends _$SharedPreferencesInstance {
+  @override
+  SharedPreferences? build() {
+    return null;
+  }
+
+  void setInstance(SharedPreferences instance) {
+    state = instance;
+  }
+}
+
 @riverpod
-Future<SharedPreferences> sharedPreferences(Ref ref) async {
-  return await SharedPreferences.getInstance();
+Future<void> initializeSharedPreferences(Ref ref) async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  ref
+      .read(sharedPreferencesInstanceProvider.notifier)
+      .setInstance(sharedPreferences);
 }

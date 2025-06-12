@@ -2,20 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
-import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/core/widgets/app_icon.dart';
-import 'package:icar/ui/map/viewmodels/map_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/map_properties/map_properties_viewmodel.dart';
+import 'package:icar/ui/map/viewmodels/schedule_dialog/schedule_dialog_viewmodel.dart';
 import 'package:icar/ui/map/widgets/schedule_dialog/schedule_dialog.dart';
-import 'package:icar/ui/map/widgets/map_properties/route_stops_markers/icar_stop_clipper.dart';
 
 class IcarStopMarker extends ConsumerWidget {
-  const IcarStopMarker({
-    super.key,
-    required this.color,
-    required this.icarStop,
-  });
+  const IcarStopMarker({super.key, required this.icarStop});
 
-  final Color color;
   final IcarStop icarStop;
 
   @override
@@ -40,22 +33,31 @@ class IcarStopMarker extends ConsumerWidget {
 
         isShowingDetailNotifier.hideDetail();
       },
-      child: ClipPath(
-        clipper: IcarStopClipper(),
-        child: Container(
-          padding: const EdgeInsets.only(
-            left: 4,
-            right: 4,
-            top: 4,
-            bottom: 4 + 6,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 18,
+            height: 28,
+            padding: const EdgeInsets.only(top: 2, left: 4),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(6),
+                bottomRight: Radius.circular(6),
+              ),
+              color: AppColors.white,
+            ),
+            child: Text(
+              "${icarStop.id}",
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: AppColors.primary500,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
-          decoration: BoxDecoration(color: color, shape: BoxShape.rectangle),
-          child: const AppIcon(
-            iconSvg: AppIconsSvg.busStop,
-            color: AppColors.white,
-            size: 16,
-          ),
-        ),
+          Container(width: 6, height: 10, color: AppColors.primary500),
+        ],
       ),
     );
   }

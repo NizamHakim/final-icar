@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:icar/data/core/providers/geofencing_tickets_inqueue/geofencing_tickets_inqueue.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/providers/bottom_nav_index.dart';
@@ -15,6 +16,7 @@ class Authorized extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int currentPageIndex = ref.watch(bottomNavIndexProvider);
+    ref.watch(geofencingTicketsInQueueProvider);
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(

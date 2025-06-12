@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/profile_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/core/providers/locales.dart';
+import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
 import 'package:icar/ui/profile/widgets/language/switch_lang_tile.dart';

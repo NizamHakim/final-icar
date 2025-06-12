@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/data/core/providers/geofencing_tickets_inqueue/geofencing_tickets_inqueue.dart';
+import 'package:icar/data/models/ticket/ticket.dart';
+import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/core/themes/app_icons.dart';
+import 'package:icar/ui/core/widgets/app_icon.dart';
+
+class TicketInfo extends ConsumerWidget {
+  const TicketInfo({super.key, required this.ticket});
+
+  final Ticket ticket;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final geofencingTicketsInQueue =
+        ref.watch(geofencingTicketsInQueueProvider).valueOrNull;
+
+    if (ticket.status == TicketStatus.CANCELED ||
+        geofencingTicketsInQueue == null ||
+        geofencingTicketsInQueue[ticket.id] == TicketDistanceStatus.NOTHING) {
+      return const SizedBox.shrink();
+    }
+
+    _TicketInfoData infoData;
+
+    if (ticket.status == TicketStatus.FINISHED) {
+      infoData = _TicketInfoData.fromType(
+        TicketDistanceStatus.ARRIVED,
+        context,
+      );
+    } else {
+      infoData = _TicketInfoData.fromType(
+        geofencingTicketsInQueue[ticket.id]!,
+        context,
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        border: Border.all(color: infoData.borderColor),
+        borderRadius: BorderRadius.circular(8),
+        color: infoData.backgroundColor,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppIcon(
+            iconSvg: AppIconsSvg.infoCircle,
+            color: infoData.foregroundColor,
+            size: 24,
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  infoData.title,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: infoData.foregroundColor,
+                  ),
+                ),
+                // this part overflows
+                Text(
+                  infoData.description,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: infoData.foregroundColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TicketInfoData {
+  const _TicketInfoData._({
+    required this.infoType,
+    required this.foregroundColor,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.title,
+    required this.description,
+  });
+
+  final TicketDistanceStatus infoType;
+  final Color foregroundColor;
+  final Color backgroundColor;
+  final Color borderColor;
+  final String title;
+  final String description;
+
+  factory _TicketInfoData.fromType(
+    TicketDistanceStatus type,
+    BuildContext context,
+  ) {
+    switch (type) {
+      case TicketDistanceStatus.CLOSE:
+        return _TicketInfoData._(
+          infoType: type,
+          foregroundColor: AppColors.primary500,
+          backgroundColor: AppColors.primary50,
+          borderColor: AppColors.primary100,
+          title: TicketLocalizations.of(context)!.ticketInfoTitle(type.name),
+          description: TicketLocalizations.of(
+            context,
+          )!.ticketInfoDescription(type.name),
+        );
+      case TicketDistanceStatus.ARRIVED:
+        return _TicketInfoData._(
+          infoType: type,
+          foregroundColor: AppColors.success500,
+          backgroundColor: AppColors.success50,
+          borderColor: AppColors.success100,
+          title: TicketLocalizations.of(context)!.ticketInfoTitle(type.name),
+          description: TicketLocalizations.of(
+            context,
+          )!.ticketInfoDescription(type.name),
+        );
+      case TicketDistanceStatus.NOTHING:
+        return _TicketInfoData._(
+          infoType: type,
+          foregroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          borderColor: Colors.transparent,
+          title: '',
+          description: '',
+        );
+    }
+  }
+}

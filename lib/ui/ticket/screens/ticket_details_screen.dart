@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
-import 'package:icar/ui/core/errors/data_not_fetched.dart';
+import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/ticket/viewmodels/ticket_details_viewmodel.dart';
-import 'package:icar/ui/ticket/widgets/ticket_card.dart';
+import 'package:icar/ui/ticket/widgets/ticket_card/ticket_card.dart';
 
 class TicketDetailsScreen extends ConsumerWidget {
   const TicketDetailsScreen({super.key, required this.ticket});

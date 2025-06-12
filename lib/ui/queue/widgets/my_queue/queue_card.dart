@@ -2,6 +2,8 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
@@ -9,21 +11,31 @@ import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/text_badge.dart';
 import 'package:icar/ui/ticket/screens/ticket_details_screen.dart';
 
-class QueueCard extends StatelessWidget {
-  const QueueCard({super.key, required this.ticket});
+class QueueCard extends ConsumerWidget {
+  const QueueCard({
+    super.key,
+    required this.ticket,
+    this.shouldNavigate = true,
+  });
 
   final Ticket ticket;
+  final bool shouldNavigate;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentLocale = ref.watch(currentLocaleProvider);
+
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TicketDetailsScreen(ticket: ticket),
-          ),
-        );
-      },
+      onTap:
+          shouldNavigate
+              ? () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TicketDetailsScreen(ticket: ticket),
+                  ),
+                );
+              }
+              : null,
       child: Card(
         elevation: 0.1,
         color: AppColors.primary500,
@@ -36,7 +48,7 @@ class QueueCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    ticket.schedule!.formattedArrivalDate,
+                    ticket.schedule!.formattedArrivalDate(currentLocale),
                     style: Theme.of(
                       context,
                     ).textTheme.labelLarge!.copyWith(color: AppColors.white),
@@ -71,7 +83,7 @@ class QueueCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        ticket.schedule!.formattedArrivalTime,
+                        ticket.schedule!.formattedArrivalTime(currentLocale),
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -83,9 +95,10 @@ class QueueCard extends StatelessWidget {
                           QueueLocalizations.of(
                             context,
                           )!.ticketStatus(ticket.status.name),
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
-                        foregroundColor: AppColors.success500,
-                        backgroundColor: AppColors.success50,
+                        foregroundColor: ticket.status.foregroundColor,
+                        backgroundColor: ticket.status.backgroundColor,
                       ),
                     ],
                   ),

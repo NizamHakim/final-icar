@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IcarStop {
 
- int get id; String get name;@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) LatLng get coordinate; List<RouteStopWaypoint>? get routeStopWaypoints; List<Schedule>? get schedules; int? get distance;@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? get duration;
+ int get id; String get name;@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng get coordinate; List<RouteStopWaypoint>? get routeStopWaypoints; List<Schedule>? get schedules; int? get distance;@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? get duration;
 /// Create a copy of IcarStop
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $IcarStopCopyWith<$Res>  {
   factory $IcarStopCopyWith(IcarStop value, $Res Function(IcarStop) _then) = _$IcarStopCopyWithImpl;
 @useResult
 $Res call({
- int id, String name,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) LatLng coordinate, List<RouteStopWaypoint>? routeStopWaypoints, List<Schedule>? schedules, int? distance,@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? duration
+ int id, String name,@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng coordinate, List<RouteStopWaypoint>? routeStopWaypoints, List<Schedule>? schedules, int? distance,@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? duration
 });
 
 
@@ -86,12 +86,12 @@ as Duration?,
 @JsonSerializable()
 
 class _IcarStop implements IcarStop {
-  const _IcarStop({required this.id, required this.name, @JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) required this.coordinate, final  List<RouteStopWaypoint>? routeStopWaypoints, final  List<Schedule>? schedules, this.distance, @JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) this.duration}): _routeStopWaypoints = routeStopWaypoints,_schedules = schedules;
+  const _IcarStop({required this.id, required this.name, @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) required this.coordinate, final  List<RouteStopWaypoint>? routeStopWaypoints, final  List<Schedule>? schedules, this.distance, @JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) this.duration}): _routeStopWaypoints = routeStopWaypoints,_schedules = schedules;
   factory _IcarStop.fromJson(Map<String, dynamic> json) => _$IcarStopFromJson(json);
 
 @override final  int id;
 @override final  String name;
-@override@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) final  LatLng coordinate;
+@override@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) final  LatLng coordinate;
  final  List<RouteStopWaypoint>? _routeStopWaypoints;
 @override List<RouteStopWaypoint>? get routeStopWaypoints {
   final value = _routeStopWaypoints;
@@ -146,7 +146,7 @@ abstract mixin class _$IcarStopCopyWith<$Res> implements $IcarStopCopyWith<$Res>
   factory _$IcarStopCopyWith(_IcarStop value, $Res Function(_IcarStop) _then) = __$IcarStopCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name,@JsonKey(fromJson: _latLngFromJson, toJson: _latLngToJson) LatLng coordinate, List<RouteStopWaypoint>? routeStopWaypoints, List<Schedule>? schedules, int? distance,@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? duration
+ int id, String name,@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng coordinate, List<RouteStopWaypoint>? routeStopWaypoints, List<Schedule>? schedules, int? distance,@JsonKey(fromJson: _durationFromJson, toJson: _durationToJson) Duration? duration
 });
 
 

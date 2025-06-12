@@ -1,3 +1,31 @@
 {
-	"@@locale": "id"
+	"@@locale": "id",
+	"onboardingTitle1": "Antre pakai Aplikasi",
+	"@onboardingTitle1": {
+		"description": "Title for the first onboarding screen"
+	},
+	"onboardingTitle2": "Lacak iCar",
+	"@onboardingTitle2": {
+		"description": "Title for the second onboarding screen"
+	},
+	"onboardingTitle3": "Pergi ke Halte",
+	"@onboardingTitle3": {
+		"description": "Title for the third onboarding screen"
+	},
+	"onboardingDescription1": "Keliling ITS dengan iCar dan lihat antrean pakai aplikasi",
+	"@onboardingDescription1": {
+		"description": "Description for the first onboarding screen"
+	},
+	"onboardingDescription2": "Lacak posisi iCar dan bersiap untuk perjalanan",
+	"@onboardingDescription2": {
+		"description": "Description for the second onboarding screen"
+	},
+	"onboardingDescription3": "Pergi ke Halte",
+	"@onboardingDescription3": {
+		"description": "Description for the second onboarding screen"
+	},
+	"skip": "Skip",
+	"@skip": {
+		"description": "Skip button"
+	}
 }

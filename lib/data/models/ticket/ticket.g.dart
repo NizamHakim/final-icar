@@ -20,6 +20,10 @@ _Ticket _$TicketFromJson(Map<String, dynamic> json) => _Ticket(
       json['schedule'] == null
           ? null
           : Schedule.fromJson(json['schedule'] as Map<String, dynamic>),
+  review:
+      json['review'] == null
+          ? null
+          : Review.fromJson(json['review'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$TicketToJson(_Ticket instance) => <String, dynamic>{
@@ -30,6 +34,7 @@ Map<String, dynamic> _$TicketToJson(_Ticket instance) => <String, dynamic>{
   'scheduleId': instance.scheduleId,
   'user': instance.user,
   'schedule': instance.schedule,
+  'review': instance.review,
 };
 
 const _$TicketStatusEnumMap = {

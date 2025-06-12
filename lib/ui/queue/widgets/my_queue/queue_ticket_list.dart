@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
-import 'package:icar/ui/core/errors/data_not_fetched.dart';
+import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/queue/viewmodels/my_queue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/my_queue/queue_card.dart';

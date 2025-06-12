@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/core/providers/current_user.dart';
+import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
@@ -42,7 +42,7 @@ class CreateNewTicket extends _$CreateNewTicket {
   Future<void> createTicket(Schedule schedule) async {
     state = const AsyncValue.loading();
 
-    final currentUser = ref.read(currentUserProvider).asData?.value;
+    final currentUser = ref.read(currentUserProvider);
     final ticketRepository = ref.read(ticketRepositoryProvider);
 
     final ticketEither = await ticketRepository.createNewTicket(
