@@ -6,7 +6,7 @@ part of 'ticket_details_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$ticketDetailsHash() => r'65c68faa7627af6fd361ef7b7d013c071e9d3048';
+String _$ticketDetailsHash() => r'5069d9f6e380aa481561aff0c8dd22bd50a9515e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -39,15 +39,15 @@ class TicketDetailsFamily extends Family<AsyncValue<Ticket>> {
   const TicketDetailsFamily();
 
   /// See also [ticketDetails].
-  TicketDetailsProvider call({required Ticket ticket}) {
-    return TicketDetailsProvider(ticket: ticket);
+  TicketDetailsProvider call(int ticketId) {
+    return TicketDetailsProvider(ticketId);
   }
 
   @override
   TicketDetailsProvider getProviderOverride(
     covariant TicketDetailsProvider provider,
   ) {
-    return call(ticket: provider.ticket);
+    return call(provider.ticketId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -68,9 +68,9 @@ class TicketDetailsFamily extends Family<AsyncValue<Ticket>> {
 /// See also [ticketDetails].
 class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
   /// See also [ticketDetails].
-  TicketDetailsProvider({required Ticket ticket})
+  TicketDetailsProvider(int ticketId)
     : this._internal(
-        (ref) => ticketDetails(ref as TicketDetailsRef, ticket: ticket),
+        (ref) => ticketDetails(ref as TicketDetailsRef, ticketId),
         from: ticketDetailsProvider,
         name: r'ticketDetailsProvider',
         debugGetCreateSourceHash:
@@ -80,7 +80,7 @@ class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
         dependencies: TicketDetailsFamily._dependencies,
         allTransitiveDependencies:
             TicketDetailsFamily._allTransitiveDependencies,
-        ticket: ticket,
+        ticketId: ticketId,
       );
 
   TicketDetailsProvider._internal(
@@ -90,10 +90,10 @@ class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.ticket,
+    required this.ticketId,
   }) : super.internal();
 
-  final Ticket ticket;
+  final int ticketId;
 
   @override
   Override overrideWith(
@@ -108,7 +108,7 @@ class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        ticket: ticket,
+        ticketId: ticketId,
       ),
     );
   }
@@ -120,13 +120,13 @@ class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
 
   @override
   bool operator ==(Object other) {
-    return other is TicketDetailsProvider && other.ticket == ticket;
+    return other is TicketDetailsProvider && other.ticketId == ticketId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, ticket.hashCode);
+    hash = _SystemHash.combine(hash, ticketId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -135,8 +135,8 @@ class TicketDetailsProvider extends AutoDisposeFutureProvider<Ticket> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin TicketDetailsRef on AutoDisposeFutureProviderRef<Ticket> {
-  /// The parameter `ticket` of this provider.
-  Ticket get ticket;
+  /// The parameter `ticketId` of this provider.
+  int get ticketId;
 }
 
 class _TicketDetailsProviderElement
@@ -145,10 +145,10 @@ class _TicketDetailsProviderElement
   _TicketDetailsProviderElement(super.provider);
 
   @override
-  Ticket get ticket => (origin as TicketDetailsProvider).ticket;
+  int get ticketId => (origin as TicketDetailsProvider).ticketId;
 }
 
-String _$cancelTicketHash() => r'5f698f79396f35404d3729c00596574983d56b99';
+String _$cancelTicketHash() => r'c90650288aba1ba549e50655a5a2d55e156e0556';
 
 /// See also [CancelTicket].
 @ProviderFor(CancelTicket)

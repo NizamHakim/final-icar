@@ -7,6 +7,8 @@ import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/ticket/viewmodels/ticket_history_viewmodel.dart';
 import 'package:icar/ui/ticket/widgets/history_review/review/review.dart';
 import 'package:icar/ui/ticket/widgets/history_review/suggestion/suggestion.dart';
+import 'package:icar/util/post_response_handler.dart';
+import 'package:icar/util/refresh_tickets_state/refresh_tickets_state.dart';
 import 'package:icar/util/show_snackbar.dart';
 
 class ReviewAndSuggestion extends ConsumerWidget {
@@ -19,14 +21,14 @@ class ReviewAndSuggestion extends ConsumerWidget {
     final isLoading = ref.watch(updateReviewProvider).isLoading;
 
     ref.listen(updateReviewProvider, (_, next) {
-      next.when(
-        data: (ticket) {
-          if (ticket != null) {
-            ref.invalidate(ticketHistoryProvider(ticket: ticket));
-          }
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          ref.read(refreshTicketByIdProvider(ticket.id));
+          ref.read(isDoingReviewProvider.notifier).setState(false);
         },
-        loading: () {},
-        error: (error, _) {
+        onError: () {
           showSnackBar(
             context,
             SnackBar(

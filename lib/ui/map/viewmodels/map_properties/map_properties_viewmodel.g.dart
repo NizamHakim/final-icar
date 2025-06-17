@@ -23,12 +23,12 @@ final icarStopListProvider = AutoDisposeFutureProvider<List<IcarStop>>.internal(
 // ignore: unused_element
 typedef IcarStopListRef = AutoDisposeFutureProviderRef<List<IcarStop>>;
 String _$icarsPositionMapStreamHash() =>
-    r'c2a8fd01f451b6a1d62fdae5dc5f389b3e0c8b1c';
+    r'5701696d1ef2e43af8755e1aa3ad7216a4846c2d';
 
 /// See also [icarsPositionMapStream].
 @ProviderFor(icarsPositionMapStream)
 final icarsPositionMapStreamProvider =
-    AutoDisposeStreamProvider<Map<int, LatLng>>.internal(
+    AutoDisposeStreamProvider<Map<int, Position>>.internal(
       icarsPositionMapStream,
       name: r'icarsPositionMapStreamProvider',
       debugGetCreateSourceHash:
@@ -42,7 +42,7 @@ final icarsPositionMapStreamProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef IcarsPositionMapStreamRef =
-    AutoDisposeStreamProviderRef<Map<int, LatLng>>;
+    AutoDisposeStreamProviderRef<Map<int, Position>>;
 String _$routeStateListHash() => r'c3633f3b42ff7412c2bc756ec6e2cca2ecbef00b';
 
 /// See also [RouteStateList].

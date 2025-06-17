@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:icar/data/core/providers/notifications_plugin/notifications_plugin.dart';
 import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/data/core/providers/shared_preferences/shared_preferences.dart';
@@ -14,5 +15,6 @@ class AppInitialization extends _$AppInitialization {
     await ref.read(initializeSharedPreferencesProvider.future);
     ref.read(currentLocaleProvider);
     await ref.read(initializeCurrentUserProvider.future);
+    await ref.read(initializeNotificationsPluginProvider.future);
   }
 }

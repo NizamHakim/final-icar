@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/core_localizations.dart';
+import 'package:flutter_gen/gen_l10n/permission_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/util/permissions/location/location_permission_manager.dart';
 
@@ -9,13 +11,13 @@ class LocationServiceDisabledRationale extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        "Location Service Disabled",
+        PermissionLocalizations.of(context)!.locationServiceTitle,
         style: Theme.of(
           context,
         ).textTheme.headlineSmall!.copyWith(color: AppColors.black),
       ),
       content: Text(
-        "Please enable location services on your device to proceed.",
+        PermissionLocalizations.of(context)!.locationServiceDesc,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontWeight: FontWeight.w500,
           color: AppColors.gray500,
@@ -27,7 +29,7 @@ class LocationServiceDisabledRationale extends StatelessWidget {
             Navigator.of(context).pop();
           },
           child: Text(
-            "Cancel",
+            CoreLocalizations.of(context)!.cancel,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: AppColors.gray400,
               fontWeight: FontWeight.w600,
@@ -40,7 +42,7 @@ class LocationServiceDisabledRationale extends StatelessWidget {
             LocationPermissionManager.requestForService();
           },
           child: Text(
-            "Enable",
+            PermissionLocalizations.of(context)!.enable,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               color: AppColors.primary500,
               fontWeight: FontWeight.w600,

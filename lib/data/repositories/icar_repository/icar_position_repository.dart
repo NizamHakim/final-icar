@@ -3,9 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:icar/data/models/json_converter/latlng_json_converter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:icar/data/models/icar/icar.dart';
+import 'package:icar/data/models/json_converter/position_json_converter.dart';
 import 'package:icar/data/repositories/icar_repository/icar_websocket.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -33,10 +34,10 @@ class IcarPositionRepository {
 
   IOWebSocketChannel? _channel;
   bool _isDisposed = false;
-  final StreamController<IcarPositionResponse> _streamController =
-      StreamController<IcarPositionResponse>.broadcast();
+  final StreamController<IcarWebSocketResponse> _streamController =
+      StreamController<IcarWebSocketResponse>.broadcast();
 
-  Stream<IcarPositionResponse> get stream => _streamController.stream;
+  Stream<IcarWebSocketResponse> get stream => _streamController.stream;
 
   void _init() {
     _channel = _icarWebsocket.connect();
@@ -48,9 +49,12 @@ class IcarPositionRepository {
 
     _channel?.stream.listen(
       (data) {
-        _streamController.add(IcarPositionResponse.fromJson(jsonDecode(data)));
+        _streamController.add(IcarWebSocketResponse.fromJson(jsonDecode(data)));
       },
       onError: (error) {
+        _reconnect();
+      },
+      onDone: () {
         _reconnect();
       },
     );
@@ -71,14 +75,43 @@ class IcarPositionRepository {
   }
 }
 
-@freezed
-abstract class IcarPositionResponse with _$IcarPositionResponse {
-  const factory IcarPositionResponse({
-    required int icarId,
-    @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)
-    required LatLng position,
-  }) = _IcarPositionResponse;
+// @freezed
+// abstract class IcarPositionResponse with _$IcarPositionResponse {
+//   const factory IcarPositionResponse({
+//     required int icarId,
+//     @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)
+//     required LatLng position,
+//   }) = _IcarPositionResponse;
 
-  factory IcarPositionResponse.fromJson(Map<String, dynamic> json) =>
-      _$IcarPositionResponseFromJson(json);
+//   factory IcarPositionResponse.fromJson(Map<String, dynamic> json) =>
+//       _$IcarPositionResponseFromJson(json);
+// }
+
+// @freezed
+// abstract class IcarDisconnectedResponse with _$IcarDisconnectedResponse {
+//   const factory IcarDisconnectedResponse({required int icarId}) =
+//       _IcarDisconnectedResponse;
+
+//   factory IcarDisconnectedResponse.fromJson(Map<String, dynamic> json) =>
+//       _$IcarDisconnectedResponseFromJson(json);
+// }
+
+enum IcarWebSocketResponseType { position, disconnected }
+
+@Freezed(unionKey: 'type')
+sealed class IcarWebSocketResponse with _$IcarWebSocketResponse {
+  const factory IcarWebSocketResponse.position({
+    required IcarWebSocketResponseType type,
+    required int icarId,
+    @JsonKey(fromJson: positionFromJson, toJson: positionToJson)
+    required Position position,
+  }) = PositionResponse;
+
+  const factory IcarWebSocketResponse.disconnected({
+    required IcarWebSocketResponseType type,
+    required Icar icar,
+  }) = DisconnectedResponse;
+
+  factory IcarWebSocketResponse.fromJson(Map<String, dynamic> json) =>
+      _$IcarWebSocketResponseFromJson(json);
 }

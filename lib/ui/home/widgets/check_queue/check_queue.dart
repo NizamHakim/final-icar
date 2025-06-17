@@ -80,8 +80,10 @@ class CheckQueue extends ConsumerWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ScheduleListScreen(
-                                        icarStop: selectedStop,
-                                        icarRoute: selectedRoute,
+                                        icarStopId: selectedStop.id,
+                                        icarStopName: selectedStop.name,
+                                        icarRouteId: selectedRoute.id,
+                                        icarRouteName: selectedRoute.name,
                                       ),
                                 ),
                               );

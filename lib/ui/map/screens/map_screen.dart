@@ -11,7 +11,7 @@ import 'package:icar/ui/map/viewmodels/schedule_dialog/schedule_dialog_viewmodel
 import 'package:icar/ui/map/widgets/map_properties/floating_toggle.dart';
 import 'package:icar/ui/map/widgets/map_properties/icar_marker/icar_marker.dart';
 import 'package:icar/ui/map/widgets/map_properties/route_polyline/route_polyline.dart';
-import 'package:icar/ui/map/widgets/map_properties/route_stops_markers/icar_stops_markers.dart';
+import 'package:icar/ui/map/widgets/map_properties/icar_stops_markers/icar_stops_markers.dart';
 import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
 import 'package:icar/util/handle_error.dart';
 import 'package:latlong2/latlong.dart';
@@ -58,11 +58,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           FlutterMap(
             mapController: mapController,
             options: MapOptions(
-              initialCenter: const LatLng(
-                // userLocationPosition.latitude,
-                // userLocationPosition.longitude,
-                -7.286326,
-                112.794968,
+              initialCenter: LatLng(
+                userLocationPosition.latitude,
+                userLocationPosition.longitude,
+                // -7.286326,
+                // 112.794968,
               ),
               initialZoom: 16,
               onMapReady: () {
@@ -84,10 +84,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   ...icarsPositionMapStream.when(
                     data: (icarsPositionMap) {
                       return routeState.route.icars!.map((icar) {
-                        final position =
-                            icarsPositionMap[icar.id] ??
-                            const LatLng(-7.280328, 112.79137);
-
+                        final position = icarsPositionMap[icar.id];
+                        if (position == null) return const SizedBox.shrink();
                         return IcarMarker(
                           route: routeState.route,
                           position: position,
@@ -99,6 +97,21 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   ),
               UserMarker(position: userLocationPosition),
             ],
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: AppColors.white,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+              child: Text(
+                '© OpenStreetMap contributors',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
           ),
           if (!isShowingDetail)
             const Positioned(

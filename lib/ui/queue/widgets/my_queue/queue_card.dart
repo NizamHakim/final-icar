@@ -31,7 +31,8 @@ class QueueCard extends ConsumerWidget {
               ? () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => TicketDetailsScreen(ticket: ticket),
+                    builder:
+                        (context) => TicketDetailsScreen(ticketId: ticket.id),
                   ),
                 );
               }

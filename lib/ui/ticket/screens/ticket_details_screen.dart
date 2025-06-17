@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
-import 'package:icar/data/models/ticket/ticket.dart';
-import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/ticket/viewmodels/ticket_details_viewmodel.dart';
 import 'package:icar/ui/ticket/widgets/ticket_card/ticket_card.dart';
+import 'package:icar/util/handle_error.dart';
 
 class TicketDetailsScreen extends ConsumerWidget {
-  const TicketDetailsScreen({super.key, required this.ticket});
+  const TicketDetailsScreen({super.key, required this.ticketId});
 
-  final Ticket ticket;
+  final int ticketId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ticketDetails = ref.watch(ticketDetailsProvider(ticket: ticket));
+    final ticketDetails = ref.watch(ticketDetailsProvider(ticketId));
 
     return Scaffold(
       backgroundColor: AppColors.primary600,
@@ -35,9 +33,7 @@ class TicketDetailsScreen extends ConsumerWidget {
             );
           },
           error: (error, _) {
-            return DataNotFetched(
-              text: CoreLocalizations.of(context)!.internalServerError,
-            );
+            return handleError(context, error);
           },
           loading: () {
             return const CircularLoader(color: AppColors.white);

@@ -1,12 +1,10 @@
 import 'dart:convert';
+import 'package:icar/util/app_dot_env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/data/core/exceptions/app_failure.dart';
-import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/icar_route/icar_route.dart';
-import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
 
 part 'schedule_repository.g.dart';
@@ -18,13 +16,13 @@ ScheduleRepository scheduleRepository(Ref ref) {
 
 class ScheduleRepository {
   Future<Either<AppFailure, List<Schedule>>> getSchedulesByStopAndRoute(
-    IcarStop icarStop,
-    IcarRoute icarRoute,
+    int icarStopId,
+    int icarRouteId,
   ) async {
     try {
       final response = await http.get(
         Uri.parse(
-          "${ServerConn.httpUrl}/api/schedules/icar-stop/${icarStop.id}/icar-route/${icarRoute.id}",
+          "${AppDotEnv.httpUrl}/api/schedules/icar-stop/$icarStopId/icar-route/$icarRouteId",
         ),
         headers: {"Content-Type": "application/json"},
       );

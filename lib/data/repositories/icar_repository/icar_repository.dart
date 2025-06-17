@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:icar/data/core/exceptions/app_failure.dart';
-import 'package:icar/data/core/server_conn.dart';
 import 'package:icar/data/models/icar/icar.dart';
 import 'package:http/http.dart' as http;
-import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/util/app_dot_env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'icar_repository.g.dart';
@@ -18,11 +17,11 @@ IcarRepository icarRepository(Ref ref) {
 
 class IcarRepository {
   Future<Either<AppFailure, List<Icar>>> getIcarsWithScheduleByStopId(
-    IcarStop icarStop,
+    int icarStopId,
   ) async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.httpUrl}/api/icars/icar-stop/${icarStop.id}"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/icars/icar-stop/$icarStopId"),
         headers: {"Content-Type": "application/json"},
       );
 

@@ -6,9 +6,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'ticket_details_viewmodel.g.dart';
 
 @riverpod
-Future<Ticket> ticketDetails(Ref ref, {required Ticket ticket}) async {
+Future<Ticket> ticketDetails(Ref ref, int ticketId) async {
   final ticketRepository = ref.watch(ticketRepositoryProvider);
-  final ticketEither = await ticketRepository.getTicketDetails(ticket);
+  final ticketEither = await ticketRepository.getTicketDetails(ticketId);
 
   return ticketEither.fold(
     (error) {
@@ -27,10 +27,10 @@ class CancelTicket extends _$CancelTicket {
     return null;
   }
 
-  Future<void> cancelTicket(Ticket ticket) async {
+  Future<void> cancelTicket(int ticketId) async {
     state = const AsyncValue.loading();
     final ticketRepository = ref.read(ticketRepositoryProvider);
-    final cancelResult = await ticketRepository.cancelTicket(ticket);
+    final cancelResult = await ticketRepository.cancelTicket(ticketId);
 
     cancelResult.fold(
       (error) {

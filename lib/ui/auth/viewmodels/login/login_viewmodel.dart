@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/models/user/user.dart';
 import 'package:icar/data/repositories/auth_repository/auth_local_repository.dart';
 import 'package:icar/data/repositories/auth_repository/auth_remote_repository.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_viewmodel.freezed.dart';
 part 'login_viewmodel.g.dart';

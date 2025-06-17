@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
-import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/ticket/viewmodels/ticket_history_viewmodel.dart';
 import 'package:icar/ui/ticket/widgets/history_review/review/review_badge.dart';
+import 'package:icar/util/handle_error.dart';
 
 class Review extends ConsumerWidget {
   const Review({super.key});
@@ -48,9 +47,7 @@ class Review extends ConsumerWidget {
         );
       },
       error: (error, _) {
-        return DataNotFetched(
-          text: CoreLocalizations.of(context)!.internalServerError,
-        );
+        return handleError(context, error);
       },
       loading: () {
         return const CircularLoader();

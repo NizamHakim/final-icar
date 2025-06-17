@@ -24,6 +24,10 @@
 	"@submit": {
 		"description": "Core - Submit"
 	},
+	"logout": "Logout",
+	"@logout": {
+		"description": "Core - Logout"
+	},
 	"stopWithName": "{stopName} Stop",
 	"@stopWithName": {
 		"placeholders": {

@@ -2,16 +2,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/data/core/providers/user_location/user_location.dart';
-import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/map/screens/map_screen.dart';
 import 'package:icar/ui/map/widgets/map_properties/user_marker/user_marker.dart';
-import 'package:icar/util/permissions/location/widgets/location_permission_denied.dart';
-import 'package:icar/util/permissions/location/widgets/location_service_disabled.dart';
+import 'package:icar/util/handle_error.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapPreview extends ConsumerStatefulWidget {
@@ -41,21 +37,40 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
               width: double.infinity,
               height: previewHeight,
               child: IgnorePointer(
-                child: FlutterMap(
-                  options: MapOptions(
-                    initialCenter: LatLng(
-                      userLocationData.latitude,
-                      userLocationData.longitude,
-                    ),
-                    initialZoom: 16,
-                  ),
+                child: Stack(
                   children: [
-                    TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'com.example.app',
+                    FlutterMap(
+                      options: MapOptions(
+                        initialCenter: LatLng(
+                          userLocationData.latitude,
+                          userLocationData.longitude,
+                        ),
+                        initialZoom: 16,
+                      ),
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          userAgentPackageName: 'com.example.app',
+                        ),
+                        UserMarker(position: userLocationData),
+                      ],
                     ),
-                    UserMarker(position: userLocationData),
+                    Positioned(
+                      bottom: 2,
+                      right: 2,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: AppColors.white,
+                        ),
+                        padding: const EdgeInsets.all(2),
+                        child: Text(
+                          '© OpenStreetMap contributors',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -74,7 +89,7 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
             height: 240,
             width: double.infinity,
             color: AppColors.white,
-            child: _showErrorWidget(error),
+            child: handleError(context, error),
           ),
         );
       },
@@ -86,17 +101,5 @@ class _MapPreviewState extends ConsumerState<MapPreview> {
         );
       },
     );
-  }
-
-  Widget _showErrorWidget(Object error) {
-    if (error is LocationServiceDisabledException) {
-      return const LocationServiceDisabled();
-    } else if (error is PermissionDeniedException) {
-      return const LocationPermissionDenied();
-    } else {
-      return DataNotFetched(
-        text: CoreLocalizations.of(context)!.internalServerError,
-      );
-    }
   }
 }

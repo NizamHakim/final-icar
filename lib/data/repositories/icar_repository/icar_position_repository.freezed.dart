@@ -12,44 +12,67 @@ part of 'icar_position_repository.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+IcarWebSocketResponse _$IcarWebSocketResponseFromJson(
+  Map<String, dynamic> json
+) {
+        switch (json['type']) {
+                  case 'position':
+          return PositionResponse.fromJson(
+            json
+          );
+                case 'disconnected':
+          return DisconnectedResponse.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'type',
+  'IcarWebSocketResponse',
+  'Invalid union type "${json['type']}"!'
+);
+        }
+      
+}
 
 /// @nodoc
-mixin _$IcarPositionResponse {
+mixin _$IcarWebSocketResponse {
 
- int get icarId;@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng get position;
-/// Create a copy of IcarPositionResponse
+ IcarWebSocketResponseType get type;
+/// Create a copy of IcarWebSocketResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$IcarPositionResponseCopyWith<IcarPositionResponse> get copyWith => _$IcarPositionResponseCopyWithImpl<IcarPositionResponse>(this as IcarPositionResponse, _$identity);
+$IcarWebSocketResponseCopyWith<IcarWebSocketResponse> get copyWith => _$IcarWebSocketResponseCopyWithImpl<IcarWebSocketResponse>(this as IcarWebSocketResponse, _$identity);
 
-  /// Serializes this IcarPositionResponse to a JSON map.
+  /// Serializes this IcarWebSocketResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is IcarPositionResponse&&(identical(other.icarId, icarId) || other.icarId == icarId)&&(identical(other.position, position) || other.position == position));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IcarWebSocketResponse&&(identical(other.type, type) || other.type == type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,icarId,position);
+int get hashCode => Object.hash(runtimeType,type);
 
 @override
 String toString() {
-  return 'IcarPositionResponse(icarId: $icarId, position: $position)';
+  return 'IcarWebSocketResponse(type: $type)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $IcarPositionResponseCopyWith<$Res>  {
-  factory $IcarPositionResponseCopyWith(IcarPositionResponse value, $Res Function(IcarPositionResponse) _then) = _$IcarPositionResponseCopyWithImpl;
+abstract mixin class $IcarWebSocketResponseCopyWith<$Res>  {
+  factory $IcarWebSocketResponseCopyWith(IcarWebSocketResponse value, $Res Function(IcarWebSocketResponse) _then) = _$IcarWebSocketResponseCopyWithImpl;
 @useResult
 $Res call({
- int icarId,@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng position
+ IcarWebSocketResponseType type
 });
 
 
@@ -57,20 +80,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$IcarPositionResponseCopyWithImpl<$Res>
-    implements $IcarPositionResponseCopyWith<$Res> {
-  _$IcarPositionResponseCopyWithImpl(this._self, this._then);
+class _$IcarWebSocketResponseCopyWithImpl<$Res>
+    implements $IcarWebSocketResponseCopyWith<$Res> {
+  _$IcarWebSocketResponseCopyWithImpl(this._self, this._then);
 
-  final IcarPositionResponse _self;
-  final $Res Function(IcarPositionResponse) _then;
+  final IcarWebSocketResponse _self;
+  final $Res Function(IcarWebSocketResponse) _then;
 
-/// Create a copy of IcarPositionResponse
+/// Create a copy of IcarWebSocketResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? icarId = null,Object? position = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,}) {
   return _then(_self.copyWith(
-icarId: null == icarId ? _self.icarId : icarId // ignore: cast_nullable_to_non_nullable
-as int,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
-as LatLng,
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as IcarWebSocketResponseType,
   ));
 }
 
@@ -80,47 +102,48 @@ as LatLng,
 /// @nodoc
 @JsonSerializable()
 
-class _IcarPositionResponse implements IcarPositionResponse {
-  const _IcarPositionResponse({required this.icarId, @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) required this.position});
-  factory _IcarPositionResponse.fromJson(Map<String, dynamic> json) => _$IcarPositionResponseFromJson(json);
+class PositionResponse implements IcarWebSocketResponse {
+  const PositionResponse({required this.type, required this.icarId, @JsonKey(fromJson: positionFromJson, toJson: positionToJson) required this.position});
+  factory PositionResponse.fromJson(Map<String, dynamic> json) => _$PositionResponseFromJson(json);
 
-@override final  int icarId;
-@override@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) final  LatLng position;
+@override final  IcarWebSocketResponseType type;
+ final  int icarId;
+@JsonKey(fromJson: positionFromJson, toJson: positionToJson) final  Position position;
 
-/// Create a copy of IcarPositionResponse
+/// Create a copy of IcarWebSocketResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$IcarPositionResponseCopyWith<_IcarPositionResponse> get copyWith => __$IcarPositionResponseCopyWithImpl<_IcarPositionResponse>(this, _$identity);
+$PositionResponseCopyWith<PositionResponse> get copyWith => _$PositionResponseCopyWithImpl<PositionResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$IcarPositionResponseToJson(this, );
+  return _$PositionResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IcarPositionResponse&&(identical(other.icarId, icarId) || other.icarId == icarId)&&(identical(other.position, position) || other.position == position));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PositionResponse&&(identical(other.type, type) || other.type == type)&&(identical(other.icarId, icarId) || other.icarId == icarId)&&(identical(other.position, position) || other.position == position));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,icarId,position);
+int get hashCode => Object.hash(runtimeType,type,icarId,position);
 
 @override
 String toString() {
-  return 'IcarPositionResponse(icarId: $icarId, position: $position)';
+  return 'IcarWebSocketResponse.position(type: $type, icarId: $icarId, position: $position)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$IcarPositionResponseCopyWith<$Res> implements $IcarPositionResponseCopyWith<$Res> {
-  factory _$IcarPositionResponseCopyWith(_IcarPositionResponse value, $Res Function(_IcarPositionResponse) _then) = __$IcarPositionResponseCopyWithImpl;
+abstract mixin class $PositionResponseCopyWith<$Res> implements $IcarWebSocketResponseCopyWith<$Res> {
+  factory $PositionResponseCopyWith(PositionResponse value, $Res Function(PositionResponse) _then) = _$PositionResponseCopyWithImpl;
 @override @useResult
 $Res call({
- int icarId,@JsonKey(fromJson: latLngFromJson, toJson: latLngToJson) LatLng position
+ IcarWebSocketResponseType type, int icarId,@JsonKey(fromJson: positionFromJson, toJson: positionToJson) Position position
 });
 
 
@@ -128,24 +151,105 @@ $Res call({
 
 }
 /// @nodoc
-class __$IcarPositionResponseCopyWithImpl<$Res>
-    implements _$IcarPositionResponseCopyWith<$Res> {
-  __$IcarPositionResponseCopyWithImpl(this._self, this._then);
+class _$PositionResponseCopyWithImpl<$Res>
+    implements $PositionResponseCopyWith<$Res> {
+  _$PositionResponseCopyWithImpl(this._self, this._then);
 
-  final _IcarPositionResponse _self;
-  final $Res Function(_IcarPositionResponse) _then;
+  final PositionResponse _self;
+  final $Res Function(PositionResponse) _then;
 
-/// Create a copy of IcarPositionResponse
+/// Create a copy of IcarWebSocketResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? icarId = null,Object? position = null,}) {
-  return _then(_IcarPositionResponse(
-icarId: null == icarId ? _self.icarId : icarId // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? icarId = null,Object? position = null,}) {
+  return _then(PositionResponse(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as IcarWebSocketResponseType,icarId: null == icarId ? _self.icarId : icarId // ignore: cast_nullable_to_non_nullable
 as int,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
-as LatLng,
+as Position,
   ));
 }
 
 
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class DisconnectedResponse implements IcarWebSocketResponse {
+  const DisconnectedResponse({required this.type, required this.icar});
+  factory DisconnectedResponse.fromJson(Map<String, dynamic> json) => _$DisconnectedResponseFromJson(json);
+
+@override final  IcarWebSocketResponseType type;
+ final  Icar icar;
+
+/// Create a copy of IcarWebSocketResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DisconnectedResponseCopyWith<DisconnectedResponse> get copyWith => _$DisconnectedResponseCopyWithImpl<DisconnectedResponse>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DisconnectedResponseToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DisconnectedResponse&&(identical(other.type, type) || other.type == type)&&(identical(other.icar, icar) || other.icar == icar));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type,icar);
+
+@override
+String toString() {
+  return 'IcarWebSocketResponse.disconnected(type: $type, icar: $icar)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DisconnectedResponseCopyWith<$Res> implements $IcarWebSocketResponseCopyWith<$Res> {
+  factory $DisconnectedResponseCopyWith(DisconnectedResponse value, $Res Function(DisconnectedResponse) _then) = _$DisconnectedResponseCopyWithImpl;
+@override @useResult
+$Res call({
+ IcarWebSocketResponseType type, Icar icar
+});
+
+
+$IcarCopyWith<$Res> get icar;
+
+}
+/// @nodoc
+class _$DisconnectedResponseCopyWithImpl<$Res>
+    implements $DisconnectedResponseCopyWith<$Res> {
+  _$DisconnectedResponseCopyWithImpl(this._self, this._then);
+
+  final DisconnectedResponse _self;
+  final $Res Function(DisconnectedResponse) _then;
+
+/// Create a copy of IcarWebSocketResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? icar = null,}) {
+  return _then(DisconnectedResponse(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as IcarWebSocketResponseType,icar: null == icar ? _self.icar : icar // ignore: cast_nullable_to_non_nullable
+as Icar,
+  ));
+}
+
+/// Create a copy of IcarWebSocketResponse
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IcarCopyWith<$Res> get icar {
+  
+  return $IcarCopyWith<$Res>(_self.icar, (value) {
+    return _then(_self.copyWith(icar: value));
+  });
+}
 }
 
 // dart format on

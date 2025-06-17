@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/data/core/server_conn.dart';
+import 'package:icar/util/app_dot_env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -32,9 +32,9 @@ class IcarWebsocket {
     debugPrint("IcarWebsocket initialized");
   }
   IOWebSocketChannel connect() {
-    debugPrint("Connecting to WebSocket: ${ServerConn.wsUrl}");
+    debugPrint("Connecting to WebSocket: ${AppDotEnv.wsUrl}");
     return IOWebSocketChannel.connect(
-      Uri.parse(ServerConn.wsUrl),
+      Uri.parse(AppDotEnv.wsUrl),
       headers: {"client-type": "user"},
       pingInterval: const Duration(seconds: 30),
     );

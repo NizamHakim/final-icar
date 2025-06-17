@@ -6,7 +6,7 @@ part of 'ticket_history_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$ticketHistoryHash() => r'5c2c659d55935711968afa084563f9c65324c082';
+String _$ticketHistoryHash() => r'74d9b479b9b1328f8de21717b68f37fa8bc97fbc';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -39,15 +39,15 @@ class TicketHistoryFamily extends Family<AsyncValue<Ticket>> {
   const TicketHistoryFamily();
 
   /// See also [ticketHistory].
-  TicketHistoryProvider call({required Ticket ticket}) {
-    return TicketHistoryProvider(ticket: ticket);
+  TicketHistoryProvider call(int ticketId) {
+    return TicketHistoryProvider(ticketId);
   }
 
   @override
   TicketHistoryProvider getProviderOverride(
     covariant TicketHistoryProvider provider,
   ) {
-    return call(ticket: provider.ticket);
+    return call(provider.ticketId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -68,9 +68,9 @@ class TicketHistoryFamily extends Family<AsyncValue<Ticket>> {
 /// See also [ticketHistory].
 class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
   /// See also [ticketHistory].
-  TicketHistoryProvider({required Ticket ticket})
+  TicketHistoryProvider(int ticketId)
     : this._internal(
-        (ref) => ticketHistory(ref as TicketHistoryRef, ticket: ticket),
+        (ref) => ticketHistory(ref as TicketHistoryRef, ticketId),
         from: ticketHistoryProvider,
         name: r'ticketHistoryProvider',
         debugGetCreateSourceHash:
@@ -80,7 +80,7 @@ class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
         dependencies: TicketHistoryFamily._dependencies,
         allTransitiveDependencies:
             TicketHistoryFamily._allTransitiveDependencies,
-        ticket: ticket,
+        ticketId: ticketId,
       );
 
   TicketHistoryProvider._internal(
@@ -90,10 +90,10 @@ class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.ticket,
+    required this.ticketId,
   }) : super.internal();
 
-  final Ticket ticket;
+  final int ticketId;
 
   @override
   Override overrideWith(
@@ -108,7 +108,7 @@ class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        ticket: ticket,
+        ticketId: ticketId,
       ),
     );
   }
@@ -120,13 +120,13 @@ class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
 
   @override
   bool operator ==(Object other) {
-    return other is TicketHistoryProvider && other.ticket == ticket;
+    return other is TicketHistoryProvider && other.ticketId == ticketId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, ticket.hashCode);
+    hash = _SystemHash.combine(hash, ticketId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -135,8 +135,8 @@ class TicketHistoryProvider extends AutoDisposeFutureProvider<Ticket> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin TicketHistoryRef on AutoDisposeFutureProviderRef<Ticket> {
-  /// The parameter `ticket` of this provider.
-  Ticket get ticket;
+  /// The parameter `ticketId` of this provider.
+  int get ticketId;
 }
 
 class _TicketHistoryProviderElement
@@ -145,7 +145,7 @@ class _TicketHistoryProviderElement
   _TicketHistoryProviderElement(super.provider);
 
   @override
-  Ticket get ticket => (origin as TicketHistoryProvider).ticket;
+  int get ticketId => (origin as TicketHistoryProvider).ticketId;
 }
 
 String _$reviewSuggestionOptionsHash() =>
@@ -252,7 +252,7 @@ final suggestionInputProvider =
     );
 
 typedef _$SuggestionInput = AutoDisposeNotifier<String>;
-String _$updateReviewHash() => r'c44250592908fecb74a7d64242b9bcbde84fd14d';
+String _$updateReviewHash() => r'3500a469ebcd656791ae0e53671a0e7b15c9ac7b';
 
 /// See also [UpdateReview].
 @ProviderFor(UpdateReview)

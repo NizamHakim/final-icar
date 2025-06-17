@@ -17,25 +17,15 @@ class TicketInfo extends ConsumerWidget {
     final geofencingTicketsInQueue =
         ref.watch(geofencingTicketsInQueueProvider).valueOrNull;
 
-    if (ticket.status == TicketStatus.CANCELED ||
-        geofencingTicketsInQueue == null ||
-        geofencingTicketsInQueue[ticket.id] == TicketDistanceStatus.NOTHING) {
+    if (shouldHideTicketInfo(ticket, geofencingTicketsInQueue)) {
       return const SizedBox.shrink();
     }
 
-    _TicketInfoData infoData;
-
-    if (ticket.status == TicketStatus.FINISHED) {
-      infoData = _TicketInfoData.fromType(
-        TicketDistanceStatus.ARRIVED,
-        context,
-      );
-    } else {
-      infoData = _TicketInfoData.fromType(
-        geofencingTicketsInQueue[ticket.id]!,
-        context,
-      );
-    }
+    final infoData = getTicketInfoData(
+      ticket,
+      geofencingTicketsInQueue,
+      context,
+    );
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -81,8 +71,44 @@ class TicketInfo extends ConsumerWidget {
   }
 }
 
-class _TicketInfoData {
-  const _TicketInfoData._({
+bool shouldHideTicketInfo(
+  Ticket ticket,
+  Map<int, TicketDistanceStatus>? geofencingTicketsInQueue,
+) {
+  if (ticket.status == TicketStatus.CANCELED) {
+    return true;
+  }
+
+  if (ticket.status == TicketStatus.FINISHED) {
+    return false;
+  }
+
+  if (geofencingTicketsInQueue == null) {
+    return true;
+  }
+
+  final distanceStatus = geofencingTicketsInQueue[ticket.id];
+  return distanceStatus == null ||
+      distanceStatus == TicketDistanceStatus.NOTHING;
+}
+
+TicketInfoData getTicketInfoData(
+  Ticket ticket,
+  Map<int, TicketDistanceStatus>? geofencingTicketsInQueue,
+  BuildContext context,
+) {
+  if (ticket.status == TicketStatus.FINISHED) {
+    return TicketInfoData.fromType(TicketDistanceStatus.ARRIVED, context);
+  }
+
+  return TicketInfoData.fromType(
+    geofencingTicketsInQueue![ticket.id]!,
+    context,
+  );
+}
+
+class TicketInfoData {
+  const TicketInfoData._({
     required this.infoType,
     required this.foregroundColor,
     required this.backgroundColor,
@@ -98,13 +124,13 @@ class _TicketInfoData {
   final String title;
   final String description;
 
-  factory _TicketInfoData.fromType(
+  factory TicketInfoData.fromType(
     TicketDistanceStatus type,
     BuildContext context,
   ) {
     switch (type) {
       case TicketDistanceStatus.CLOSE:
-        return _TicketInfoData._(
+        return TicketInfoData._(
           infoType: type,
           foregroundColor: AppColors.primary500,
           backgroundColor: AppColors.primary50,
@@ -115,7 +141,7 @@ class _TicketInfoData {
           )!.ticketInfoDescription(type.name),
         );
       case TicketDistanceStatus.ARRIVED:
-        return _TicketInfoData._(
+        return TicketInfoData._(
           infoType: type,
           foregroundColor: AppColors.success500,
           backgroundColor: AppColors.success50,
@@ -126,7 +152,7 @@ class _TicketInfoData {
           )!.ticketInfoDescription(type.name),
         );
       case TicketDistanceStatus.NOTHING:
-        return _TicketInfoData._(
+        return TicketInfoData._(
           infoType: type,
           foregroundColor: Colors.transparent,
           backgroundColor: Colors.transparent,

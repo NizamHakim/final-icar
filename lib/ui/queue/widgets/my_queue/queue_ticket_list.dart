@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
-import 'package:icar/ui/queue/viewmodels/my_queue_viewmodel.dart';
+import 'package:icar/ui/queue/viewmodels/my_queue/my_queue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/my_queue/queue_card.dart';
+import 'package:icar/util/handle_error.dart';
 
 class QueueTicketList extends ConsumerWidget {
   const QueueTicketList({super.key, required this.ticketStatus});
@@ -42,9 +42,7 @@ class QueueTicketList extends ConsumerWidget {
         );
       },
       error: (error, _) {
-        return DataNotFetched(
-          text: CoreLocalizations.of(context)!.internalServerError,
-        );
+        return handleError(context, error);
       },
       loading: () {
         return const CircularLoader();

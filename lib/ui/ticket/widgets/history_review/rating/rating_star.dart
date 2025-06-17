@@ -14,7 +14,14 @@ class RatingStar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rating = ref.watch(ratingProvider);
+    final isAbleToReview = (ticket.review == null) ? true : false;
+    int rating;
+
+    if (isAbleToReview) {
+      rating = ref.watch(ratingProvider);
+    } else {
+      rating = ticket.review!.rating;
+    }
 
     return Card(
       elevation: 0.1,
@@ -38,9 +45,14 @@ class RatingStar extends ConsumerWidget {
                 for (int index = 1; index <= 5; index++)
                   (index <= rating)
                       ? GestureDetector(
-                        onTap: () {
-                          ref.read(ratingProvider.notifier).setRating(index);
-                        },
+                        onTap:
+                            isAbleToReview
+                                ? () {
+                                  ref
+                                      .read(ratingProvider.notifier)
+                                      .setRating(index);
+                                }
+                                : null,
                         child: const AppIcon(
                           iconSvg: AppIconsSvg.starFilled,
                           color: AppColors.secondary500,
@@ -48,9 +60,14 @@ class RatingStar extends ConsumerWidget {
                         ),
                       )
                       : GestureDetector(
-                        onTap: () {
-                          ref.read(ratingProvider.notifier).setRating(index);
-                        },
+                        onTap:
+                            isAbleToReview
+                                ? () {
+                                  ref
+                                      .read(ratingProvider.notifier)
+                                      .setRating(index);
+                                }
+                                : null,
                         child: const AppIcon(
                           iconSvg: AppIconsSvg.starOutline,
                           color: AppColors.gray100,

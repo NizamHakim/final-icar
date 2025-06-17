@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:icar/data/models/icar/icar.dart';
 import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
@@ -25,7 +26,9 @@ class _SdContentState extends ConsumerState<SdContent> {
     Widget content;
 
     if (widget.icarList.isEmpty) {
-      content = const DataNotFetched(text: "No schedule available");
+      content = DataNotFetched(
+        text: QueueLocalizations.of(context)!.noScheduleAvailable,
+      );
     } else {
       final icar = widget.icarList[pageIndex];
       content = Column(

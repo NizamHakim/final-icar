@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:icar/data/core/server_conn.dart';
-import 'package:icar/data/models/schedule/schedule.dart';
 import 'package:icar/data/models/ticket/review.dart';
 import 'package:icar/data/models/ticket/ticket.dart';
-import 'package:icar/data/models/user/user.dart';
 import 'package:icar/data/repositories/icar_repository/icar_position_repository.dart';
+import 'package:icar/util/app_dot_env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -21,10 +19,10 @@ TicketRepository ticketRepository(Ref ref) {
 }
 
 class TicketRepository {
-  Future<Either<AppFailure, Ticket?>> getClosestTicket(User user) async {
+  Future<Either<AppFailure, Ticket?>> getClosestTicket(int userId) async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/user/${user.id}/closest"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/user/$userId/closest"),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -44,13 +42,13 @@ class TicketRepository {
   }
 
   Future<Either<AppFailure, List<Ticket>>> getTicketsByStatus(
-    User user,
+    int userId,
     TicketStatus status,
   ) async {
     try {
       final response = await http.get(
         Uri.parse(
-          "${ServerConn.httpUrl}/api/tickets/user/${user.id}/status/${status.name}",
+          "${AppDotEnv.httpUrl}/api/tickets/user/$userId/status/${status.name}",
         ),
         headers: {"Content-Type": "application/json"},
       );
@@ -72,10 +70,10 @@ class TicketRepository {
     }
   }
 
-  Future<Either<AppFailure, Ticket>> getTicketDetails(Ticket ticket) async {
+  Future<Either<AppFailure, Ticket>> getTicketDetails(int ticketId) async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/${ticket.id}"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/$ticketId"),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -91,14 +89,14 @@ class TicketRepository {
   }
 
   Future<Either<AppFailure, Ticket>> createNewTicket(
-    User user,
-    Schedule schedule,
+    int userId,
+    int scheduleId,
   ) async {
     try {
       final response = await http.post(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/create"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/create"),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"userId": user.id, "scheduleId": schedule.id}),
+        body: jsonEncode({"userId": userId, "scheduleId": scheduleId}),
       );
 
       if (response.statusCode != 201) {
@@ -112,28 +110,10 @@ class TicketRepository {
     }
   }
 
-  Future<Either<AppFailure, Ticket>> cancelTicket(Ticket ticket) async {
+  Future<Either<AppFailure, Ticket>> cancelTicket(int ticketId) async {
     try {
       final response = await http.post(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/${ticket.id}/cancel"),
-        headers: {"Content-Type": "application/json"},
-      );
-
-      if (response.statusCode != 200) {
-        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-        return Left(AppFailure(responseMap["error"]));
-      }
-
-      return Right(Ticket.fromJson(jsonDecode(response.body)));
-    } catch (e) {
-      return Left(AppFailure(e.toString()));
-    }
-  }
-
-  Future<Either<AppFailure, Ticket>> finishTicket(Ticket ticket) async {
-    try {
-      final response = await http.post(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/${ticket.id}/finish"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/$ticketId/cancel"),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -150,15 +130,15 @@ class TicketRepository {
 
   Future<Either<AppFailure, List<TicketDistanceResponse>>>
   getTicketsDistanceStatus(
-    User user,
-    IcarPositionResponse icarPositionResponse,
+    int userId,
+    PositionResponse icarPositionResponse,
   ) async {
     try {
       final response = await http.post(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/distance-status"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/distance-status"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
-          "userId": user.id,
+          "userId": userId,
           "icarId": icarPositionResponse.icarId,
           "position": {
             "latitude": icarPositionResponse.position.latitude,
@@ -189,7 +169,7 @@ class TicketRepository {
   Future<Either<AppFailure, ReviewOptionsResponse>> getReviewOptions() async {
     try {
       final response = await http.get(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/review-options"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/review-options"),
         headers: {"Content-Type": "application/json"},
       );
 
@@ -205,12 +185,12 @@ class TicketRepository {
   }
 
   Future<Either<AppFailure, Ticket>> updateReview(
-    Ticket ticket,
+    int ticketId,
     Review review,
   ) async {
     try {
       final response = await http.post(
-        Uri.parse("${ServerConn.httpUrl}/api/tickets/${ticket.id}/review"),
+        Uri.parse("${AppDotEnv.httpUrl}/api/tickets/$ticketId/review"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(review.toJson()),
       );

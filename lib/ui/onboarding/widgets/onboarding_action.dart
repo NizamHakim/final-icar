@@ -5,7 +5,7 @@ import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/onboarding/viewmodels/onboarding_viewmodel.dart';
-import 'package:icar/ui/root/unaothorized.dart';
+import 'package:icar/ui/root/unauthorized.dart';
 import 'package:icar/util/permissions/location/location_permission_manager.dart';
 
 class OnboardingAction extends ConsumerWidget {
@@ -23,7 +23,7 @@ class OnboardingAction extends ConsumerWidget {
             await LocationPermissionManager.requestForPermission(context);
             if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const Unaothorized()),
+              MaterialPageRoute(builder: (context) => const Unauthorized()),
             );
           },
           child: Text(
@@ -47,7 +47,7 @@ class OnboardingAction extends ConsumerWidget {
                     if (!context.mounted) return;
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const Unaothorized(),
+                        builder: (context) => const Unauthorized(),
                       ),
                     );
                   },

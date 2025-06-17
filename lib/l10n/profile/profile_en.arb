@@ -28,5 +28,13 @@
 	"switchLangDialogDescription": "The app will restart to apply the new language.",
 	"@switchLangDialogDescription": {
 		"description": "Description for dialog to switch language"
+	},
+	"logoutDialogTitle": "Logout",
+	"@logoutDialogTitle": {
+		"description": "Title for dialog to logout"
+	},
+	"logoutDialogDesc": "Are you sure you want to logout?",
+	"@logoutDialogDesc": {
+		"description": "Desc for dialog to logout"
 	}
 }

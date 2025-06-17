@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/permission_localizations.dart';
 import 'package:icar/data/core/providers/user_location/user_location.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/util/permissions/location/location_permission_manager.dart';
@@ -16,7 +17,7 @@ class LocationServiceDisabled extends ConsumerWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 300),
             child: Text(
-              'Could not load map: Location service has not been enabled',
+              PermissionLocalizations.of(context)!.locationServiceError,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: AppColors.gray300),
@@ -37,7 +38,7 @@ class LocationServiceDisabled extends ConsumerWidget {
               ),
             ),
             child: Text(
-              'Enable location',
+              PermissionLocalizations.of(context)!.enable,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,

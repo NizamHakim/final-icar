@@ -64,7 +64,7 @@ class SuccessDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => const Authorized()),
-              (route) => false, // remove all until home page
+              (route) => route.isFirst,
             );
           },
           child: Text(
@@ -77,9 +77,10 @@ class SuccessDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => TicketDetailsScreen(ticket: ticket),
+                builder: (context) => TicketDetailsScreen(ticketId: ticket.id),
               ),
             );
           },

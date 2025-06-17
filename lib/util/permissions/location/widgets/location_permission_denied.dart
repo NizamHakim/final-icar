@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/permission_localizations.dart';
 import 'package:icar/data/core/providers/user_location/user_location.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/util/permissions/location/location_permission_manager.dart';
@@ -16,10 +17,10 @@ class LocationPermissionDenied extends ConsumerWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 300),
             child: Text(
-              'Location permission has not been granted. Please grant permission to proceed with this feature.',
+              PermissionLocalizations.of(context)!.locationPermissionError,
               style: Theme.of(
                 context,
-              ).textTheme.bodyMedium!.copyWith(color: AppColors.gray300),
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.gray300),
               textAlign: TextAlign.center,
             ),
           ),
@@ -37,7 +38,7 @@ class LocationPermissionDenied extends ConsumerWidget {
               ),
             ),
             child: Text(
-              'Grant permission',
+              PermissionLocalizations.of(context)!.grantPermission,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,

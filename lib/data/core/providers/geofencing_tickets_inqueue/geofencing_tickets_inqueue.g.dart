@@ -7,7 +7,7 @@ part of 'geofencing_tickets_inqueue.dart';
 // **************************************************************************
 
 String _$geofencingTicketsInQueueHash() =>
-    r'b0f9224851e49eb7d574166bbc13de1f85c57432';
+    r'7fa29ff478c97b168efa5952236dd26ec41e1ec2';
 
 /// See also [geofencingTicketsInQueue].
 @ProviderFor(geofencingTicketsInQueue)

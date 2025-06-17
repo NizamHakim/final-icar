@@ -28,5 +28,13 @@
 	"switchLangDialogDescription": "Aplikasi iCar ITS akan dimulai ulang setelah kamu mengonfirmasi.",
 	"@switchLangDialogDescription": {
 		"description": "Description for dialog to switch language"
+	},
+	"logoutDialogTitle": "Keluar",
+	"@logoutDialogTitle": {
+		"description": "Title for dialog to logout"
+	},
+	"logoutDialogDesc": "Apakah kamu yakin ingin keluar?",
+	"@logoutDialogDesc": {
+		"description": "Desc for dialog to logout"
 	}
 }

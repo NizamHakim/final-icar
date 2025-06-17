@@ -32,9 +32,9 @@ class IsDoingReview extends _$IsDoingReview {
 }
 
 @riverpod
-Future<Ticket> ticketHistory(Ref ref, {required Ticket ticket}) async {
+Future<Ticket> ticketHistory(Ref ref, int ticketId) async {
   final ticketRepository = ref.watch(ticketRepositoryProvider);
-  final ticketEither = await ticketRepository.getTicketDetails(ticket);
+  final ticketEither = await ticketRepository.getTicketDetails(ticketId);
 
   return ticketEither.fold(
     (error) {
@@ -121,10 +121,9 @@ class UpdateReview extends _$UpdateReview {
       review: review,
       suggestion: suggestion,
     );
-    print(newReview);
 
     final updateReviewEither = await ticketRepository.updateReview(
-      ticket,
+      ticket.id,
       newReview,
     );
 

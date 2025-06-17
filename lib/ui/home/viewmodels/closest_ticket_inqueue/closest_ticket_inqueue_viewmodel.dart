@@ -11,7 +11,7 @@ Future<Ticket?> closestTicketInQueue(Ref ref) async {
   final currentUser = ref.watch(currentUserProvider)!;
   final ticketRepository = ref.watch(ticketRepositoryProvider);
   final closestTicketEither = await ticketRepository.getClosestTicket(
-    currentUser,
+    currentUser.id,
   );
 
   return closestTicketEither.fold(

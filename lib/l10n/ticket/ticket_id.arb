@@ -25,7 +25,7 @@
 		},
 		"description": "Title for the ticket info screen base on the type of information"
 	},
-	"ticketInfoDescription": "{infoType, select, CLOSE{iCar sampai dalam beberapa menit. Ayo pergi ke halte!} ARRIVED{Ayo naik iCar atau antre di waktu lain kalau iCar penuh.} other{Unknown}}",
+	"ticketInfoDescription": "{infoType, select, CLOSE{iCar sampai dalam beberapa menit. Ayo pergi ke halte!} ARRIVED{Ayo naik iCar atau antre di waktu lain kalau iCar penuh!} other{Unknown}}",
 	"@ticketInfoDescription": {
 		"placeholders": {
 			"infoType": {
@@ -82,5 +82,21 @@
 	"enterSuggestion": "Masukkan saran...",
 	"@enterSuggestion": {
 		"description": "Hint for suggestion"
+	},
+	"cancelTicketDialogTitle": "Batalkan Antrean iCar",
+	"@cancelTicketDialogTitle": {
+		"description": "Title for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogDesc": "Perlu diingat bahwa pembatalan ini bersifat permanen. Apakah anda ingin melanjutkan?",
+	"@cancelTicketDialogDesc": {
+		"description": "Description for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogSubmit": "Batalkan antrean",
+	"@cancelTicketDialogSubmit": {
+		"description": "Action text for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogCancel": "Tetap antre",
+	"@cancelTicketDialogCancel": {
+		"description": "Action text for the dialog to cancel a queue ticket"
 	}
 }

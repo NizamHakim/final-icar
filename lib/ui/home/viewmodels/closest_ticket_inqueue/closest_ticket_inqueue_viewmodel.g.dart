@@ -7,7 +7,7 @@ part of 'closest_ticket_inqueue_viewmodel.dart';
 // **************************************************************************
 
 String _$closestTicketInQueueHash() =>
-    r'd437996befede973be2c707e57e0b7f1ffe8c203';
+    r'c3ea3e685bb6eda3d04dcc6997b2a475b8b8707a';
 
 /// See also [closestTicketInQueue].
 @ProviderFor(closestTicketInQueue)

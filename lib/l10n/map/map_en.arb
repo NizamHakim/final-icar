@@ -3,5 +3,22 @@
 	"mapScreenTitle": "Track iCar",
 	"@mapScreenTitle": {
 		"description": "Title for map screen"
+	},
+	"stopsForOneMinute": "Stops for 1 minute",
+	"@stopsForOneMinute": {
+		"description": "Badge text schedule dialog"
+	},
+	"arrivalTime": "Arrival Time",
+	"@arrivalTime": {
+		"description": "Schedule dialog - divider"
+	},
+	"session": "{session, select, SESSION_1{Session 1} SESSION_2{Session 2} other{Unknown}}",
+	"@session": {
+		"placeholders": {
+			"session": {
+				"type": "String"
+			}
+		},
+		"description": "Schedule session"
 	}
 }

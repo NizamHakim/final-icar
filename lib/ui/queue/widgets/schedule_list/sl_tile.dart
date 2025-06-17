@@ -12,6 +12,7 @@ import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/text_badge.dart';
 import 'package:icar/ui/queue/widgets/schedule_list/confirmation_dialog.dart';
 import 'package:icar/ui/queue/widgets/schedule_list/success_dialog.dart';
+import 'package:icar/util/show_snackbar.dart';
 
 class SlTile extends ConsumerWidget {
   const SlTile({
@@ -126,8 +127,8 @@ class SlTile extends ConsumerWidget {
     }
 
     return () {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
+      showSnackBar(
+        context,
         SnackBar(
           content: Text(
             QueueLocalizations.of(context)!.pleaseSelectOtherSchedule,

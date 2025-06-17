@@ -4,24 +4,26 @@ import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:icar/data/core/providers/geofencing_tickets_inqueue/geofencing_tickets_inqueue.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/core/providers/bottom_nav_index.dart';
+import 'package:icar/ui/root/bottom_nav_index/bottom_nav_index.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/home/screens/home_screen.dart';
 import 'package:icar/ui/profile/screens/profile_screen.dart';
 import 'package:icar/ui/queue/screens/my_queue_screen.dart';
 
 class Authorized extends ConsumerWidget {
-  const Authorized({super.key});
+  const Authorized({super.key, this.navIndexInitial = 0});
+
+  final int navIndexInitial;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int currentPageIndex = ref.watch(bottomNavIndexProvider);
+    int currentPageIndex = ref.watch(bottomNavIndexProvider(navIndexInitial));
     ref.watch(geofencingTicketsInQueueProvider);
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {
-          ref.read(bottomNavIndexProvider.notifier).set(value);
+          ref.read(bottomNavIndexProvider(navIndexInitial).notifier).set(value);
         },
         selectedIndex: currentPageIndex,
         destinations: <Widget>[

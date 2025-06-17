@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/home_localizations.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/core/providers/bottom_nav_index.dart';
+import 'package:icar/ui/root/bottom_nav_index/bottom_nav_index.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/home/viewmodels/closest_ticket_inqueue/closest_ticket_inqueue_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/my_queue/queue_card.dart';
+import 'package:icar/util/handle_error.dart';
 
 class ClosestTicket extends ConsumerWidget {
   const ClosestTicket({super.key});
@@ -88,9 +88,7 @@ class ClosestTicket extends ConsumerWidget {
                 height: 200,
                 width: double.infinity,
                 color: AppColors.white,
-                child: DataNotFetched(
-                  text: CoreLocalizations.of(context)!.internalServerError,
-                ),
+                child: handleError(context, error),
               ),
             );
           },

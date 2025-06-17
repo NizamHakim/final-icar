@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/map_localizations.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 
 class SdDivider extends StatelessWidget {
@@ -22,7 +23,7 @@ class SdDivider extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
           decoration: const BoxDecoration(color: AppColors.gray50),
           child: Text(
-            "Jadwal Tiba",
+            MapLocalizations.of(context)!.arrivalTime,
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
               fontWeight: FontWeight.w600,
               color: AppColors.gray700,

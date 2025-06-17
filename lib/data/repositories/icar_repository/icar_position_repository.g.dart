@@ -6,18 +6,37 @@ part of 'icar_position_repository.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_IcarPositionResponse _$IcarPositionResponseFromJson(
+PositionResponse _$PositionResponseFromJson(Map<String, dynamic> json) =>
+    PositionResponse(
+      type: $enumDecode(_$IcarWebSocketResponseTypeEnumMap, json['type']),
+      icarId: (json['icarId'] as num).toInt(),
+      position: positionFromJson(json['position'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PositionResponseToJson(PositionResponse instance) =>
+    <String, dynamic>{
+      'type': _$IcarWebSocketResponseTypeEnumMap[instance.type]!,
+      'icarId': instance.icarId,
+      'position': positionToJson(instance.position),
+    };
+
+const _$IcarWebSocketResponseTypeEnumMap = {
+  IcarWebSocketResponseType.position: 'position',
+  IcarWebSocketResponseType.disconnected: 'disconnected',
+};
+
+DisconnectedResponse _$DisconnectedResponseFromJson(
   Map<String, dynamic> json,
-) => _IcarPositionResponse(
-  icarId: (json['icarId'] as num).toInt(),
-  position: latLngFromJson(json['position'] as Map<String, dynamic>),
+) => DisconnectedResponse(
+  type: $enumDecode(_$IcarWebSocketResponseTypeEnumMap, json['type']),
+  icar: Icar.fromJson(json['icar'] as Map<String, dynamic>),
 );
 
-Map<String, dynamic> _$IcarPositionResponseToJson(
-  _IcarPositionResponse instance,
+Map<String, dynamic> _$DisconnectedResponseToJson(
+  DisconnectedResponse instance,
 ) => <String, dynamic>{
-  'icarId': instance.icarId,
-  'position': latLngToJson(instance.position),
+  'type': _$IcarWebSocketResponseTypeEnumMap[instance.type]!,
+  'icar': instance.icar,
 };
 
 // **************************************************************************

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:icar/data/core/server_conn.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
+import 'package:icar/util/app_dot_env.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +23,7 @@ class IcarStopRemoteRepository {
     try {
       final response = await http.get(
         Uri.parse(
-          "${ServerConn.httpUrl}/api/icar-stops/${userPosition.latitude},${userPosition.longitude}",
+          "${AppDotEnv.httpUrl}/api/icar-stops/${userPosition.latitude},${userPosition.longitude}",
         ),
         headers: {"Content-Type": "application/json"},
       );
@@ -45,13 +45,13 @@ class IcarStopRemoteRepository {
   }
 
   Future<Either<AppFailure, IcarStop>> getStopById(
-    IcarStop icarStop,
+    int icarStopId,
     Position userPosition,
   ) async {
     try {
       final response = await http.get(
         Uri.parse(
-          "${ServerConn.httpUrl}/api/icar-stops/${userPosition.latitude},${userPosition.longitude}/${icarStop.id}",
+          "${AppDotEnv.httpUrl}/api/icar-stops/${userPosition.latitude},${userPosition.longitude}/$icarStopId",
         ),
         headers: {"Content-Type": "application/json"},
       );

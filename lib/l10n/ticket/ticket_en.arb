@@ -25,7 +25,7 @@
 		},
 		"description": "Title for the ticket info screen base on the type of information"
 	},
-	"ticketInfoDescription": "{infoType, select, CLOSE{iCar will be arrived in couple of minutes. Lets go to the stop!} ARRIVED{Let's get to the iCar or queue for another time if it's fully occupied.} other{Unknown}}",
+	"ticketInfoDescription": "{infoType, select, CLOSE{iCar will be arrived in couple of minutes. Lets go to the stop!} ARRIVED{Let's get to the iCar or queue for another time if it's fully occupied!} other{Unknown}}",
 	"@ticketInfoDescription": {
 		"placeholders": {
 			"infoType": {
@@ -82,5 +82,21 @@
 	"enterSuggestion": "Enter suggestion...",
 	"@enterSuggestion": {
 		"description": "Hint for suggestion"
+	},
+	"cancelTicketDialogTitle": "Cancel iCar Queue",
+	"@cancelTicketDialogTitle": {
+		"description": "Title for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogDesc": "This action will cancel your ticket permanently. Are you sure?",
+	"@cancelTicketDialogDesc": {
+		"description": "Description for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogSubmit": "Cancel queue",
+	"@cancelTicketDialogSubmit": {
+		"description": "Action text for the dialog to cancel a queue ticket"
+	},
+	"cancelTicketDialogCancel": "Stay on queue",
+	"@cancelTicketDialogCancel": {
+		"description": "Action text for the dialog to cancel a queue ticket"
 	}
 }

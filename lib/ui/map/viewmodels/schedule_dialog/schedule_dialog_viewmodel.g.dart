@@ -6,7 +6,7 @@ part of 'schedule_dialog_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$icarStopDetailHash() => r'711ed2c78e0c1e561da1831a7aa3e64db9edb202';
+String _$icarStopDetailHash() => r'469af5c52a825aa4629677cc04ea9d5e32b5d60b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -39,15 +39,15 @@ class IcarStopDetailFamily extends Family<AsyncValue<IcarStop>> {
   const IcarStopDetailFamily();
 
   /// See also [icarStopDetail].
-  IcarStopDetailProvider call(IcarStop icarStop, Position userPosition) {
-    return IcarStopDetailProvider(icarStop, userPosition);
+  IcarStopDetailProvider call(int icarStopId) {
+    return IcarStopDetailProvider(icarStopId);
   }
 
   @override
   IcarStopDetailProvider getProviderOverride(
     covariant IcarStopDetailProvider provider,
   ) {
-    return call(provider.icarStop, provider.userPosition);
+    return call(provider.icarStopId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -68,10 +68,9 @@ class IcarStopDetailFamily extends Family<AsyncValue<IcarStop>> {
 /// See also [icarStopDetail].
 class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
   /// See also [icarStopDetail].
-  IcarStopDetailProvider(IcarStop icarStop, Position userPosition)
+  IcarStopDetailProvider(int icarStopId)
     : this._internal(
-        (ref) =>
-            icarStopDetail(ref as IcarStopDetailRef, icarStop, userPosition),
+        (ref) => icarStopDetail(ref as IcarStopDetailRef, icarStopId),
         from: icarStopDetailProvider,
         name: r'icarStopDetailProvider',
         debugGetCreateSourceHash:
@@ -81,8 +80,7 @@ class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
         dependencies: IcarStopDetailFamily._dependencies,
         allTransitiveDependencies:
             IcarStopDetailFamily._allTransitiveDependencies,
-        icarStop: icarStop,
-        userPosition: userPosition,
+        icarStopId: icarStopId,
       );
 
   IcarStopDetailProvider._internal(
@@ -92,12 +90,10 @@ class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.icarStop,
-    required this.userPosition,
+    required this.icarStopId,
   }) : super.internal();
 
-  final IcarStop icarStop;
-  final Position userPosition;
+  final int icarStopId;
 
   @override
   Override overrideWith(
@@ -112,8 +108,7 @@ class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        icarStop: icarStop,
-        userPosition: userPosition,
+        icarStopId: icarStopId,
       ),
     );
   }
@@ -125,16 +120,13 @@ class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
 
   @override
   bool operator ==(Object other) {
-    return other is IcarStopDetailProvider &&
-        other.icarStop == icarStop &&
-        other.userPosition == userPosition;
+    return other is IcarStopDetailProvider && other.icarStopId == icarStopId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, icarStop.hashCode);
-    hash = _SystemHash.combine(hash, userPosition.hashCode);
+    hash = _SystemHash.combine(hash, icarStopId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -143,11 +135,8 @@ class IcarStopDetailProvider extends AutoDisposeFutureProvider<IcarStop> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin IcarStopDetailRef on AutoDisposeFutureProviderRef<IcarStop> {
-  /// The parameter `icarStop` of this provider.
-  IcarStop get icarStop;
-
-  /// The parameter `userPosition` of this provider.
-  Position get userPosition;
+  /// The parameter `icarStopId` of this provider.
+  int get icarStopId;
 }
 
 class _IcarStopDetailProviderElement
@@ -156,13 +145,11 @@ class _IcarStopDetailProviderElement
   _IcarStopDetailProviderElement(super.provider);
 
   @override
-  IcarStop get icarStop => (origin as IcarStopDetailProvider).icarStop;
-  @override
-  Position get userPosition => (origin as IcarStopDetailProvider).userPosition;
+  int get icarStopId => (origin as IcarStopDetailProvider).icarStopId;
 }
 
 String _$icarWithSchedulesListHash() =>
-    r'0163f37e875a8cda0d2d263d89eb094b8ea0aa3e';
+    r'ba7e29bdfde8ecc2bbf0dfd2dd8d42b4e336acce';
 
 /// See also [icarWithSchedulesList].
 @ProviderFor(icarWithSchedulesList)
@@ -174,15 +161,15 @@ class IcarWithSchedulesListFamily extends Family<AsyncValue<List<Icar>>> {
   const IcarWithSchedulesListFamily();
 
   /// See also [icarWithSchedulesList].
-  IcarWithSchedulesListProvider call(IcarStop icarStop) {
-    return IcarWithSchedulesListProvider(icarStop);
+  IcarWithSchedulesListProvider call(int icarStopId) {
+    return IcarWithSchedulesListProvider(icarStopId);
   }
 
   @override
   IcarWithSchedulesListProvider getProviderOverride(
     covariant IcarWithSchedulesListProvider provider,
   ) {
-    return call(provider.icarStop);
+    return call(provider.icarStopId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -204,10 +191,10 @@ class IcarWithSchedulesListFamily extends Family<AsyncValue<List<Icar>>> {
 class IcarWithSchedulesListProvider
     extends AutoDisposeFutureProvider<List<Icar>> {
   /// See also [icarWithSchedulesList].
-  IcarWithSchedulesListProvider(IcarStop icarStop)
+  IcarWithSchedulesListProvider(int icarStopId)
     : this._internal(
         (ref) =>
-            icarWithSchedulesList(ref as IcarWithSchedulesListRef, icarStop),
+            icarWithSchedulesList(ref as IcarWithSchedulesListRef, icarStopId),
         from: icarWithSchedulesListProvider,
         name: r'icarWithSchedulesListProvider',
         debugGetCreateSourceHash:
@@ -217,7 +204,7 @@ class IcarWithSchedulesListProvider
         dependencies: IcarWithSchedulesListFamily._dependencies,
         allTransitiveDependencies:
             IcarWithSchedulesListFamily._allTransitiveDependencies,
-        icarStop: icarStop,
+        icarStopId: icarStopId,
       );
 
   IcarWithSchedulesListProvider._internal(
@@ -227,10 +214,10 @@ class IcarWithSchedulesListProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.icarStop,
+    required this.icarStopId,
   }) : super.internal();
 
-  final IcarStop icarStop;
+  final int icarStopId;
 
   @override
   Override overrideWith(
@@ -245,7 +232,7 @@ class IcarWithSchedulesListProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        icarStop: icarStop,
+        icarStopId: icarStopId,
       ),
     );
   }
@@ -257,13 +244,14 @@ class IcarWithSchedulesListProvider
 
   @override
   bool operator ==(Object other) {
-    return other is IcarWithSchedulesListProvider && other.icarStop == icarStop;
+    return other is IcarWithSchedulesListProvider &&
+        other.icarStopId == icarStopId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, icarStop.hashCode);
+    hash = _SystemHash.combine(hash, icarStopId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -272,8 +260,8 @@ class IcarWithSchedulesListProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin IcarWithSchedulesListRef on AutoDisposeFutureProviderRef<List<Icar>> {
-  /// The parameter `icarStop` of this provider.
-  IcarStop get icarStop;
+  /// The parameter `icarStopId` of this provider.
+  int get icarStopId;
 }
 
 class _IcarWithSchedulesListProviderElement
@@ -282,7 +270,7 @@ class _IcarWithSchedulesListProviderElement
   _IcarWithSchedulesListProviderElement(super.provider);
 
   @override
-  IcarStop get icarStop => (origin as IcarWithSchedulesListProvider).icarStop;
+  int get icarStopId => (origin as IcarWithSchedulesListProvider).icarStopId;
 }
 
 String _$isShowingDetailHash() => r'1e8f3344994be6fdefd09251a396dccfcc3eb6d4';

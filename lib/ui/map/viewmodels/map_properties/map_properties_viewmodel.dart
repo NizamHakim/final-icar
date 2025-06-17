@@ -1,13 +1,13 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:icar/data/core/providers/user_location/user_location.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/repositories/icar_repository/icar_position_repository.dart';
 import 'package:icar/data/repositories/icar_route_repository/icar_route_repository.dart';
 import 'package:icar/data/repositories/icar_stop_repository/icar_stop_remote_repository.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'map_properties_viewmodel.g.dart';
@@ -77,13 +77,18 @@ class FlutterMapController extends _$FlutterMapController {
 }
 
 @riverpod
-Stream<Map<int, LatLng>> icarsPositionMapStream(Ref ref) async* {
+Stream<Map<int, Position>> icarsPositionMapStream(Ref ref) async* {
   final icarPositionRepository = ref.watch(icarPositionRepositoryProvider);
-  final Map<int, LatLng> icarPositionMap = {};
+  final Map<int, Position> icarPositionMap = {};
 
-  await for (final icarPosition in icarPositionRepository.stream) {
-    icarPositionMap[icarPosition.icarId] = icarPosition.position;
-    yield icarPositionMap;
+  await for (final icarResponse in icarPositionRepository.stream) {
+    if (icarResponse is PositionResponse) {
+      icarPositionMap[icarResponse.icarId] = icarResponse.position;
+      yield icarPositionMap;
+    } else if (icarResponse is DisconnectedResponse) {
+      icarPositionMap.remove(icarResponse.icar.id);
+      yield icarPositionMap;
+    }
   }
 }
 

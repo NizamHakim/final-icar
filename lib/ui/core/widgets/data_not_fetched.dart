@@ -9,12 +9,15 @@ class DataNotFetched extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        text,
-        style: Theme.of(
-          context,
-        ).textTheme.bodyMedium!.copyWith(color: AppColors.gray300),
-        textAlign: TextAlign.center,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 300),
+        child: Text(
+          text,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(color: AppColors.gray300),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

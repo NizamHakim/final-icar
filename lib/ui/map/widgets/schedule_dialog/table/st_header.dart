@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/map_localizations.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 
@@ -16,7 +17,7 @@ class StHeader extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          session.name,
+          MapLocalizations.of(context)!.session(session.name),
           style: Theme.of(
             context,
           ).textTheme.labelMedium!.copyWith(color: AppColors.gray700),

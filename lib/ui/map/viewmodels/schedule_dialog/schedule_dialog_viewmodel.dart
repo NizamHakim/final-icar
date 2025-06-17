@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:icar/data/core/providers/user_location/user_location.dart';
 import 'package:icar/data/models/icar/icar.dart';
 import 'package:icar/data/models/icar_stop/icar_stop.dart';
 import 'package:icar/data/repositories/icar_repository/icar_repository.dart';
@@ -9,13 +9,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'schedule_dialog_viewmodel.g.dart';
 
 @riverpod
-Future<IcarStop> icarStopDetail(
-  Ref ref,
-  IcarStop icarStop,
-  Position userPosition,
-) async {
+Future<IcarStop> icarStopDetail(Ref ref, int icarStopId) async {
   final stopRepository = ref.watch(icarStopRemoteRepositoryProvider);
-  final stopEither = await stopRepository.getStopById(icarStop, userPosition);
+  final userPosition = await ref.watch(userLocationProvider.future);
+  final stopEither = await stopRepository.getStopById(icarStopId, userPosition);
 
   return stopEither.fold(
     (failure) {
@@ -28,10 +25,10 @@ Future<IcarStop> icarStopDetail(
 }
 
 @riverpod
-Future<List<Icar>> icarWithSchedulesList(Ref ref, IcarStop icarStop) async {
+Future<List<Icar>> icarWithSchedulesList(Ref ref, int icarStopId) async {
   final icarRepository = ref.watch(icarRepositoryProvider);
   final icarListEither = await icarRepository.getIcarsWithScheduleByStopId(
-    icarStop,
+    icarStopId,
   );
 
   return icarListEither.fold(

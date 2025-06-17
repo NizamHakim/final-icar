@@ -9,9 +9,11 @@ import 'package:icar/data/models/schedule/schedule.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
-import 'package:icar/ui/home/viewmodels/closest_ticket_inqueue/closest_ticket_inqueue_viewmodel.dart';
-import 'package:icar/ui/queue/viewmodels/schedule_list_viewmodel.dart';
+import 'package:icar/ui/queue/viewmodels/schedule_list/schedule_list_viewmodel.dart';
 import 'package:icar/ui/queue/widgets/schedule_list/cd_tile.dart';
+import 'package:icar/util/permissions/notifications/notification_permission_manager.dart';
+import 'package:icar/util/post_response_handler.dart';
+import 'package:icar/util/refresh_tickets_state/refresh_tickets_state.dart';
 
 class ConfirmationDialog extends ConsumerWidget {
   const ConfirmationDialog({
@@ -27,53 +29,19 @@ class ConfirmationDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ticketState = ref.watch(createNewTicketProvider);
+    final isLoading = ref.watch(createNewTicketProvider).isLoading;
     final currentLocale = ref.watch(currentLocaleProvider);
 
-    ref.listen(createNewTicketProvider, (previous, next) {
-      if (next.hasValue &&
-          !next.isLoading &&
-          next.value != null &&
-          context.mounted) {
-        ref.invalidate(closestTicketInQueueProvider);
-        Navigator.of(context).pop(next.value);
-      }
-    });
-
-    Widget submitButton;
-
-    if (ticketState.isLoading) {
-      submitButton = TextButton(
-        onPressed: null,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const CircularLoader(color: AppColors.primary100, size: 12),
-            const SizedBox(width: 8),
-            Text(
-              QueueLocalizations.of(context)!.confirmJoinQueue,
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: AppColors.primary100,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-      );
-    } else {
-      submitButton = TextButton(
-        onPressed: () {
-          ref.read(createNewTicketProvider.notifier).createTicket(schedule);
+    ref.listen(createNewTicketProvider, (_, next) {
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          ref.read(refreshTicketsStateProvider);
+          Navigator.of(context).pop(next.value);
         },
-        child: Text(
-          QueueLocalizations.of(context)!.confirmJoinQueue,
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
-            color: AppColors.primary500,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       );
-    }
+    });
 
     return AlertDialog(
       backgroundColor: AppColors.white,
@@ -108,19 +76,58 @@ class ConfirmationDialog extends ConsumerWidget {
       ),
       actions: [
         TextButton(
-          onPressed:
-              ticketState.isLoading ? null : () => Navigator.pop(context),
+          onPressed: isLoading ? null : () => Navigator.pop(context),
           child: Text(
             CoreLocalizations.of(context)!.cancel,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              color:
-                  ticketState.isLoading ? AppColors.gray200 : AppColors.gray600,
+              color: isLoading ? AppColors.gray200 : AppColors.gray600,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        submitButton,
+        _submitButton(context, ref, isLoading),
       ],
+    );
+  }
+
+  Widget _submitButton(BuildContext context, WidgetRef ref, bool isLoading) {
+    if (isLoading) {
+      return TextButton(
+        onPressed: null,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularLoader(color: AppColors.primary100, size: 12),
+            const SizedBox(width: 8),
+            Text(
+              QueueLocalizations.of(context)!.confirmJoinQueue,
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: AppColors.primary100,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return TextButton(
+      onPressed: () async {
+        if (!await NotificationPermissionManager.checkForPermission()) {
+          if (!context.mounted) return;
+          await NotificationPermissionManager.requestForPermission(context);
+        }
+        await ref
+            .read(createNewTicketProvider.notifier)
+            .createTicket(schedule.id);
+      },
+      child: Text(
+        QueueLocalizations.of(context)!.confirmJoinQueue,
+        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+          color: AppColors.primary500,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }

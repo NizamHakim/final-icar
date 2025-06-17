@@ -8,15 +8,17 @@ import 'package:flutter_gen/gen_l10n/onboarding_localizations.dart';
 import 'package:flutter_gen/gen_l10n/profile_localizations.dart';
 import 'package:flutter_gen/gen_l10n/queue_localizations.dart';
 import 'package:flutter_gen/gen_l10n/ticket_localizations.dart';
+import 'package:flutter_gen/gen_l10n/permission_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/data/models/user/user.dart';
+import 'package:icar/ui/core/router/router.dart';
 import 'package:icar/ui/core/themes/app_theme.dart';
 import 'package:icar/ui/onboarding/screens/onboarding_screen.dart';
 import 'package:icar/ui/onboarding/viewmodels/onboarding_viewmodel.dart';
 import 'package:icar/ui/root/authorized.dart';
-import 'package:icar/ui/root/unaothorized.dart';
+import 'package:icar/ui/root/unauthorized.dart';
 
 class Initialized extends ConsumerWidget {
   const Initialized({super.key});
@@ -25,10 +27,9 @@ class Initialized extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final supportedLocales = ref.watch(supportedLocalesProvider);
     final currentLocale = ref.watch(currentLocaleProvider);
-    final currentUser = ref.watch(currentUserProvider);
-    final shouldShowOnboarding = ref.read(shouldShowOnboardingProvider);
+    final router = ref.watch(routerProvider);
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'iCar ITS',
       theme: AppTheme.lightTheme,
       localizationsDelegates: const [
@@ -43,11 +44,13 @@ class Initialized extends ConsumerWidget {
         ProfileLocalizations.delegate,
         QueueLocalizations.delegate,
         TicketLocalizations.delegate,
+        PermissionLocalizations.delegate,
       ],
       supportedLocales:
           supportedLocales.map((appLocale) => appLocale.locale).toList(),
       locale: currentLocale,
-      home: _content(currentUser, shouldShowOnboarding),
+      // home: _content(currentUser, shouldShowOnboarding),
+      routerConfig: router,
     );
   }
 
@@ -55,7 +58,7 @@ class Initialized extends ConsumerWidget {
     if (shouldShowOnboarding) {
       return const OnboardingScreen();
     } else {
-      return currentUser == null ? const Unaothorized() : const Authorized();
+      return currentUser == null ? const Unauthorized() : const Authorized();
     }
   }
 }

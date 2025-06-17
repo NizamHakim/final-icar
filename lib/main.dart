@@ -1,4 +1,3 @@
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:icar/app_initialization/initialization_provider/app_initialization.dart';
 import 'package:icar/app_initialization/materials/error.dart';
 import 'package:icar/app_initialization/materials/initialized.dart';
@@ -7,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -30,14 +28,14 @@ class _EagerInitialization extends ConsumerWidget {
 
     return appInitializationState.when(
       data: (_) {
-        FlutterNativeSplash.remove();
         return const Initialized();
       },
       error: (error, _) {
-        FlutterNativeSplash.remove();
         return InitializationError(errorMessage: error.toString());
       },
-      loading: () => const InitializationLoading(),
+      loading: () {
+        return const InitializationLoading();
+      },
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
 import 'package:icar/ui/root/authorized.dart';
+import 'package:icar/util/post_response_handler.dart';
 import 'package:icar/util/show_snackbar.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
@@ -42,16 +43,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     final signupFormError = ref.watch(signupFormErrorProvider);
 
     ref.listen(createNewUserProvider, (_, next) {
-      next.when(
-        data: (_) {
-          if (next.value != null) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const Authorized()),
-            );
-          }
+      postResponseHandler(
+        context,
+        next,
+        onSuccess: () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const Authorized()),
+          );
         },
-        loading: () {},
-        error: (error, _) {
+        onError: () {
           showSnackBar(
             context,
             SnackBar(

@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/home_localizations.dart';
 import 'package:icar/data/models/icar_route/icar_route.dart';
-import 'package:icar/ui/core/widgets/data_not_fetched.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/widgets/circular_loader.dart';
 import 'package:icar/ui/home/viewmodels/icar_route/icar_route_viewmodel.dart';
 import 'package:icar/ui/home/widgets/check_queue/select_route/icar_route_radio.dart';
+import 'package:icar/util/handle_error.dart';
 
 class SelectIcarRouteSheet extends ConsumerStatefulWidget {
   const SelectIcarRouteSheet({super.key});
@@ -133,9 +133,7 @@ class _SelectIcarRouteSheetState extends ConsumerState<SelectIcarRouteSheet> {
           );
         },
         error: (error, _) {
-          return DataNotFetched(
-            text: CoreLocalizations.of(context)!.internalServerError,
-          );
+          return handleError(context, error);
         },
         loading: () {
           return const CircularLoader(size: 16);

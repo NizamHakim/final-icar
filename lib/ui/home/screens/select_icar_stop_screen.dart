@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/core_localizations.dart';
 import 'package:flutter_gen/gen_l10n/home_localizations.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:icar/ui/core/widgets/data_not_fetched.dart';
-import 'package:icar/util/permissions/location/widgets/location_permission_denied.dart';
-import 'package:icar/util/permissions/location/widgets/location_service_disabled.dart';
+import 'package:icar/util/handle_error.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/app_icon.dart';
@@ -32,9 +29,9 @@ class SelectIcarStopScreen extends ConsumerWidget {
         icarStopOptionsFromHistory.isLoading) {
       content = const CircularLoader();
     } else if (filteredIcarStopOptions.hasError) {
-      content = _showErrorWidget(filteredIcarStopOptions.error!, context);
+      content = handleError(context, filteredIcarStopOptions.error!);
     } else if (icarStopOptionsFromHistory.hasError) {
-      content = _showErrorWidget(icarStopOptionsFromHistory.error!, context);
+      content = handleError(context, icarStopOptionsFromHistory.error!);
     } else {
       final filteredOptions = filteredIcarStopOptions.asData!.value;
 
@@ -90,17 +87,5 @@ class SelectIcarStopScreen extends ConsumerWidget {
       ),
       body: RootContainer(child: content),
     );
-  }
-
-  Widget _showErrorWidget(Object error, BuildContext context) {
-    if (error is LocationServiceDisabledException) {
-      return const LocationServiceDisabled();
-    } else if (error is PermissionDeniedException) {
-      return const LocationPermissionDenied();
-    } else {
-      return DataNotFetched(
-        text: CoreLocalizations.of(context)!.internalServerError,
-      );
-    }
   }
 }

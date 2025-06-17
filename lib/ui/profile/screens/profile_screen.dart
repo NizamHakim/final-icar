@@ -5,8 +5,9 @@ import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/ui/core/themes/app_colors.dart';
 import 'package:icar/ui/core/themes/app_icons.dart';
 import 'package:icar/ui/core/widgets/root_container.dart';
-import 'package:icar/ui/profile/viewmodels/logout/logout.dart';
-import 'package:icar/ui/profile/widgets/language/switch_language_screen.dart';
+import 'package:icar/ui/profile/screens/switch_language_screen.dart';
+import 'package:icar/ui/profile/viewmodels/help_viewmodel/help_viewmodel.dart';
+import 'package:icar/ui/profile/widgets/logout/logout_dialog.dart';
 import 'package:icar/ui/profile/widgets/profile_menu_tile.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -17,7 +18,6 @@ class ProfileScreen extends ConsumerWidget {
     final currentUser = ref.watch(currentUserProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(ProfileLocalizations.of(context)!.profileScreenTitle),
       ),
@@ -71,13 +71,16 @@ class ProfileScreen extends ConsumerWidget {
                     ProfileMenuTile(
                       leadingIcon: AppIconsSvg.messageChat,
                       text: ProfileLocalizations.of(context)!.help,
-                      onTap: () {},
+                      onTap: callHelp,
                     ),
                     ProfileMenuTile(
                       leadingIcon: AppIconsSvg.logout,
                       text: ProfileLocalizations.of(context)!.logout,
                       onTap: () {
-                        ref.read(logoutProvider);
+                        showDialog(
+                          context: context,
+                          builder: (context) => const LogoutDialog(),
+                        );
                       },
                     ),
                   ],
