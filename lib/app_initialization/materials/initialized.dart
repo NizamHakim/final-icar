@@ -13,12 +13,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/core/providers/locales/locales.dart';
 import 'package:icar/data/models/user/user.dart';
-import 'package:icar/ui/core/router/router.dart';
 import 'package:icar/ui/core/themes/app_theme.dart';
 import 'package:icar/ui/onboarding/screens/onboarding_screen.dart';
 import 'package:icar/ui/onboarding/viewmodels/onboarding_viewmodel.dart';
 import 'package:icar/ui/root/authorized.dart';
 import 'package:icar/ui/root/unauthorized.dart';
+import 'package:icar/util/navigator_key.dart';
 
 class Initialized extends ConsumerWidget {
   const Initialized({super.key});
@@ -27,9 +27,10 @@ class Initialized extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final supportedLocales = ref.watch(supportedLocalesProvider);
     final currentLocale = ref.watch(currentLocaleProvider);
-    final router = ref.watch(routerProvider);
+    final currentUser = ref.watch(currentUserProvider);
+    final shouldShowOnboarding = ref.watch(shouldShowOnboardingProvider);
 
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'iCar ITS',
       theme: AppTheme.lightTheme,
       localizationsDelegates: const [
@@ -49,8 +50,8 @@ class Initialized extends ConsumerWidget {
       supportedLocales:
           supportedLocales.map((appLocale) => appLocale.locale).toList(),
       locale: currentLocale,
-      // home: _content(currentUser, shouldShowOnboarding),
-      routerConfig: router,
+      navigatorKey: navigatorKey,
+      home: _content(currentUser, shouldShowOnboarding),
     );
   }
 

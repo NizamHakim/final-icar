@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icar/data/core/providers/current_user/current_user.dart';
 import 'package:icar/data/core/providers/locales/locales.dart';
@@ -6,6 +8,7 @@ import 'package:icar/data/models/ticket/ticket.dart';
 import 'package:icar/data/repositories/icar_repository/icar_position_repository.dart';
 import 'package:icar/data/repositories/ticket_repository/ticket_repository.dart';
 import 'package:icar/util/refresh_tickets_state/refresh_tickets_state.dart';
+import 'package:icar/util/show_notification/notification_payload.dart';
 import 'package:icar/util/show_notification/show_notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -65,7 +68,19 @@ void _handleIcarClose(Ref ref, int ticketId) {
           ? 'iCar sampai dalam beberapa menit. Ayo pergi ke halte!'
           : 'iCar will be arrived in couple of minutes. Lets go to the stop!';
 
-  ref.read(showNotificationProvider(ticketId, title, body));
+  ref.read(
+    showNotificationProvider(
+      ticketId,
+      title,
+      body,
+      payload: jsonEncode(
+        NotificationPayload(
+          type: NotificationType.TICKET_DETAILS,
+          ticketId: ticketId,
+        ).toJson(),
+      ),
+    ),
+  );
 }
 
 void _handleIcarArrived(Ref ref, int ticketId) async {
@@ -83,7 +98,19 @@ void _handleIcarArrived(Ref ref, int ticketId) async {
 
   ref.read(refreshTicketByIdProvider(ticketId));
   ref.read(refreshTicketsStateProvider);
-  ref.read(showNotificationProvider(ticketId, title, body));
+  ref.read(
+    showNotificationProvider(
+      ticketId,
+      title,
+      body,
+      payload: jsonEncode(
+        NotificationPayload(
+          type: NotificationType.TICKET_DETAILS,
+          ticketId: ticketId,
+        ).toJson(),
+      ),
+    ),
+  );
 
   final reviewTitle =
       (currentLocale.languageCode == 'id')
@@ -106,8 +133,13 @@ void _handleIcarArrived(Ref ref, int ticketId) async {
           ticketId,
           reviewTitle,
           reviewBody,
-          // ticket.expiredAt,
-          DateTime.now().add(const Duration(minutes: 15)),
+          DateTime.now().add(const Duration(minutes: 10)),
+          payload: jsonEncode(
+            NotificationPayload(
+              type: NotificationType.TICKET_REVIEW,
+              ticketId: ticketId,
+            ).toJson(),
+          ),
         ),
       );
     },

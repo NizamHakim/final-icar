@@ -11,8 +11,9 @@ Future<void> showNotification(
   Ref ref,
   int id,
   String title,
-  String body,
-) async {
+  String body, {
+  String? payload,
+}) async {
   final notificationsPlugin = ref.read(notificationsPluginProvider);
   await notificationsPlugin?.show(
     id,
@@ -28,6 +29,7 @@ Future<void> showNotification(
       ),
       iOS: DarwinNotificationDetails(),
     ),
+    payload: payload,
   );
 }
 
@@ -37,8 +39,9 @@ Future<void> showScheduledNotification(
   int id,
   String title,
   String body,
-  DateTime scheduledTime,
-) async {
+  DateTime scheduledTime, {
+  String? payload,
+}) async {
   final notificationsPlugin = ref.read(notificationsPluginProvider);
   TZDateTime scheduledTZTime = TZDateTime(
     local,
@@ -66,5 +69,6 @@ Future<void> showScheduledNotification(
       iOS: DarwinNotificationDetails(),
     ),
     androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+    payload: payload,
   );
 }

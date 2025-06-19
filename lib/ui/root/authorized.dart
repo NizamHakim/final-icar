@@ -11,19 +11,17 @@ import 'package:icar/ui/profile/screens/profile_screen.dart';
 import 'package:icar/ui/queue/screens/my_queue_screen.dart';
 
 class Authorized extends ConsumerWidget {
-  const Authorized({super.key, this.navIndexInitial = 0});
-
-  final int navIndexInitial;
+  const Authorized({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int currentPageIndex = ref.watch(bottomNavIndexProvider(navIndexInitial));
+    int currentPageIndex = ref.watch(bottomNavIndexProvider);
     ref.watch(geofencingTicketsInQueueProvider);
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {
-          ref.read(bottomNavIndexProvider(navIndexInitial).notifier).set(value);
+          ref.read(bottomNavIndexProvider.notifier).set(value);
         },
         selectedIndex: currentPageIndex,
         destinations: <Widget>[

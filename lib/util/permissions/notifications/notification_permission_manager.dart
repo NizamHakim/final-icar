@@ -5,7 +5,6 @@ import 'package:permission_handler/permission_handler.dart';
 class NotificationPermissionManager {
   static Future<bool> checkForPermission() async {
     final status = await Permission.notification.isGranted;
-    print("Notification permission status: $status");
     return status;
   }
 

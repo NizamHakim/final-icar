@@ -5,7 +5,7 @@ part 'bottom_nav_index.g.dart';
 @riverpod
 class BottomNavIndex extends _$BottomNavIndex {
   @override
-  int build(int initial) => initial;
+  int build() => 0;
 
   void set(int index) => state = index;
 }

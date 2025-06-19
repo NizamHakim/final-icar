@@ -27,13 +27,15 @@ class TcBody extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                CoreLocalizations.of(
-                  context,
-                )!.stopWithName(ticket.schedule!.icarStop!.name),
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.gray900,
+              Expanded(
+                child: Text(
+                  CoreLocalizations.of(
+                    context,
+                  )!.stopWithName(ticket.schedule!.icarStop!.name),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gray900,
+                  ),
                 ),
               ),
               TextBadge(

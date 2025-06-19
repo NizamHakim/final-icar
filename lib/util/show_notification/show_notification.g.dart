@@ -6,7 +6,7 @@ part of 'show_notification.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$showNotificationHash() => r'9aaef4fffbd2c79cfffca75959bffdd4e25fc048';
+String _$showNotificationHash() => r'0819b620e5a17dcd9904c4dc00aac274ae266c17';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -39,15 +39,25 @@ class ShowNotificationFamily extends Family<AsyncValue<void>> {
   const ShowNotificationFamily();
 
   /// See also [showNotification].
-  ShowNotificationProvider call(int id, String title, String body) {
-    return ShowNotificationProvider(id, title, body);
+  ShowNotificationProvider call(
+    int id,
+    String title,
+    String body, {
+    String? payload,
+  }) {
+    return ShowNotificationProvider(id, title, body, payload: payload);
   }
 
   @override
   ShowNotificationProvider getProviderOverride(
     covariant ShowNotificationProvider provider,
   ) {
-    return call(provider.id, provider.title, provider.body);
+    return call(
+      provider.id,
+      provider.title,
+      provider.body,
+      payload: provider.payload,
+    );
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -68,9 +78,15 @@ class ShowNotificationFamily extends Family<AsyncValue<void>> {
 /// See also [showNotification].
 class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
   /// See also [showNotification].
-  ShowNotificationProvider(int id, String title, String body)
+  ShowNotificationProvider(int id, String title, String body, {String? payload})
     : this._internal(
-        (ref) => showNotification(ref as ShowNotificationRef, id, title, body),
+        (ref) => showNotification(
+          ref as ShowNotificationRef,
+          id,
+          title,
+          body,
+          payload: payload,
+        ),
         from: showNotificationProvider,
         name: r'showNotificationProvider',
         debugGetCreateSourceHash:
@@ -83,6 +99,7 @@ class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
         id: id,
         title: title,
         body: body,
+        payload: payload,
       );
 
   ShowNotificationProvider._internal(
@@ -95,11 +112,13 @@ class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
     required this.id,
     required this.title,
     required this.body,
+    required this.payload,
   }) : super.internal();
 
   final int id;
   final String title;
   final String body;
+  final String? payload;
 
   @override
   Override overrideWith(
@@ -117,6 +136,7 @@ class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
         id: id,
         title: title,
         body: body,
+        payload: payload,
       ),
     );
   }
@@ -131,7 +151,8 @@ class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
     return other is ShowNotificationProvider &&
         other.id == id &&
         other.title == title &&
-        other.body == body;
+        other.body == body &&
+        other.payload == payload;
   }
 
   @override
@@ -140,6 +161,7 @@ class ShowNotificationProvider extends AutoDisposeFutureProvider<void> {
     hash = _SystemHash.combine(hash, id.hashCode);
     hash = _SystemHash.combine(hash, title.hashCode);
     hash = _SystemHash.combine(hash, body.hashCode);
+    hash = _SystemHash.combine(hash, payload.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -156,6 +178,9 @@ mixin ShowNotificationRef on AutoDisposeFutureProviderRef<void> {
 
   /// The parameter `body` of this provider.
   String get body;
+
+  /// The parameter `payload` of this provider.
+  String? get payload;
 }
 
 class _ShowNotificationProviderElement
@@ -169,10 +194,12 @@ class _ShowNotificationProviderElement
   String get title => (origin as ShowNotificationProvider).title;
   @override
   String get body => (origin as ShowNotificationProvider).body;
+  @override
+  String? get payload => (origin as ShowNotificationProvider).payload;
 }
 
 String _$showScheduledNotificationHash() =>
-    r'2eb4e48b71d8513353190a7668ed6cf010f6d8dd';
+    r'abb6887cfea74913a7d2bc58b71ed6b1746c3464';
 
 /// See also [showScheduledNotification].
 @ProviderFor(showScheduledNotification)
@@ -188,9 +215,16 @@ class ShowScheduledNotificationFamily extends Family<AsyncValue<void>> {
     int id,
     String title,
     String body,
-    DateTime scheduledTime,
-  ) {
-    return ShowScheduledNotificationProvider(id, title, body, scheduledTime);
+    DateTime scheduledTime, {
+    String? payload,
+  }) {
+    return ShowScheduledNotificationProvider(
+      id,
+      title,
+      body,
+      scheduledTime,
+      payload: payload,
+    );
   }
 
   @override
@@ -202,6 +236,7 @@ class ShowScheduledNotificationFamily extends Family<AsyncValue<void>> {
       provider.title,
       provider.body,
       provider.scheduledTime,
+      payload: provider.payload,
     );
   }
 
@@ -228,29 +263,32 @@ class ShowScheduledNotificationProvider
     int id,
     String title,
     String body,
-    DateTime scheduledTime,
-  ) : this._internal(
-        (ref) => showScheduledNotification(
-          ref as ShowScheduledNotificationRef,
-          id,
-          title,
-          body,
-          scheduledTime,
-        ),
-        from: showScheduledNotificationProvider,
-        name: r'showScheduledNotificationProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$showScheduledNotificationHash,
-        dependencies: ShowScheduledNotificationFamily._dependencies,
-        allTransitiveDependencies:
-            ShowScheduledNotificationFamily._allTransitiveDependencies,
-        id: id,
-        title: title,
-        body: body,
-        scheduledTime: scheduledTime,
-      );
+    DateTime scheduledTime, {
+    String? payload,
+  }) : this._internal(
+         (ref) => showScheduledNotification(
+           ref as ShowScheduledNotificationRef,
+           id,
+           title,
+           body,
+           scheduledTime,
+           payload: payload,
+         ),
+         from: showScheduledNotificationProvider,
+         name: r'showScheduledNotificationProvider',
+         debugGetCreateSourceHash:
+             const bool.fromEnvironment('dart.vm.product')
+                 ? null
+                 : _$showScheduledNotificationHash,
+         dependencies: ShowScheduledNotificationFamily._dependencies,
+         allTransitiveDependencies:
+             ShowScheduledNotificationFamily._allTransitiveDependencies,
+         id: id,
+         title: title,
+         body: body,
+         scheduledTime: scheduledTime,
+         payload: payload,
+       );
 
   ShowScheduledNotificationProvider._internal(
     super._createNotifier, {
@@ -263,12 +301,14 @@ class ShowScheduledNotificationProvider
     required this.title,
     required this.body,
     required this.scheduledTime,
+    required this.payload,
   }) : super.internal();
 
   final int id;
   final String title;
   final String body;
   final DateTime scheduledTime;
+  final String? payload;
 
   @override
   Override overrideWith(
@@ -287,6 +327,7 @@ class ShowScheduledNotificationProvider
         title: title,
         body: body,
         scheduledTime: scheduledTime,
+        payload: payload,
       ),
     );
   }
@@ -302,7 +343,8 @@ class ShowScheduledNotificationProvider
         other.id == id &&
         other.title == title &&
         other.body == body &&
-        other.scheduledTime == scheduledTime;
+        other.scheduledTime == scheduledTime &&
+        other.payload == payload;
   }
 
   @override
@@ -312,6 +354,7 @@ class ShowScheduledNotificationProvider
     hash = _SystemHash.combine(hash, title.hashCode);
     hash = _SystemHash.combine(hash, body.hashCode);
     hash = _SystemHash.combine(hash, scheduledTime.hashCode);
+    hash = _SystemHash.combine(hash, payload.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -331,6 +374,9 @@ mixin ShowScheduledNotificationRef on AutoDisposeFutureProviderRef<void> {
 
   /// The parameter `scheduledTime` of this provider.
   DateTime get scheduledTime;
+
+  /// The parameter `payload` of this provider.
+  String? get payload;
 }
 
 class _ShowScheduledNotificationProviderElement
@@ -347,6 +393,8 @@ class _ShowScheduledNotificationProviderElement
   @override
   DateTime get scheduledTime =>
       (origin as ShowScheduledNotificationProvider).scheduledTime;
+  @override
+  String? get payload => (origin as ShowScheduledNotificationProvider).payload;
 }
 
 // ignore_for_file: type=lint

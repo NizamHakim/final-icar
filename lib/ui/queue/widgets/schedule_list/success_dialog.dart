@@ -77,11 +77,11 @@ class SuccessDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).popUntil((route) => route.isFirst);
-            Navigator.of(context).push(
+            Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => TicketDetailsScreen(ticketId: ticket.id),
               ),
+              (route) => route.isFirst,
             );
           },
           child: Text(
