@@ -26,9 +26,9 @@ class SettingsRepository {
 
   bool shouldShowOnboarding() {
     final hasSeenOnboarding =
-        sharedPreferences.getBool('hasSeenOnboarding') ?? false;
+        sharedPreferences.getBool('first_launch') ?? false;
     if (!hasSeenOnboarding) {
-      sharedPreferences.setBool('hasSeenOnboarding', true);
+      sharedPreferences.setBool('first_launch', true);
       return true;
     }
     return false;

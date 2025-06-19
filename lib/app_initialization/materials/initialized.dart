@@ -28,7 +28,7 @@ class Initialized extends ConsumerWidget {
     final supportedLocales = ref.watch(supportedLocalesProvider);
     final currentLocale = ref.watch(currentLocaleProvider);
     final currentUser = ref.watch(currentUserProvider);
-    final shouldShowOnboarding = ref.watch(shouldShowOnboardingProvider);
+    final shouldShowOnboarding = ref.read(shouldShowOnboardingProvider);
 
     return MaterialApp(
       title: 'iCar ITS',

@@ -8,7 +8,6 @@ import 'package:icar/data/models/user/user.dart';
 import 'package:icar/ui/auth/viewmodels/login/login_viewmodel.dart';
 import 'package:icar/ui/auth/viewmodels/signup/signup_viewmodel.dart';
 import 'package:icar/util/app_dot_env.dart';
-import 'package:icar/util/future_timeout.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_remote_repository.g.dart';
@@ -21,11 +20,9 @@ AuthRemoteRepository authRemoteRepository(Ref ref) {
 class AuthRemoteRepository {
   Future<Either<AppFailure, User>> getAuthorizedUserData(String token) async {
     try {
-      final response = await futureTimeout(
-        http.get(
-          Uri.parse("${AppDotEnv.httpUrl}/api/auth"),
-          headers: {"Content-Type": "application/json", "x-auth-token": token},
-        ),
+      final response = await http.get(
+        Uri.parse("${AppDotEnv.httpUrl}/api/auth"),
+        headers: {"Content-Type": "application/json", "x-auth-token": token},
       );
       if (response.statusCode != 200) {
         final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
@@ -45,17 +42,15 @@ class AuthRemoteRepository {
     String confirmPassword,
   ) async {
     try {
-      final response = await futureTimeout(
-        http.post(
-          Uri.parse("${AppDotEnv.httpUrl}/api/auth/signup"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({
-            "name": name,
-            "email": email,
-            "password": password,
-            "confirmPassword": confirmPassword,
-          }),
-        ),
+      final response = await http.post(
+        Uri.parse("${AppDotEnv.httpUrl}/api/auth/signup"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "name": name,
+          "email": email,
+          "password": password,
+          "confirmPassword": confirmPassword,
+        }),
       );
 
       final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
@@ -85,12 +80,10 @@ class AuthRemoteRepository {
     String password,
   ) async {
     try {
-      final response = await futureTimeout(
-        http.post(
-          Uri.parse("${AppDotEnv.httpUrl}/api/auth/login"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({"email": email, "password": password}),
-        ),
+      final response = await http.post(
+        Uri.parse("${AppDotEnv.httpUrl}/api/auth/login"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"email": email, "password": password}),
       );
 
       final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
