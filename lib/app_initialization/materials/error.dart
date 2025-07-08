@@ -19,10 +19,7 @@ class InitializationError extends ConsumerWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            DataNotFetched(
-              // text: "An unexpected error occurred during app initialization",
-              text: errorMessage,
-            ),
+            DataNotFetched(text: errorMessage),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {

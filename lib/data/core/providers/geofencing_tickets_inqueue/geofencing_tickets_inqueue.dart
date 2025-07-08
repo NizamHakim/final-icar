@@ -133,7 +133,7 @@ void _handleIcarArrived(Ref ref, int ticketId) async {
           ticketId,
           reviewTitle,
           reviewBody,
-          DateTime.now().add(const Duration(minutes: 10)),
+          DateTime.now().add(const Duration(minutes: 1)),
           payload: jsonEncode(
             NotificationPayload(
               type: NotificationType.TICKET_REVIEW,

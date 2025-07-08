@@ -75,27 +75,6 @@ class IcarPositionRepository {
   }
 }
 
-// @freezed
-// abstract class IcarPositionResponse with _$IcarPositionResponse {
-//   const factory IcarPositionResponse({
-//     required int icarId,
-//     @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)
-//     required LatLng position,
-//   }) = _IcarPositionResponse;
-
-//   factory IcarPositionResponse.fromJson(Map<String, dynamic> json) =>
-//       _$IcarPositionResponseFromJson(json);
-// }
-
-// @freezed
-// abstract class IcarDisconnectedResponse with _$IcarDisconnectedResponse {
-//   const factory IcarDisconnectedResponse({required int icarId}) =
-//       _IcarDisconnectedResponse;
-
-//   factory IcarDisconnectedResponse.fromJson(Map<String, dynamic> json) =>
-//       _$IcarDisconnectedResponseFromJson(json);
-// }
-
 enum IcarWebSocketResponseType { position, disconnected }
 
 @Freezed(unionKey: 'type')
