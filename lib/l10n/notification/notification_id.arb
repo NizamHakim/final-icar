@@ -1,0 +1,40 @@
+{
+	"@@locale": "id",
+	"icarCloseTitle": "iCar sudah dekat!",
+	"@icarCloseTitle": {
+		"description": "iCar close notification title"
+	},
+	"icarCloseBody": "iCar sampai dalam beberapa menit. Ayo pergi ke halte!",
+	"@icarCloseBody": {
+		"description": "iCar close notification body"
+	},
+	"icarArrivedTitle": "iCar tiba di halte!",
+	"@icarArrivedTitle": {
+		"description": "iCar close notification title"
+	},
+	"icarArrivedBody": "Ayo naik iCar atau antre di waktu lain kalau iCar penuh!",
+	"@icarArrivedBody": {
+		"description": "iCar close notification body"
+	},
+	"reviewTitle": "Bagaimana pengalamanmu dengan iCar hari ini?",
+	"@reviewTitle": {
+		"description": "Review notification title"
+	},
+	"reviewBody": "Silakan berikan penilaian dan ulasan untuk membantu kami meningkatkan layanan.",
+	"@reviewBody": {
+		"description": "Review notification body"
+	},
+	"icarDisconnectTitle": "{icarName} dinonaktifkan sementara!",
+	"@icarDisconnectTitle": {
+		"placeholders": {
+			"icarName": {
+				"type": "String"
+			}
+		},
+		"description": "iCar disconnected notification title"
+	},
+	"icarDisconnectBody": "Semua tiket yang sedang dalam antrean telah dibatalkan. Mohon maaf atas ketidaknyamanannya.",
+	"@icarDisconnectBody": {
+		"description": "iCar disconnected notification body"
+	}
+}

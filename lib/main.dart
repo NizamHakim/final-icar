@@ -1,7 +1,7 @@
-import 'package:icar/app_initialization/initialization_provider/app_initialization.dart';
-import 'package:icar/app_initialization/materials/error.dart';
-import 'package:icar/app_initialization/materials/initialized.dart';
-import 'package:icar/app_initialization/materials/loading.dart';
+import 'package:icar/init/provider/init_app.dart';
+import 'package:icar/init/materials/error.dart';
+import 'package:icar/init/materials/initialized.dart';
+import 'package:icar/init/materials/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,13 +25,13 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appInitializationState = ref.watch(appInitializationProvider);
+    final appInitializationState = ref.watch(initAppProvider);
 
     return appInitializationState.when(
       data: (_) {
         return const Initialized();
       },
-      error: (error, _) {
+      error: (error, st) {
         return InitializationError(errorMessage: error.toString());
       },
       loading: () {

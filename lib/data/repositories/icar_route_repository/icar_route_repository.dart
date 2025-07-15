@@ -1,60 +1,65 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icar/util/app_dot_env.dart';
+import 'package:icar/core/providers/current_user/current_user.dart';
+import 'package:icar/util/http/request_headers.dart';
+import 'package:icar/util/http/response_handler.dart';
+import 'package:icar/util/http/uri_builder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:icar/data/models/icar_route/icar_route.dart';
-import 'package:icar/data/core/exceptions/app_failure.dart';
+import 'package:icar/core/exceptions/app_failure.dart';
 
 part 'icar_route_repository.g.dart';
 
 @riverpod
 IcarRouteRepository icarRouteRepository(Ref ref) {
-  return IcarRouteRepository();
+  return IcarRouteRepository(ref);
 }
 
 class IcarRouteRepository {
-  Future<Either<AppFailure, List<IcarRoute>>> getAllRoutes() async {
+  final Ref ref;
+  const IcarRouteRepository(this.ref);
+
+  Future<Either<AppFailure, List<IcarRoute>>> getRoutes() async {
     try {
+      final currentUser = ref.read(currentUserProvider)!;
       final response = await http.get(
-        Uri.parse("${AppDotEnv.httpUrl}/api/icar-routes"),
-        headers: {"Content-Type": "application/json"},
+        uriBuilder(
+          endpoint: "/api/icar-routes",
+          queryParameters: {"polyline": true},
+        ),
+        headers: getHeaders(token: currentUser.token),
       );
 
-      if (response.statusCode != 200) {
-        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-        return Left(AppFailure(responseMap["error"]));
-      }
-
-      List<IcarRoute> icarRouteList = [];
-      for (final icarRoute in jsonDecode(response.body) as List) {
-        icarRouteList.add(IcarRoute.fromJson(icarRoute));
-      }
-
-      return Right(icarRouteList);
+      return handleResponse<AppFailure, List<IcarRoute>>(
+        response,
+        onSuccess: (json) {
+          return (json as List)
+              .map((icarRoute) => IcarRoute.fromJson(icarRoute))
+              .toList();
+        },
+        onError: (json) => AppFailure.fromJson(json),
+      );
     } catch (e) {
-      return Left(AppFailure(e.toString()));
+      return Left(AppFailure(error: e.toString()));
     }
   }
 
   Future<Either<AppFailure, IcarRoute>> getRouteById(int icarRouteId) async {
     try {
+      final currentUser = ref.read(currentUserProvider)!;
       final response = await http.get(
-        Uri.parse("${AppDotEnv.httpUrl}/api/icar-routes/$icarRouteId"),
-        headers: {"Content-Type": "application/json"},
+        uriBuilder(endpoint: "/api/icar-routes/$icarRouteId"),
+        headers: getHeaders(token: currentUser.token),
       );
 
-      if (response.statusCode != 200) {
-        final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-        return Left(AppFailure(responseMap["error"]));
-      }
-
-      final icarRoute = IcarRoute.fromJson(jsonDecode(response.body));
-      return Right(icarRoute);
+      return handleResponse<AppFailure, IcarRoute>(
+        response,
+        onSuccess: (json) => IcarRoute.fromJson(json),
+        onError: (json) => AppFailure.fromJson(json),
+      );
     } catch (e) {
-      return Left(AppFailure(e.toString()));
+      return Left(AppFailure(error: e.toString()));
     }
   }
 }

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- int get id; String get name; String get email; String get password; List<Ticket>? get tickets;
+ String get token; int get id; String get name; String get email; String get password; List<Ticket>? get tickets;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&const DeepCollectionEquality().equals(other.tickets, tickets));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.token, token) || other.token == token)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&const DeepCollectionEquality().equals(other.tickets, tickets));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,password,const DeepCollectionEquality().hash(tickets));
+int get hashCode => Object.hash(runtimeType,token,id,name,email,password,const DeepCollectionEquality().hash(tickets));
 
 @override
 String toString() {
-  return 'User(id: $id, name: $name, email: $email, password: $password, tickets: $tickets)';
+  return 'User(token: $token, id: $id, name: $name, email: $email, password: $password, tickets: $tickets)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String email, String password, List<Ticket>? tickets
+ String token, int id, String name, String email, String password, List<Ticket>? tickets
 });
 
 
@@ -66,9 +66,10 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? password = null,Object? tickets = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? token = null,Object? id = null,Object? name = null,Object? email = null,Object? password = null,Object? tickets = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -84,9 +85,10 @@ as List<Ticket>?,
 @JsonSerializable()
 
 class _User implements User {
-  const _User({required this.id, required this.name, required this.email, required this.password, final  List<Ticket>? tickets}): _tickets = tickets;
+  const _User({required this.token, required this.id, required this.name, required this.email, required this.password, final  List<Ticket>? tickets}): _tickets = tickets;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
+@override final  String token;
 @override final  int id;
 @override final  String name;
 @override final  String email;
@@ -114,16 +116,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&const DeepCollectionEquality().equals(other._tickets, _tickets));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.token, token) || other.token == token)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&const DeepCollectionEquality().equals(other._tickets, _tickets));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,password,const DeepCollectionEquality().hash(_tickets));
+int get hashCode => Object.hash(runtimeType,token,id,name,email,password,const DeepCollectionEquality().hash(_tickets));
 
 @override
 String toString() {
-  return 'User(id: $id, name: $name, email: $email, password: $password, tickets: $tickets)';
+  return 'User(token: $token, id: $id, name: $name, email: $email, password: $password, tickets: $tickets)';
 }
 
 
@@ -134,7 +136,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String email, String password, List<Ticket>? tickets
+ String token, int id, String name, String email, String password, List<Ticket>? tickets
 });
 
 
@@ -151,9 +153,10 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? password = null,Object? tickets = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? token = null,Object? id = null,Object? name = null,Object? email = null,Object? password = null,Object? tickets = freezed,}) {
   return _then(_User(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable

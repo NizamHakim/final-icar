@@ -7,6 +7,7 @@ part 'user.g.dart';
 @freezed
 abstract class User with _$User {
   const factory User({
+    required String token,
     required int id,
     required String name,
     required String email,

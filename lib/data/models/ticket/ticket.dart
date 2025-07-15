@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:icar/data/models/schedule/schedule.dart';
-import 'package:icar/data/models/ticket/review.dart';
+import 'package:icar/data/models/review/review.dart';
 import 'package:icar/data/models/user/user.dart';
-import 'package:icar/ui/core/themes/app_colors.dart';
+import 'package:icar/ui/themes/app_colors.dart';
 import 'package:intl/intl.dart';
 
 part 'ticket.freezed.dart';

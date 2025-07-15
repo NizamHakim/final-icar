@@ -1,0 +1,40 @@
+{
+	"@@locale": "en",
+	"icarCloseTitle": "iCar is nearby!",
+	"@icarCloseTitle": {
+		"description": "iCar close notification title"
+	},
+	"icarCloseBody": "iCar will be arrived in couple of minutes. Lets go to the stop!",
+	"@icarCloseBody": {
+		"description": "iCar close notification body"
+	},
+	"icarArrivedTitle": "iCar has arrived at the stop!",
+	"@icarArrivedTitle": {
+		"description": "iCar arrived notification title"
+	},
+	"icarArrivedBody": "Let's get to the iCar or queue for another time if it's fully occupied!",
+	"@icarArrivedBody": {
+		"description": "iCar arrived notification body"
+	},
+	"reviewTitle": "How was your experience with iCar today?",
+	"@reviewTitle": {
+		"description": "Review notification title"
+	},
+	"reviewBody": "Please rate and review to help us improve our service.",
+	"@reviewBody": {
+		"description": "Review notification body"
+	},
+	"icarDisconnectTitle": "{icarName} is temporarily deactivated!",
+	"@icarDisconnectTitle": {
+		"placeholders": {
+			"icarName": {
+				"type": "String"
+			}
+		},
+		"description": "iCar disconnected notification title"
+	},
+	"icarDisconnectBody": "All tickets in queue have been cancelled. We apologize for the inconvenience.",
+	"@icarDisconnectBody": {
+		"description": "iCar disconnected notification body"
+	}
+}

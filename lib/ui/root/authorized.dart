@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/core_localizations.dart';
-import 'package:icar/data/core/providers/geofencing_tickets_inqueue/geofencing_tickets_inqueue.dart';
-import 'package:icar/ui/core/themes/app_colors.dart';
-import 'package:icar/ui/core/themes/app_icons.dart';
-import 'package:icar/ui/root/bottom_nav_index/bottom_nav_index.dart';
-import 'package:icar/ui/core/widgets/app_icon.dart';
-import 'package:icar/ui/home/screens/home_screen.dart';
-import 'package:icar/ui/profile/screens/profile_screen.dart';
-import 'package:icar/ui/queue/screens/my_queue_screen.dart';
+import 'package:icar/core/providers/geofencing_tickets_inqueue/geofencing_tickets_inqueue.dart';
+import 'package:icar/core/providers/notifications_plugin/notifications_plugin.dart';
+import 'package:icar/ui/themes/app_colors.dart';
+import 'package:icar/ui/themes/app_icons.dart';
+import 'package:icar/ui/root/providers/bottom_nav_index.dart';
+import 'package:icar/ui/widgets/app_icon.dart';
+import 'package:icar/ui/features/home/screens/home_screen.dart';
+import 'package:icar/ui/features/profile/screens/profile_screen.dart';
+import 'package:icar/ui/features/queue/screens/my_queue_screen.dart';
 
 class Authorized extends ConsumerWidget {
   const Authorized({super.key});
@@ -17,6 +18,7 @@ class Authorized extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int currentPageIndex = ref.watch(bottomNavIndexProvider);
     ref.watch(geofencingTicketsInQueueProvider);
+    ref.watch(launchedWithNotificationProvider);
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(

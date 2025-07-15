@@ -7,7 +7,7 @@ part of 'icar_route_repository.dart';
 // **************************************************************************
 
 String _$icarRouteRepositoryHash() =>
-    r'363c17077b41027bbd11d8c4d0889f0a0bc248fd';
+    r'ddbd825ab7ed72b6edb083912e951cad5a624112';
 
 /// See also [icarRouteRepository].
 @ProviderFor(icarRouteRepository)
