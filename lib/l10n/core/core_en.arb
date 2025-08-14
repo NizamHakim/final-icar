@@ -58,7 +58,7 @@
 	"@bottomNavProfile": {
 		"description": "Bottom navigation profile label"
 	},
-	"internalServerError": "Internal server error.\nPlease try again later.",
+	"internalServerError": "Sorry, an unexpected error occured.\nPlease try again later.",
 	"@internalServerError": {
 		"description": "Exception - Internal server error message"
 	}

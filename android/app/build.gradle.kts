@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.icar"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "29.0.13113456"
+    ndkVersion = "27.2.12479018"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -25,7 +25,7 @@ android {
         applicationId = "com.example.icar"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 29
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -45,6 +45,9 @@ flutter {
     source = "../.."
 }
 
+
 dependencies {
+    implementation(project(":unityLibrary"))
+
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
