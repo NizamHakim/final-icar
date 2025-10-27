@@ -1,0 +1,11 @@
+{
+	"@@locale": "en",
+	"checkQueueLabel": "{label, select, stop{Stop} route{Route} other{Unknown value}}",
+	"checkQueueHint": "{hint, select, stop{Select a stop} route{Select a route} other{Unknown value}}",
+	"checkQueueSubmitButton": "Check iCar queue",
+	"selectStopLabel": "{label, select, latest_search{Latest search} all_options{Stops} other{Unknown value}}",
+	"selectStopFindStopHint": "Find a stop...",
+	"selectStopNoStopMatched": "No suitable stops matched",
+	"noUpcomingTicket": "No upcoming ticket in queue",
+	"viewAll": "View all"
+}

@@ -1,0 +1,4 @@
+{
+	"@@locale": "en",
+	"failure": "{failure, select, no_authentication_token{Token invalid, please login!} logout_failed{Logout failed!} other{Sorry, an unexpected error occured.\nPlease try again later.}}"
+}

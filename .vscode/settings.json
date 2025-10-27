@@ -1,5 +1,11 @@
 {
-	"java.configuration.updateBuildConfiguration": "interactive",
+  "java.configuration.updateBuildConfiguration": "interactive",
   "cmake.ignoreCMakeListsMissing": true,
-  "svg.preview.background": "white"
+  "svg.preview.background": "white",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart",
+    "*_localizations.dart": "${capture}_localizations_en.dart, ${capture}_localizations_id.dart",
+  },
 }

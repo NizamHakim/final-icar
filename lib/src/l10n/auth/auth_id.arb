@@ -1,0 +1,13 @@
+{
+	"@@locale": "id",
+	"loginScreenTitle": "Masuk ke akunmu",
+	"login": "Masuk",
+	"haveAnAccount": "Sudah punya akun?",
+	"signupScreenTitle": "Buat akun baru",
+	"signup": "Daftar",
+	"doesntHaveAnAccount": "Belum punya akun?",
+	"inputLabel": "{label, select, name{Nama} email{Email} password{Password} confirmPassword{Konfirmasi Password} other{Unknown value}}",
+	"inputHint": "{hint, select, name{Masukkan nama} email{Masukkan email} password{Masukkan password} confirmPassword{Masukkan password} other{Unknown value}}",
+	"inputError": "{error, select, name_required{Nama tidak boleh kosong} email_required{Email tidak boleh kosong} email_invalid{Email tidak valid} email_registered{Email sudah digunakan} credentials_mismatch{Kombinasi email dan password salah} password_required{Password tidak boleh kosong} password_tooShort{Password minimal terdiri dari 8 karakter} confirmPassword_required{Konfirmasi password tidak boleh kosong} confirmPassword_mismatch{Konfirmasi password tidak sama dengan password} other{An unexpected error occurred}}",
+	"authSuccess": "{success, select, login_success{Login berhasil} user_created_successfully{Akun berhasil dibuat} logout_success{Berhasil logout} other{Unknown value}}"
+}

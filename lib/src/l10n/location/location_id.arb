@@ -1,0 +1,8 @@
+{
+	"@@locale": "id",
+	"locationPermissionError": "Izin lokasi belum diberikan.",
+	"locationServiceError": "Layanan lokasi belum diaktifkan.",
+	"stayDisabled": "Tetap Nonaktif",
+	"grantPermission": "Berikan Izin",
+	"enable": "Aktifkan"
+}

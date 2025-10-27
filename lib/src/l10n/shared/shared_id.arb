@@ -1,0 +1,15 @@
+{
+	"@@locale": "id",
+	"appName": "Antre iCar ITS",
+	"stop": "Halte",
+	"cancel": "Batal",
+	"save": "Simpan",
+	"confirm": "Konfirmasi",
+	"submit": "Selesai",
+	"logout": "Keluar",
+	"stopWithName": "Halte {stopName}",
+	"minutes": "{count, plural, =1{1 menit} other{{count} menit}}",
+	"bottomNavHome": "Beranda",
+	"bottomNavMyQueue": "Antrean Saya",
+	"bottomNavProfile": "Profil"
+}

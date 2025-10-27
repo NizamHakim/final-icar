@@ -1,0 +1,7 @@
+{
+	"@@locale": "en",
+	"mapScreenTitle": "Track iCar",
+	"stopsForOneMinute": "Stops for 1 minute",
+	"arrivalTime": "Arrival Time",
+	"session": "{session, select, SESSION_1{Session 1} SESSION_2{Session 2} other{Unknown value}}"
+}

@@ -1,0 +1,7 @@
+{
+	"@@locale": "id",
+	"mapScreenTitle": "Lacak iCar",
+	"stopsForOneMinute": "Berhenti 1 menit",
+	"arrivalTime": "Jadwal Tiba",
+	"session": "{session, select, SESSION_1{Sesi 1} SESSION_2{Sesi 2} other{Unknown value}}"
+}

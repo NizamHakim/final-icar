@@ -1,0 +1,15 @@
+{
+	"@@locale": "en",
+	"appName": "Join Queue iCar ITS",
+	"stop": "Stop",
+	"cancel": "Cancel",
+	"save": "Save",
+	"confirm": "Confirm",
+	"submit": "Submit",
+	"logout": "Logout",
+	"stopWithName": "{stopName} Stop",
+	"minutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+	"bottomNavHome": "Home",
+	"bottomNavMyQueue": "My Queue",
+	"bottomNavProfile": "Profile"
+}

@@ -1,0 +1,16 @@
+{
+	"@@locale": "en",
+	"notificationPermissionTitle": "Notification Permission",
+	"notificationPermissionDesc": "You will be notified when your iCar is nearby or arrived.",
+	"stayDisabled": "Stay Disabled",
+	"grantPermission": "Grant Permission",
+	"enable": "Enable",
+	"icarCloseNotificationTitle": "iCar is nearby!",
+	"icarCloseNotificationBody": "iCar will be arrived in couple of minutes. Lets go to the stop!",
+	"icarArrivedNotificationTitle": "iCar has arrived at the stop!",
+	"icarArrivedNotificationBody": "Let's get to the iCar or queue for another time if it's fully occupied!",
+	"reviewNotificationTitle": "How was your experience with iCar today?",
+	"reviewNotificationBody": "Please rate and review to help us improve our service.",
+	"icarDisconnectNotificationTitle": "{icarName} is temporarily deactivated!",
+	"icarDisconnectNotificationBody": "All tickets in queue have been cancelled. We apologize for the inconvenience."
+}

@@ -1,0 +1,4 @@
+{
+	"@@locale": "id",
+	"failure": "{failure, select, no_authentication_token{Token tidak valid, silakan login!} logout_failed{Logout gagal!} other{Terjadi kesalahan pada sistem.\nSilakan coba lagi dalam beberapa saat.}}"
+}

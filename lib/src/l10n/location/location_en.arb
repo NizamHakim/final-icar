@@ -1,0 +1,8 @@
+{
+	"@@locale": "en",
+	"locationPermissionError": "Location permission has not been granted.",
+	"locationServiceError": "Location service has not been enabled.",
+	"stayDisabled": "Stay Disabled",
+	"grantPermission": "Grant Permission",
+	"enable": "Enable"
+}

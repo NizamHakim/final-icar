@@ -1,0 +1,11 @@
+{
+	"@@locale": "id",
+	"checkQueueLabel": "{label, select, stop{Halte} route{Rute} other{Unknown value}}",
+	"checkQueueHint": "{hint, select, stop{Pilih halte} route{Pilih rute} other{Unknown value}}",
+	"checkQueueSubmitButton": "Cek antrean iCar",
+	"selectStopLabel": "{label, select, latest_search{Pencarian terbaru} all_options{Halte} other{Unknown value}}",
+	"selectStopFindStopHint": "Cari halte...",
+	"selectStopNoStopMatched": "Tidak ada halte yang cocok",
+	"noUpcomingTicket": "Tidak ada tiket antrian yang akan datang",
+	"viewAll": "Lihat semua"
+}

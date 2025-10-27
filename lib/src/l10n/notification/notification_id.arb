@@ -1,0 +1,16 @@
+{
+	"@@locale": "id",
+	"notificationPermissionTitle": "Izin Notifikasi",
+	"notificationPermissionDesc": "Anda akan mendapatkan notifikasi ketika iCar anda sudah dekat atau sudah tiba.",
+	"stayDisabled": "Tetap Nonaktif",
+	"grantPermission": "Berikan Izin",
+	"enable": "Aktifkan",
+	"icarCloseNotificationTitle": "iCar sudah dekat!",
+	"icarCloseNotificationBody": "iCar sampai dalam beberapa menit. Ayo pergi ke halte!",
+	"icarArrivedNotificationTitle": "iCar tiba di halte!",
+	"icarArrivedNotificationBody": "Ayo naik iCar atau antre di waktu lain kalau iCar penuh!",
+	"reviewNotificationTitle": "Bagaimana pengalamanmu dengan iCar hari ini?",
+	"reviewNotificationBody": "Silakan berikan penilaian dan ulasan untuk membantu kami meningkatkan layanan.",
+	"icarDisconnectNotificationTitle": "{icarName} dinonaktifkan sementara!",
+	"icarDisconnectNotificationBody": "Semua tiket yang sedang dalam antrean telah dibatalkan. Mohon maaf atas ketidaknyamanannya."
+}

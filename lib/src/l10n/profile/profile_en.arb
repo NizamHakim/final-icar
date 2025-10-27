@@ -1,0 +1,11 @@
+{
+	"@@locale": "en",
+	"profileScreenTitle": "Profile",
+	"language": "Language",
+	"help": "Help",
+	"logout": "Logout",
+	"languageTileLabel": "{languageCode, select, en{English} id{Bahasa Indonesia} other{Unknown value}}",
+	"switchLangDialogTitle": "{languageCode, select, en{Switch language to English} id{Switch language to Bahasa Indonesia} other{Unknown value}}",
+	"logoutDialogTitle": "Logout",
+	"logoutDialogDesc": "Are you sure you want to logout?"
+}

@@ -1,0 +1,1 @@
+scrcpy --stay-awake --turn-screen-off

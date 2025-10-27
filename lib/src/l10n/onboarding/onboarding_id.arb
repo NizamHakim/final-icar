@@ -1,0 +1,6 @@
+{
+	"@@locale": "id",
+	"onboardingTitle": "{index, select, 1{Antre pakai Aplikasi} 2{Lacak iCar} 3{Pergi ke Halte} other{Unknown value}}",
+	"onboardingDescription": "{index, select, 1{Keliling ITS dengan iCar dan lihat antrean pakai aplikasi} 2{Lacak posisi iCar dan bersiap untuk perjalanan} 3{Pergi ke Halte} other{Unknown value}}",
+	"skip": "Skip"
+}

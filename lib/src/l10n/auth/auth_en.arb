@@ -1,0 +1,13 @@
+{
+	"@@locale": "en",
+	"loginScreenTitle": "Login to your account",
+	"login": "Login",
+	"haveAnAccount": "Have an account?",
+	"signupScreenTitle": "Create new account",
+	"signup": "Signup",
+	"doesntHaveAnAccount": "Doesn't have an account?",
+	"inputLabel": "{label, select, name{Name} email{Email} password{Password} confirmPassword{Confirm Password} other{Unknown value}}",
+	"inputHint": "{hint, select, name{Enter your name} email{Enter your email} password{Enter your password} confirmPassword{Enter your password} other{Unknown value}}",
+	"inputError": "{error, select, name_required{Name is required} email_required{Email is required} email_invalid{Email is invalid} email_registered{Email is already registered} credentials_mismatch{Email and password combination is incorrect} password_required{Password is required} password_tooShort{Password must be at least 8 characters long} confirmPassword_required{Confirm password is required} confirmPassword_mismatch{Confirm password and password does not match} other{An unexpected error occurred}}",
+	"authSuccess": "{success, select, login_success{Login successful} user_created_successfully{Account successfully created} logout_success{Logout successful} other{Unknown value}}"
+}

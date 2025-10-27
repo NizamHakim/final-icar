@@ -1,0 +1,6 @@
+{
+	"@@locale": "en",
+	"onboardingTitle": "{index, select, 1{Join queue with the app} 2{iCar tracking} 3{Go to the stop} other{Unknown value}}",
+	"onboardingDescription": "{index, select, 1{Travel around ITS with iCar and monitor queues through the app} 2{Track iCar position and get ready for your ride} 3{Go to the stop when your ride is nearby} other{Unknown value}}",
+	"skip": "Skip"
+}

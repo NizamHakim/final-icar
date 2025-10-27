@@ -1,0 +1,14 @@
+{
+	"@@locale": "en",
+	"scheduleNotYetAvailable": "Available for queue 30 minutes before iCar arrives",
+	"confirmJoinQueueTitle": "Confirm queue",
+	"confirmJoinQueueButtonLabel": "Join queue",
+	"confirmJoinQueueDate": "Today, {date}",
+	"successJoinQueueNotification": "Successfully Added to Queue!",
+	"successJoinQueueDescription": "Open ticket to see your queue details",
+	"successQueueTicket": "Queue ticket",
+	"icarSeats": "{count, plural, =1{1 seat} other{{count} seats}}",
+	"peopleInQueue": "{count, plural, =1{1 person} other{{count} people}} in queue",
+	"noScheduleAvailable": "No schedule available",
+	"pleaseSelectOtherSchedule": "Not yet available. Please select other available schedule."
+}

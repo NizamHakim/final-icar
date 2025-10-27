@@ -1,0 +1,29 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'icar_routes_options.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$icarRoutesOptionsHash() => r'b2af8e1c448c55525c054fdb1ec9167546195efa';
+
+/// See also [icarRoutesOptions].
+@ProviderFor(icarRoutesOptions)
+final icarRoutesOptionsProvider =
+    AutoDisposeFutureProvider<List<IcarRoute>>.internal(
+      icarRoutesOptions,
+      name: r'icarRoutesOptionsProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$icarRoutesOptionsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef IcarRoutesOptionsRef = AutoDisposeFutureProviderRef<List<IcarRoute>>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

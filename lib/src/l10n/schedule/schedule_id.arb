@@ -1,0 +1,14 @@
+{
+	"@@locale": "id",
+	"scheduleNotYetAvailable": "Antre dibuka 30 menit sebelum iCar tiba",
+	"confirmJoinQueueTitle": "Konfirmasi antrean",
+	"confirmJoinQueueButtonLabel": "Antre sekarang",
+	"confirmJoinQueueDate": "Hari ini, {date}",
+	"successJoinQueueNotification": "Berhasil Masuk Antrean!",
+	"successJoinQueueDescription": "Buka tiket antrean untuk melihat antreanmu.",
+	"successQueueTicket": "Tiket antrean",
+	"icarSeats": "{count, plural, =1{1 kursi} other{{count} kursi}}",
+	"peopleInQueue": "{count, plural, =1{1 orang} other{{count} orang}} dalam antrean",
+	"noScheduleAvailable": "Tidak ada jadwal tersedia",
+	"pleaseSelectOtherSchedule": "Belum bisa antre. Silahkan memilih waktu lain yang tersedia."
+}
